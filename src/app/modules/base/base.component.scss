@@ -1,0 +1,76 @@
+.mat-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    background-color: #202125;
+}
+
+.mat-sidenav-content {
+    padding: 0;
+    margin: 0; 
+    height: 100%; 
+}
+
+.mat-sidenav-container {
+    height: 100%;
+    background-color: #16171B;
+}
+
+
+mat-nav-list {
+    --mdc-list-list-item-label-text-color: white !important;
+    --mdc-list-list-item-hover-label-text-color: #556B2F !important;
+}
+
+.mdc-list-item:hover .mdc-list-item__primary-text {
+    --mdc-list-list-item-hover-label-text-color: #556B2F !important;
+}
+
+.container-nome{
+    margin-left: 30px;
+    margin-top: 30px;
+    color: white;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+  }
+  
+.circle {
+  width: 40px; /* Tamanho da bolinha */
+  height: 40px; /* Tamanho da bolinha */
+  border-radius: 50%; /* Faz a bolinha ser redonda */
+  overflow: hidden; /* Garante que a imagem fique dentro da bolinha */
+  margin-right: 10px; /* Espaço entre a bolinha e o nome */
+  background-color: #f0f0f0; /* Cor de fundo da bolinha, caso a imagem não preencha completamente */
+}
+
+.profile-photo {
+  width: 100%; /* Garante que a imagem preencha a bolinha */
+  height: 100%; /* Garante que a imagem preencha a bolinha */
+  object-fit: cover; /* Ajusta a imagem para cobrir a bolinha */
+}
+
+.name {
+  font-size: 16px; /* Tamanho do texto */
+  font-weight: bold; /* Deixa o texto em negrito */
+  color: white; /* Cor do texto */
+}
+
+.fa-icone {
+  margin-right: 10px;
+}
+
+.mat-list-item {
+  transition: background-color 0.3s ease;
+  margin: 10px 0; /* Espaço em cima e embaixo */
+  padding: 8px 16px; /* Espaço interno dentro dos itens */
+  border-radius: 4px; /* Bordas arredondadas para um efeito visual melhor */
+}
+
+.mat-list-item.selected {
+  border-radius: 4px; /* Bordas arredondadas */
+  background-color: #023D31; /* Cor de fundo do item selecionado */
+}
