@@ -52,11 +52,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Aplica o estilo à parte deslizante do scrollbar */
 ::-webkit-scrollbar-thumb {
-  background-color: #556B2F; /* Cor do thumb (parte deslizante) */
+  background-color: var(--verde-claro); /* Cor do thumb (parte deslizante) */
   border-radius: 10px; /* Borda arredondada do thumb */
 }
 
 /* Aplica o estilo ao canto entre scrollbars horizontal e vertical (se aplicável) */
 ::-webkit-scrollbar-corner {
-  background-color: #556B2F; /* Cor do canto */
+  background-color: var(--verde-claro); /* Cor do canto */
+}
+
+:root {
+  --verde-claro: #556B2F;
+  --cinza: gray;
+  --verde-escuro: #023D31;
+  --cinza-escuro: #202125;
+  --cinza-escuro-tom-mais: #16171B;
 }

@@ -13,25 +13,25 @@
 }
   
 table {
-    border: 2px solid #023D31;
+    border: 2px solid var(--verde-escuro);
     overflow: hidden; /* Important for rounded corners */
     width: 100%; /* Optional: adjust based on your layout */
     max-width: 600px; /* Optional: to limit the table width */
-    background-color: #202125;
+    background-color: var(--cinza-escuro);
 }
 
 tbody {
-    border: 2px solid  #023D31;  
+    border: 2px solid var(--verde-escuro);  
 }
 
 th {
     color: gray;
-    border-top: 2px solid  #023D31;
+    border-top: 2px solid var(--verde-escuro);
 }
 
 td {
     color: white;
-    border-top: 2px solid  #023D31;
+    border-top: 2px solid var(--verde-escuro);
 }
 
 .fa-icone {
@@ -50,7 +50,7 @@ mat-paginator {
 }
 
 .mat-mdc-paginator {
-    background-color: #202125 !important;
+    background-color: var(--cinza-escuro) !important;
     color: white !important;
 }
 
@@ -60,4 +60,20 @@ mat-paginator {
 
 .mdc-text-field{
     background-color: blue !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: var(--cinza-escuro) !important;
+  }
+
+::ng-deep mat-label {
+    color: white;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: white !important;
+}
+
+::ng-deep .mat-input-element::placeholder{
+    color: white !important;
 }

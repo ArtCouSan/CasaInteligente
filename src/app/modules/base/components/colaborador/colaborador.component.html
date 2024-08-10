@@ -2,7 +2,6 @@
     <mat-form-field class="filtro" appearance="fill">
       <mat-label>Buscar o colaborador</mat-label>
       <input matInput placeholder="Digite pelo conteudo de uma das colunas">
-      <mat-hint>Hint</mat-hint>
     </mat-form-field>
 </div>
 
@@ -36,7 +35,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[10]" [hidePageSize]="true">
+  <mat-paginator [pageSizeOptions]="[5]" [hidePageSize]="true">
   </mat-paginator>
   
 </div>
