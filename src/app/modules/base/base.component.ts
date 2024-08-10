@@ -4,7 +4,8 @@ import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faHouse, faDatabase, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faDatabase, faUser, faChartPie} from '@fortawesome/free-solid-svg-icons';
+import { ColaboradorComponent } from './components/colaborador/colaborador.component';
 
 @Component({
   selector: 'app-base',
@@ -16,6 +17,7 @@ export class BaseComponent implements OnDestroy {
   conteudoDinamico: ComponentType<any> | null;
   componentHome = HomeComponent;
   componentDashboard = DashboadComponent;
+  componentColaborador = ColaboradorComponent;
   mobileQuery: MediaQueryList;
   selectedItem: string = "";
   
@@ -32,6 +34,7 @@ export class BaseComponent implements OnDestroy {
     library.addIcons(faHouse);
     library.addIcons(faDatabase);
     library.addIcons(faUser);
+    library.addIcons(faChartPie);
   }
 
   mostrarComponente(componente: ComponentType<any>, item: string) {

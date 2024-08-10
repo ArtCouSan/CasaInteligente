@@ -39,3 +39,24 @@ $beholder-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Aplica o estilo ao scrollbar inteiro */
+::-webkit-scrollbar {
+  width: 12px; /* Largura do scrollbar */
+}
+
+/* Aplica o estilo ao fundo do scrollbar */
+::-webkit-scrollbar-track {
+  border-radius: 10px; /* Borda arredondada do track */
+}
+
+/* Aplica o estilo à parte deslizante do scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: #556B2F; /* Cor do thumb (parte deslizante) */
+  border-radius: 10px; /* Borda arredondada do thumb */
+}
+
+/* Aplica o estilo ao canto entre scrollbars horizontal e vertical (se aplicável) */
+::-webkit-scrollbar-corner {
+  background-color: #556B2F; /* Cor do canto */
+}

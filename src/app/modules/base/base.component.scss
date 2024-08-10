@@ -61,16 +61,21 @@ mat-nav-list {
 
 .fa-icone {
   margin-right: 10px;
+  color: gray;
 }
 
 .mat-list-item {
   transition: background-color 0.3s ease;
-  margin: 10px 0; /* Espaço em cima e embaixo */
-  padding: 8px 16px; /* Espaço interno dentro dos itens */
+  padding: 20px 16px; /* Espaço interno dentro dos itens */
   border-radius: 4px; /* Bordas arredondadas para um efeito visual melhor */
 }
 
 .mat-list-item.selected {
   border-radius: 4px; /* Bordas arredondadas */
   background-color: #023D31; /* Cor de fundo do item selecionado */
+}
+
+.item-titulo {
+  color: gray !important;
+  font-size: 13px;
 }

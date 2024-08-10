@@ -5,11 +5,15 @@ import { SharedModule } from '../shared/shared.module';
 import { BaseRoutingModule } from './base.routes';
 import { HomeComponent } from './components/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ColaboradorComponent } from './components/colaborador/colaborador.component';
+import { DashboadComponent } from './components/dashboad/dashboad.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    BaseComponent
+    BaseComponent,
+    ColaboradorComponent,
+    DashboadComponent
   ],
   imports: [
     CommonModule,

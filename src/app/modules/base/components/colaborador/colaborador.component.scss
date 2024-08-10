@@ -1,0 +1,63 @@
+.container-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 60px 20px 60px;
+}
+
+.container-filtro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 60px 20px 60px;
+}
+  
+table {
+    border: 2px solid #023D31;
+    overflow: hidden; /* Important for rounded corners */
+    width: 100%; /* Optional: adjust based on your layout */
+    max-width: 600px; /* Optional: to limit the table width */
+    background-color: #202125;
+}
+
+tbody {
+    border: 2px solid  #023D31;  
+}
+
+th {
+    color: gray;
+    border-top: 2px solid  #023D31;
+}
+
+td {
+    color: white;
+    border-top: 2px solid  #023D31;
+}
+
+.fa-icone {
+    margin: 10px;
+}
+  
+mat-paginator {
+    margin-top: 15px;
+    border-radius: 15px;
+    overflow: hidden; /* Para bordas arredondadas */
+    width: 100%; /* Ocupe toda a largura disponível */
+    max-width: 800px; /* Limita a largura do paginador */
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+}
+
+.mat-mdc-paginator {
+    background-color: #202125 !important;
+    color: white !important;
+}
+
+.filtro{
+    width: 100%;
+}
+
+.mdc-text-field{
+    background-color: blue !important;
+}

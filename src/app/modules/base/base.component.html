@@ -29,18 +29,26 @@
         <span>Home</span>
       </mat-list-item>
       <mat-list-item 
-        class="mat-list-item" 
-        (click)="mostrarComponente(componentDashboard, 'dashboard')"
-        [class.selected]="selectedItem === 'dashboard'">
-          <fa-icon class="fa-icone" icon="database"></fa-icon>
-          <span>Dashboard</span>
+        class="mat-list-item">
+        <span class="item-titulo">Dashboards</span>
       </mat-list-item>
       <mat-list-item 
         class="mat-list-item" 
-        (click)="mostrarComponente(componentDashboard, 'user')"
+        (click)="mostrarComponente(componentDashboard, 'dashboard')"
+        [class.selected]="selectedItem === 'dashboard'">
+          <fa-icon class="fa-icone" icon="chart-pie"></fa-icon>
+          <span>Analytics</span>
+      </mat-list-item>
+      <mat-list-item 
+        class="mat-list-item">
+        <span class="item-titulo">Colaborador</span>
+      </mat-list-item>
+      <mat-list-item 
+        class="mat-list-item" 
+        (click)="mostrarComponente(componentColaborador, 'user')"
         [class.selected]="selectedItem === 'user'">
         <fa-icon class="fa-icone" icon="user"></fa-icon>
-        <span>Colaborador</span>
+        <span>Gerenciar Colaboradores</span>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
