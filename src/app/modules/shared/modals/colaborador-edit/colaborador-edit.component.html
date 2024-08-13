@@ -1,0 +1,100 @@
+<div class="container-modal">
+    <div class="container-formulario">
+        <fa-icon class="fa-icone i-sair" icon="angle-left" (click)="onVoltar()"></fa-icon> 
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Nome</mat-label>
+            <input matInput [(ngModel)]="colaborador.nome">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">CPF</mat-label>
+            <input matInput [(ngModel)]="colaborador.cpf">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Departamento</mat-label>
+            <input matInput [(ngModel)]="colaborador.departamento">
+        </mat-form-field>
+
+        <!-- Informação de Contato -->
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Telefone</mat-label>
+            <input matInput [(ngModel)]="colaborador.telefone">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">E-mail</mat-label>
+            <input matInput [(ngModel)]="colaborador.email" type="email">
+        </mat-form-field>
+
+        <!-- Informações de Endereço -->
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Endereço</mat-label>
+            <input matInput [(ngModel)]="colaborador.endereco">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Número</mat-label>
+            <input matInput [(ngModel)]="colaborador.numero">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Complemento</mat-label>
+            <input matInput [(ngModel)]="colaborador.complemento">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Bairro</mat-label>
+            <input matInput [(ngModel)]="colaborador.bairro">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Cidade</mat-label>
+            <input matInput [(ngModel)]="colaborador.cidade">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Estado</mat-label>
+            <input matInput [(ngModel)]="colaborador.estado">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">CEP</mat-label>
+            <input matInput [(ngModel)]="colaborador.cep">
+        </mat-form-field>
+
+        <!-- Informações da Empresa -->
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Setor</mat-label>
+            <input matInput [(ngModel)]="colaborador.setor">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Faixa Salarial</mat-label>
+            <input matInput [(ngModel)]="colaborador.faixaSalarial">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Cargo</mat-label>
+            <input matInput [(ngModel)]="colaborador.cargo">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Gerente</mat-label>
+            <input matInput [(ngModel)]="colaborador.gerente">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Faculdade</mat-label>
+            <input matInput [(ngModel)]="colaborador.faculdade">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label class="titulo">Tempo de Trabalho</mat-label>
+            <input matInput [(ngModel)]="colaborador.tempoTrabalho">
+        </mat-form-field>
+
+        <fa-icon class="fa-icone i-salvar" icon="check" (click)="salvar()"></fa-icon> 
+    </div>
+</div>

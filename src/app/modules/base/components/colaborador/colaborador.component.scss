@@ -9,11 +9,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 60px 20px 60px;
+    padding: 40px 60px 0px 60px;
 }
   
 table {
-    border: 2px solid var(--verde-escuro);
+    // border: 2px solid var(--verde-escuro);
     overflow: hidden; /* Important for rounded corners */
     width: 100%; /* Optional: adjust based on your layout */
     max-width: 600px; /* Optional: to limit the table width */
@@ -21,21 +21,30 @@ table {
 }
 
 tbody {
-    border: 2px solid var(--verde-escuro);  
+    // border: 2px solid var(--verde-escuro);  
 }
 
 th {
     color: gray;
-    border-top: 2px solid var(--verde-escuro);
+    border-top: 2px solid var(--cinza-escuro-tom-mais);
 }
 
 td {
     color: white;
-    border-top: 2px solid var(--verde-escuro);
+    border-top: 3px solid var(--cinza-escuro-tom-mais);
+}
+
+tr:hover {
+    background-color: var(--verde-escuro);
 }
 
 .fa-icone {
     margin: 10px;
+    cursor: pointer;
+}
+
+.fa-icone:hover {
+    color: var(--laranja);
 }
   
 mat-paginator {
@@ -58,10 +67,6 @@ mat-paginator {
     width: 100%;
 }
 
-.mdc-text-field{
-    background-color: blue !important;
-}
-
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: var(--cinza-escuro) !important;
   }
@@ -76,4 +81,8 @@ mat-paginator {
 
 ::ng-deep .mat-input-element::placeholder{
     color: white !important;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__s {
+    border-radius: 0px !important;
 }

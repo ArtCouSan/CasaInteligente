@@ -1,0 +1,46 @@
+.container-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.container-formulario {
+    width: 80%;
+    padding: 70px 60px 10px 60px;
+    background-color: var(--cinza-escuro);
+    height: 500px;
+    position: relative;
+}
+
+.titulo {
+    color: var(--cinza);
+}
+
+.form-field {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.fa-icone {
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.fa-icone:hover {
+    color: var(--laranja);
+}
+
+.i-salvar {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+}
+
+.i-sair {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}

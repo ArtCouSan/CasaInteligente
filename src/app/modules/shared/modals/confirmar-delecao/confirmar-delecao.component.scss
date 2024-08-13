@@ -1,0 +1,50 @@
+.container-modal {
+    background-color: var(--cinza-escuro);
+    height: 300px;
+    width: 600px;
+    position: relative;
+}
+
+.container-conteudo {
+    height: 80%;
+}
+
+.titulo {
+    color: white;
+}
+
+.mensagem {
+    color: var(--laranja);
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__s {
+    border-radius: 0px !important;
+}
+
+.mat-dialog-container {
+    border-radius: 0 !important; /* Remove a borda arredondada */
+}
+
+.fa-icone {
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.fa-icone:hover {
+    color: var(--laranja);
+}
+
+.i-salvar {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+}
+
+.i-sair {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  height: 10%;
+}
