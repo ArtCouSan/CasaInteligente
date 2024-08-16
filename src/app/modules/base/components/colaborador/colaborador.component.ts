@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Colaborador } from '../../../core/dto/colaborador';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,10 +22,10 @@ const ELEMENT_DATA: Colaborador[] = [
     complemento: "Apto 45",
     bairro: "Centro",
     cidade: "São Paulo",
-    estado: "SP",
+    estado: "RS",
     cep: "01000-000",
     setor: "Desenvolvimento",
-    faixaSalarial: "R$ 8.000 - R$ 10.000",
+    faixaSalarial: "R$ 8.501 - R$ 9.000",
     cargo: "Desenvolvedor Sênior",
     gerente: "Carlos Silva",
     faculdade: "USP",
@@ -46,7 +46,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "01300-000",
     setor: "Recrutamento",
-    faixaSalarial: "R$ 5.000 - R$ 7.000",
+    faixaSalarial: "R$ 5.001 - R$ 5.500",
     cargo: "Analista de RH",
     gerente: "Mariana Andrade",
     faculdade: "PUC-SP",
@@ -67,7 +67,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "04100-000",
     setor: "Contabilidade",
-    faixaSalarial: "R$ 10.000 - R$ 12.000",
+    faixaSalarial: "R$ 11.001 - R$ 11.500",
     cargo: "Contador",
     gerente: "Fernanda Braga",
     faculdade: "Mackenzie",
@@ -88,7 +88,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "01400-000",
     setor: "Publicidade",
-    faixaSalarial: "R$ 6.000 - R$ 8.000",
+    faixaSalarial: "R$ 7.001 - R$ 7.500",
     cargo: "Coordenadora de Marketing",
     gerente: "Patrícia Campos",
     faculdade: "ESPM",
@@ -109,7 +109,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "05400-000",
     setor: "Infraestrutura",
-    faixaSalarial: "R$ 9.000 - R$ 11.000",
+    faixaSalarial: "R$ 9.001 - R$ 9.500",
     cargo: "Administrador de Redes",
     gerente: "Ricardo Almeida",
     faculdade: "FAAP",
@@ -130,7 +130,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "04500-000",
     setor: "Comercial",
-    faixaSalarial: "R$ 7.000 - R$ 9.000",
+    faixaSalarial: "R$ 7.501 - R$ 8.000",
     cargo: "Vendedora",
     gerente: "Ana Paula Nunes",
     faculdade: "FGV",
@@ -151,7 +151,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "02000-000",
     setor: "Operações",
-    faixaSalarial: "R$ 4.000 - R$ 6.000",
+    faixaSalarial: "R$ 4.501 - R$ 5.000",
     cargo: "Supervisor de Logística",
     gerente: "Júlio César",
     faculdade: "Unip",
@@ -172,7 +172,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "04547-000",
     setor: "Desenvolvimento",
-    faixaSalarial: "R$ 8.500 - R$ 10.500",
+    faixaSalarial: "R$ 9.501 - R$ 10.000",
     cargo: "Desenvolvedora Júnior",
     gerente: "Roberto Oliveira",
     faculdade: "Senac",
@@ -193,7 +193,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "04600-000",
     setor: "Consultoria",
-    faixaSalarial: "R$ 12.000 - R$ 14.000",
+    faixaSalarial: "R$ 12.001 - R$ 12.500",
     cargo: "Advogada",
     gerente: "Sérgio Fonseca",
     faculdade: "Mackenzie",
@@ -214,7 +214,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "03100-000",
     setor: "Treinamento",
-    faixaSalarial: "R$ 6.500 - R$ 8.500",
+    faixaSalarial: "R$ 6.501 - R$ 7.000",
     cargo: "Instrutor de RH",
     gerente: "Camila Santos",
     faculdade: "Unesp",
@@ -235,7 +235,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "04530-000",
     setor: "Desenvolvimento",
-    faixaSalarial: "R$ 9.500 - R$ 11.500",
+    faixaSalarial: "R$ 9.501 - R$ 10.000",
     cargo: "Desenvolvedora Pleno",
     gerente: "Fernando Rocha",
     faculdade: "FIAP",
@@ -256,7 +256,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "05430-000",
     setor: "Tesouraria",
-    faixaSalarial: "R$ 11.000 - R$ 13.000",
+    faixaSalarial: "R$ 11.001 - R$ 11.500",
     cargo: "Tesoureiro",
     gerente: "Patrícia Lima",
     faculdade: "FEA-USP",
@@ -277,7 +277,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "05030-000",
     setor: "Branding",
-    faixaSalarial: "R$ 7.500 - R$ 9.500",
+    faixaSalarial: "R$ 7.501 - R$ 8.000",
     cargo: "Gerente de Marca",
     gerente: "Carlos Almeida",
     faculdade: "Anhembi Morumbi",
@@ -298,7 +298,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "05530-000",
     setor: "Relacionamento",
-    faixaSalarial: "R$ 6.000 - R$ 8.000",
+    faixaSalarial: "R$ 6.001 - R$ 6.500",
     cargo: "Executivo de Contas",
     gerente: "Adriana Freitas",
     faculdade: "SENAC",
@@ -319,7 +319,7 @@ const ELEMENT_DATA: Colaborador[] = [
     estado: "SP",
     cep: "05050-000",
     setor: "Distribuição",
-    faixaSalarial: "R$ 5.500 - R$ 7.500",
+    faixaSalarial: "R$ 5.501 - R$ 6.000",
     cargo: "Analista de Logística",
     gerente: "Jorge Santos",
     faculdade: "Metodista",
@@ -327,8 +327,6 @@ const ELEMENT_DATA: Colaborador[] = [
     acoes: "Editar"
   }
 ];
-
-
 
 @Component({
   selector: 'app-colaborador',
@@ -344,7 +342,7 @@ export class ColaboradorComponent {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  @ViewChild(MatSort) 
+  @ViewChild(MatSort)
   sort!: MatSort;
 
   ngAfterViewInit() {
@@ -358,15 +356,70 @@ export class ColaboradorComponent {
   ) {
     library.addIcons(faPen);
     library.addIcons(faTrash);
+    library.addIcons(faUserPlus);
+  }
+
+  aplicarFiltro(valor: string): void {
+    this.dataSource.filter = valor.trim().toLowerCase();    
   }
 
   filtrar(event: Event) {
     const filterValue = (event.target as HTMLInputElement)?.value || '';
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.aplicarFiltro(filterValue);
+    this.resetar();
   }
 
-  editarColaborador(colaborador: Colaborador) {
-    this.colaboradorParaEditar = colaborador;
+  adicionarColaborador(): void {
+    this.colaboradorParaEditar = {
+      nome: '',
+      cpf: '',
+      departamento: '',
+      telefone: '',
+      email: '',
+      endereco: '',
+      numero: '',
+      complemento: '',
+      bairro: '',
+      cidade: '',
+      estado: '',
+      cep: '',
+      setor: '',
+      faixaSalarial: '',
+      cargo: '',
+      gerente: '',
+      faculdade: '',
+      tempoTrabalho: '',
+      acoes: 'Adicionar'
+    };
+  }
+
+  editarColaborador(colaborador: Colaborador): void {
+    this.colaboradorParaEditar = { ...colaborador };
+  }
+
+  salvarColaborador(colaborador: Colaborador): void {
+    if (this.colaboradorParaEditar) {
+      const index = this.dataSource.data.findIndex(c => c.cpf === colaborador.cpf);
+      if (index >= 0) {
+        this.dataSource.data[index] = colaborador;
+      } else {
+        this.dataSource.data.push(colaborador);
+      }
+      this.dataSource._updateChangeSubscription(); 
+      this.colaboradorParaEditar = null;
+      this.snackBar.open('Colaborador salvo com sucesso!', 'Fechar', {
+        duration: 2000,
+      });
+    }
+  }
+
+  resetar(): void {
+    this.colaboradorParaEditar = null;
+  }
+
+  voltar(): void {
+    this.aplicarFiltro(' ');
+    this.resetar();
   }
 
   confirmarExclusao(colaborador: Colaborador) {
@@ -390,11 +443,5 @@ export class ColaboradorComponent {
         duration: 2000,
       });
     }
-  }
-
-  voltar() {
-    this.colaboradorParaEditar = null;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 }

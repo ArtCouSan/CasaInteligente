@@ -5,6 +5,9 @@
       <mat-label>Buscar o colaborador</mat-label>
       <input (input)="filtrar($event)" matInput placeholder="Digite pelo conteúdo de uma das colunas">
     </mat-form-field>
+    <div class="botao-adicionar">
+      <fa-icon class="fa-icone-filtro i-adicionar" icon="user-plus" (click)="adicionarColaborador()"></fa-icon> 
+    </div>
   </div>
 
   <div class="container-table">
@@ -43,7 +46,7 @@
   </table>
 
   <!-- Paginação -->
-  <mat-paginator [pageSizeOptions]="[5]" [hidePageSize]="true">
+  <mat-paginator [pageSizeOptions]="[7]" [hidePageSize]="true">
   </mat-paginator>
   </div>
 </div>
@@ -52,6 +55,7 @@
   <app-colaborador-edit 
     *ngIf="colaboradorParaEditar"
     [colaborador]="colaboradorParaEditar" 
+    (salvar)="salvarColaborador($event)"
     (voltar)="voltar()">
   </app-colaborador-edit>
 </ng-template>

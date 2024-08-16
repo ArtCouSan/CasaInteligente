@@ -1,23 +1,27 @@
 .container-modal {
     background-color: var(--cinza-escuro);
-    height: 300px;
-    width: 600px;
-    position: relative;
+    height: 170px;
+    width: 550px;
 }
 
 .container-conteudo {
-    height: 80%;
+    height: 100px;
+    margin-top: 10px;
 }
 
 .titulo {
-    color: white;
+    color: gray;
 }
 
 .mensagem {
-    color: var(--laranja);
+    color: white;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__s {
+    border-radius: 0px !important;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
     border-radius: 0px !important;
 }
 
@@ -25,26 +29,22 @@
     border-radius: 0 !important; /* Remove a borda arredondada */
 }
 
-.fa-icone {
+.mat-mdc-button:not(:disabled) {
     color: white;
-    margin: 10px;
-    cursor: pointer;
-    font-size: 30px;
 }
 
-.fa-icone:hover {
-    color: var(--laranja);
+.botao-nao {
+    background-color: var(--verde-claro);
 }
 
-.i-salvar {
-    position: absolute;
-    bottom: 30px;
-    right: 40px;
+.botao-sim {
+    background-color: var(--laranja);
+
 }
 
-.i-sair {
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  height: 10%;
+.botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; 
+    margin-right: 20px;
 }

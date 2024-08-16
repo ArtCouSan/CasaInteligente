@@ -1,12 +1,12 @@
 <div class="container-modal">
-    <fa-icon class="fa-icone i-sair" icon="angle-left" (click)="onNoClick()"></fa-icon> 
     <div class="container-conteudo">
         <h1 class="titulo" mat-dialog-title>Confirmação</h1>
         <div class="mensagem" mat-dialog-content>
           <p>{{data.message}}</p>
         </div>
     </div>
-    <div mat-dialog-actions>
-      <fa-icon [mat-dialog-close]="true" cdkFocusInitial class="fa-icone i-salvar" icon="check"></fa-icon> 
+    <div class="botoes" mat-dialog-actions>
+      <button mat-button class="botao-nao" (click)="onNoClick()">Não</button>
+      <button mat-button class="botao-sim" [mat-dialog-close]="true" cdkFocusInitial>Sim</button>
     </div>
 </div>

@@ -2,14 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0px 60px 20px 60px;
+    padding: 0px 60px 60px 60px;
 }
 
 .container-filtro{
+    padding: 40px 60px 20px 60px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 60px 0px 60px;
+    align-items: baseline;
 }
   
 table {
@@ -43,7 +42,12 @@ tr:hover {
     cursor: pointer;
 }
 
-.fa-icone:hover {
+.fa-icone-filtro {
+    margin: 20px;
+    cursor: pointer;
+}
+
+.fa-icone:hover, .fa-icone-filtro:hover {
     color: var(--laranja);
 }
   
@@ -64,7 +68,7 @@ mat-paginator {
 }
 
 .filtro{
-    width: 100%;
+    width: 95%;
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -85,4 +89,14 @@ mat-paginator {
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__s {
     border-radius: 0px !important;
+}
+
+.i-adicionar {
+    color: white;
+    font-size: 35px;
+}
+
+.botao-adicionar {
+    display: flex;
+    align-items: center;
 }
