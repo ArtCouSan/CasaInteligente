@@ -14,12 +14,9 @@ import { AnaliseColaboradorComponent } from './components/analise-colaborador/an
     HomeComponent,
     BaseComponent,
     ColaboradorComponent,
-<<<<<<< HEAD
     DashboadComponent,
-=======
     AnaliseColaboradorComponent,
-    DashboadComponent
->>>>>>> 7eefb137583ca05c949dbf5b43f9942911aa3300
+    
   ],
   imports: [CommonModule, BaseRoutingModule, FontAwesomeModule, SharedModule],
 })

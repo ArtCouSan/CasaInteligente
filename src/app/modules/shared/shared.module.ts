@@ -8,6 +8,11 @@ import { ColaboradorEditComponent } from './modals/colaborador-edit/colaborador-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ConfirmarDelecaoComponent } from './modals/confirmar-delecao/confirmar-delecao.component';
 import { DetalheAnaliseColaboradorComponent } from './modals/detalhe-analise-colaborador/detalhe-analise-colaborador.component';
+import { TotalEmployeesComponent } from './graficos/total-employees/total-employees.component';
+import { EmployeeTimelineComponent } from './graficos/employee-timeline/employee-timeline.component';
+import { DepartmentPieComponent } from './graficos/department-pie/department-pie.component';
+import { GenderBarComponent } from './graficos/gender-bar/gender-bar.component';
+import { BaseChartDirective } from 'ng2-charts';
 
 
 @NgModule({
@@ -15,7 +20,11 @@ import { DetalheAnaliseColaboradorComponent } from './modals/detalhe-analise-col
     EmConstrucaoComponent,
     ColaboradorEditComponent,
     ConfirmarDelecaoComponent,
-    DetalheAnaliseColaboradorComponent
+    DetalheAnaliseColaboradorComponent,
+    TotalEmployeesComponent,
+    EmployeeTimelineComponent,
+    DepartmentPieComponent,
+    GenderBarComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +32,7 @@ import { DetalheAnaliseColaboradorComponent } from './modals/detalhe-analise-col
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    BaseChartDirective,
     MaterialModule
   ],
   exports: [
@@ -30,7 +40,11 @@ import { DetalheAnaliseColaboradorComponent } from './modals/detalhe-analise-col
     EmConstrucaoComponent,
     ColaboradorEditComponent,
     ConfirmarDelecaoComponent,
-    DetalheAnaliseColaboradorComponent
+    DetalheAnaliseColaboradorComponent,
+    TotalEmployeesComponent,
+    EmployeeTimelineComponent,
+    DepartmentPieComponent,
+    GenderBarComponent
   ]
 })
 export class SharedModule { }
