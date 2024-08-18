@@ -6,7 +6,7 @@
     margin-bottom: 50px;
 }
 
-.container-formulario {
+.container-conteudo {
     width: 80%;
     padding: 70px 60px 60px 60px;
     background-color: var(--cinza-escuro);
@@ -20,6 +20,7 @@
 .form-field {
     margin-left: 15px;
     margin-right: 15px;
+    font-weight: bold;
 }
 
 .fa-icone {
@@ -57,7 +58,8 @@
 }
 
 ::ng-deep .mat-mdc-select-value {
-    color: white;
+    color: var(--verde-claro);
+    font-weight: bold;
 }
 
 ::ng-deep div.mat-mdc-select-panel{
@@ -65,11 +67,19 @@
 }
 
 ::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
-    color: white !important;
+    color: var(--verde-claro) !important;
 }
 
 ::ng-deep .mat-mdc-select-arrow {
-    color: white !important;
+    color: var(--verde-claro) !important;
+}
+
+::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
+    background-color: var(--cinza-escuro);
+}
+
+::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input{
+    color: var(--verde-claro) !important;
 }
 
 .select {

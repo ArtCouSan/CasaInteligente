@@ -1,4 +1,4 @@
-export interface Colaborador {
+export interface AnaliseColaborador {
   nome: string;
   cpf: string;
   idade: number;
@@ -25,4 +25,5 @@ export interface Colaborador {
   quantidadeAnosTrabalhadosAnteriormente: number;
   nivelEscolaridade: string;
   acoes: string;
+  predicao?: number
 }

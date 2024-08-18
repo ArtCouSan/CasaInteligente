@@ -1,20 +1,20 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { Colaborador } from '../../../core/dto/colaborador';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AnaliseColaborador } from '../../../core/dto/analise-colaborador';
 import { faCheck, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'app-colaborador-edit',
-  templateUrl: './colaborador-edit.component.html',
-  styleUrl: './colaborador-edit.component.scss'
+  selector: 'app-detalhe-analise-colaborador',
+  templateUrl: './detalhe-analise-colaborador.component.html',
+  styleUrl: './detalhe-analise-colaborador.component.scss'
 })
-export class ColaboradorEditComponent {
+export class DetalheAnaliseColaboradorComponent {
 
   @Input()
-  colaborador!: Colaborador;
-  @Output() salvar = new EventEmitter<Colaborador>();
+  colaborador!: AnaliseColaborador;
+  @Output() salvar = new EventEmitter<AnaliseColaborador>();
   @Output() voltar = new EventEmitter<void>();
-
+  
   estadosCivis: string[] = [
     "Solteiro",
     "Casado",
@@ -106,12 +106,9 @@ export class ColaboradorEditComponent {
     library.addIcons(faAngleLeft);
   }
 
+
   onVoltar() {
     this.voltar.emit(); 
-  }
-
-  onSalvar(): void {
-    this.salvar.emit(this.colaborador);
   }
 
 }
