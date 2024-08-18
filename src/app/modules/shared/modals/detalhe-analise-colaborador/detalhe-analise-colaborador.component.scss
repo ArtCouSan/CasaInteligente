@@ -1,0 +1,87 @@
+.container-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container-conteudo {
+    width: 80%;
+    padding: 70px 60px 60px 60px;
+    background-color: var(--cinza-escuro);
+    position: relative;
+}
+
+.titulo {
+    color: var(--cinza);
+}
+
+.form-field {
+    margin-left: 15px;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.fa-icone {
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.fa-icone:hover {
+    color: var(--laranja);
+}
+
+.i-salvar {
+    position: absolute;
+    bottom: 35px;
+    right: 40px;
+}
+
+.i-sair {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.secao-dados-pessoais, .secao-endereco, 
+.secao-dados-cargo, .secao-contato, .secao-formacao,
+.secao-dados-antiga-empresa {
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.titulo-secao {
+    color: gray;
+}
+
+::ng-deep .mat-mdc-select-value {
+    color: var(--verde-claro);
+    font-weight: bold;
+}
+
+::ng-deep div.mat-mdc-select-panel{
+    background-color: var(--cinza-escuro) !important;
+}
+
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+    color: var(--verde-claro) !important;
+}
+
+::ng-deep .mat-mdc-select-arrow {
+    color: var(--verde-claro) !important;
+}
+
+::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
+    background-color: var(--cinza-escuro);
+}
+
+::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input{
+    color: var(--verde-claro) !important;
+}
+
+.select {
+    width: 270px;
+}

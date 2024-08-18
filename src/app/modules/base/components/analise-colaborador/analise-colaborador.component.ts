@@ -456,9 +456,9 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
 export class AnaliseColaboradorComponent {
 
   displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'predicao', 'acoes'];
-  dataSource = new MatTableDataSource<Colaborador>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<AnaliseColaborador>(ELEMENT_DATA);
 
-  colaboradorParaEditar: Colaborador | null = null;
+  colaboradorParaAnalisar: AnaliseColaborador | null = null;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -490,12 +490,16 @@ export class AnaliseColaboradorComponent {
   }
 
   resetar(): void {
-    this.colaboradorParaEditar = null;
+    this.colaboradorParaAnalisar = null;
   }
 
   voltar(): void {
     this.aplicarFiltro(' ');
     this.resetar();
+  }
+
+  analisarColaborador(colaborador: AnaliseColaborador): void {
+    this.colaboradorParaAnalisar = { ...colaborador };
   }
 
 }

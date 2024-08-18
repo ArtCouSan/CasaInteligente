@@ -99,7 +99,7 @@
         <!-- Seção de formação -->
         <mat-label class="titulo-secao">Formação</mat-label>
         <div class="secao-formacao">
-            <mat-form-field class="form-field">
+            <mat-form-field class="form-field select">
                 <mat-label class="titulo">Nível de Escolaridade</mat-label>
                 <mat-select [(ngModel)]="colaborador.nivelEscolaridade">
                     <mat-option *ngFor="let nivelEscolaridade of niveisEscolaridade" [value]="nivelEscolaridade">
