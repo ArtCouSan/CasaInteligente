@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { Colaborador } from '../../../core/dto/colaborador';
 import { faCheck, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -14,6 +14,13 @@ export class ColaboradorEditComponent {
   colaborador!: Colaborador;
   @Output() salvar = new EventEmitter<Colaborador>();
   @Output() voltar = new EventEmitter<void>();
+
+  readonly panelDadosPessoais = signal(true);
+  readonly panelContato = signal(true);
+  readonly panelEndereco = signal(true);
+  readonly panelFormacao = signal(true);
+  readonly panelCargo = signal(true);
+  readonly panelCarreira = signal(true);
 
   estadosCivis: string[] = [
     "Solteiro",
