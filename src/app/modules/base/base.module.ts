@@ -13,13 +13,8 @@ import { DashboadComponent } from './components/dashboad/dashboad.component';
     HomeComponent,
     BaseComponent,
     ColaboradorComponent,
-    DashboadComponent
+    DashboadComponent,
   ],
-  imports: [
-    CommonModule,
-    BaseRoutingModule,
-    FontAwesomeModule,
-    SharedModule
-  ]
+  imports: [CommonModule, BaseRoutingModule, FontAwesomeModule, SharedModule],
 })
-export class BaseModule { }
+export class BaseModule {}
