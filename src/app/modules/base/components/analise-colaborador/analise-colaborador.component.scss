@@ -68,7 +68,7 @@ mat-paginator {
 }
 
 .filtro{
-    width: 95%;
+    width: 100%;
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -89,16 +89,6 @@ mat-paginator {
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__s {
     border-radius: 0px !important;
-}
-
-.i-adicionar {
-    color: white;
-    font-size: 35px;
-}
-
-.botao-adicionar {
-    display: flex;
-    align-items: center;
 }
 
 ::ng-deep .mat-mdc-icon-button .mat-mdc-button-touch-target{

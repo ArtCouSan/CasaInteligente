@@ -15,6 +15,32 @@ export class ColaboradorEditComponent {
   @Output() salvar = new EventEmitter<Colaborador>();
   @Output() voltar = new EventEmitter<void>();
 
+  estadosCivis: string[] = [
+    "Solteiro",
+    "Casado",
+    "Viuvo",
+    "Divorciado",
+    "Solteira",
+    "Casada",
+    "Viuva",
+    "Divorciada"
+  ]
+
+  generos: string[] = [
+    "Masculino",
+    "Feminino",
+    "Outros"
+  ]
+
+  niveisEscolaridade: string[] = [
+    "Ensino Fundamental - Completo",
+    "Ensino Fundamental - Incompleto",
+    "Ensino Médio - Completo",
+    "Ensino Médio - Incompleto",
+    "Ensino Superior - Completo",
+    "Ensino Superior - Incompleto"
+  ]
+
   estados: string[] = [
     'AC',  // Acre
     'AL',  // Alagoas

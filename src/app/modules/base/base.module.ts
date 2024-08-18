@@ -7,12 +7,14 @@ import { HomeComponent } from './components/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColaboradorComponent } from './components/colaborador/colaborador.component';
 import { DashboadComponent } from './components/dashboad/dashboad.component';
+import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     BaseComponent,
     ColaboradorComponent,
+    AnaliseColaboradorComponent,
     DashboadComponent
   ],
   imports: [

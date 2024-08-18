@@ -16,6 +16,33 @@
             </mat-form-field>
 
             <mat-form-field class="form-field">
+                <mat-label class="titulo">Idade</mat-label>
+                <input matInput  type="number" min="1" [(ngModel)]="colaborador.idade">
+            </mat-form-field>
+
+            <mat-form-field class="form-field">
+                <mat-label class="titulo">Genero</mat-label>
+                <mat-select [(ngModel)]="colaborador.genero">
+                    <mat-option *ngFor="let genero of generos" [value]="genero">
+                        {{ genero }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="form-field">
+                <mat-label class="titulo">Estado Civil</mat-label>
+                <mat-select [(ngModel)]="colaborador.estadoCivil">
+                    <mat-option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil">
+                        {{ estadoCivil }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        
+        <!-- Seção de contato -->
+        <mat-label class="titulo-secao">Contatos</mat-label>
+        <div class="secao-contato">
+            <mat-form-field class="form-field">
                 <mat-label class="titulo">Telefone</mat-label>
                 <input matInput [(ngModel)]="colaborador.telefone">
             </mat-form-field>
@@ -68,6 +95,27 @@
                 <input matInput [(ngModel)]="colaborador.cep">
             </mat-form-field>
         </div>
+        
+        <!-- Seção de formação -->
+        <mat-label class="titulo-secao">Formação</mat-label>
+        <div class="secao-formacao">
+            <mat-form-field class="form-field">
+                <mat-label class="titulo">Nível de Escolaridade</mat-label>
+                <mat-select [(ngModel)]="colaborador.nivelEscolaridade">
+                    <mat-option *ngFor="let nivelEscolaridade of niveisEscolaridade" [value]="nivelEscolaridade">
+                        {{ nivelEscolaridade }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label class="titulo">Faculdade</mat-label>
+                <input matInput [(ngModel)]="colaborador.faculdade">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label class="titulo">Formação</mat-label>
+                <input matInput [(ngModel)]="colaborador.formacao">
+            </mat-form-field>
+        </div>
 
         <!-- Seção de Dados do Cargo -->
         <mat-label class="titulo-secao">Dados do Cargo</mat-label>
@@ -102,13 +150,22 @@
             </mat-form-field>
 
             <mat-form-field class="form-field">
-                <mat-label class="titulo">Faculdade</mat-label>
-                <input matInput [(ngModel)]="colaborador.faculdade">
-            </mat-form-field>
-
-            <mat-form-field class="form-field">
                 <mat-label class="titulo">Tempo de Trabalho</mat-label>
                 <input matInput [(ngModel)]="colaborador.tempoTrabalho">
+            </mat-form-field>
+        </div>
+
+        <!-- Seção de Dados do Cargo -->
+        <mat-label class="titulo-secao">Carreira</mat-label>
+        <div class="secao-dados-antiga-empresa">
+            <mat-form-field class="form-field">
+                <mat-label class="titulo">Quantas empresas trabalhou</mat-label>
+                <input matInput type="number" min="0"  [(ngModel)]="colaborador.quantidadeEmpresasTrabalhou">
+            </mat-form-field>
+            
+            <mat-form-field class="form-field">
+                <mat-label class="titulo">Quantos anos de carreira</mat-label>
+                <input matInput type="number" min="0" [(ngModel)]="colaborador.quantidadeAnosTrabalhadosAnteriormente">
             </mat-form-field>
         </div>
 

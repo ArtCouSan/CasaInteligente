@@ -3,13 +3,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faPen, faTrash, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faPercent } from '@fortawesome/free-solid-svg-icons';
 import { Colaborador } from '../../../core/dto/colaborador';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfirmarDelecaoComponent } from '../../../shared/modals/confirmar-delecao/confirmar-delecao.component';
+import { AnaliseColaborador } from '../../../core/dto/analise-colaborador';
 
-const ELEMENT_DATA: Colaborador[] = [
+const ELEMENT_DATA: AnaliseColaborador[] = [
   {
     nome: 'Arthur Coutinho',
     cpf: "433.966.222-98",
@@ -36,7 +36,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 8,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:85
   },
   {
     nome: 'Beatriz Souza',
@@ -64,7 +65,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 5,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:72
   },
   {
     nome: 'Carlos Almeida',
@@ -92,7 +94,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 4,
     quantidadeAnosTrabalhadosAnteriormente: 10,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:88
   },
   {
     nome: 'Daniela Lima',
@@ -120,7 +123,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 6,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:80
   },
   {
     nome: 'Eduardo Silva',
@@ -148,7 +152,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 7,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:87
   },
   {
     nome: 'Fernanda Costa',
@@ -176,7 +181,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 3,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:74
   },
   {
     nome: 'Gabriel Moreira',
@@ -204,7 +210,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 4,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:69
   },
   {
     nome: 'Helena Ferreira',
@@ -232,7 +239,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 1,
     quantidadeAnosTrabalhadosAnteriormente: 1,
     nivelEscolaridade: "Ensino Superior - Incompleto",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:75
   },
   {
     nome: 'Isabela Martins',
@@ -260,7 +268,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 5,
     quantidadeAnosTrabalhadosAnteriormente: 15,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:90
   },
   {
     nome: 'João Pereira',
@@ -288,7 +297,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 4,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:77
   },
   {
     nome: 'Larissa Mendes',
@@ -316,7 +326,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 6,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:84
   },
   {
     nome: 'Marcos Oliveira',
@@ -344,7 +355,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 4,
     quantidadeAnosTrabalhadosAnteriormente: 12,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:89
   },
   {
     nome: 'Natalia Ribeiro',
@@ -372,7 +384,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 8,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:83
   },
   {
     nome: 'Otávio Fonseca',
@@ -400,7 +413,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 5,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:76
   },
   {
     nome: 'Paula Gomes',
@@ -428,18 +442,20 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 3,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    predicao:70
   }
 ];
 
 
 @Component({
-  selector: 'app-colaborador',
-  templateUrl: './colaborador.component.html',
-  styleUrl: './colaborador.component.scss'
+  selector: 'app-analise-colaborador',
+  templateUrl: './analise-colaborador.component.html',
+  styleUrl: './analise-colaborador.component.scss'
 })
-export class ColaboradorComponent {
-  displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'acoes'];
+export class AnaliseColaboradorComponent {
+
+  displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'predicao', 'acoes'];
   dataSource = new MatTableDataSource<Colaborador>(ELEMENT_DATA);
 
   colaboradorParaEditar: Colaborador | null = null;
@@ -459,9 +475,8 @@ export class ColaboradorComponent {
     private dialog: MatDialog, 
     private snackBar: MatSnackBar
   ) {
-    library.addIcons(faPen);
-    library.addIcons(faTrash);
-    library.addIcons(faUserPlus);
+    library.addIcons(faEye);
+    library.addIcons(faPercent);
   }
 
   aplicarFiltro(valor: string): void {
@@ -474,57 +489,6 @@ export class ColaboradorComponent {
     this.resetar();
   }
 
-  adicionarColaborador(): void {
-    this.colaboradorParaEditar = {
-      nome: '',
-      cpf: '',
-      departamento: '',
-      telefone: '',
-      email: '',
-      endereco: '',
-      numero: '',
-      complemento: '',
-      bairro: '',
-      cidade: '',
-      estado: '',
-      cep: '',
-      setor: '',
-      faixaSalarial: '',
-      cargo: '',
-      gerente: '',
-      faculdade: '',
-      tempoTrabalho: '',
-      estadoCivil: '',
-      formacao: '',
-      genero: '',
-      idade: 0,
-      quantidadeAnosTrabalhadosAnteriormente: 0,
-      quantidadeEmpresasTrabalhou: 0,
-      nivelEscolaridade: '',
-      acoes: 'Adicionar'
-    };
-  }
-
-  editarColaborador(colaborador: Colaborador): void {
-    this.colaboradorParaEditar = { ...colaborador };
-  }
-
-  salvarColaborador(colaborador: Colaborador): void {
-    if (this.colaboradorParaEditar) {
-      const index = this.dataSource.data.findIndex(c => c.cpf === colaborador.cpf);
-      if (index >= 0) {
-        this.dataSource.data[index] = colaborador;
-      } else {
-        this.dataSource.data.push(colaborador);
-      }
-      this.dataSource._updateChangeSubscription(); 
-      this.colaboradorParaEditar = null;
-      this.snackBar.open('Colaborador salvo com sucesso!', 'Fechar', {
-        duration: 2000,
-      });
-    }
-  }
-
   resetar(): void {
     this.colaboradorParaEditar = null;
   }
@@ -534,26 +498,4 @@ export class ColaboradorComponent {
     this.resetar();
   }
 
-  confirmarExclusao(colaborador: Colaborador) {
-    const dialogRef = this.dialog.open(ConfirmarDelecaoComponent, {
-      data: { message: `Tem certeza que deseja excluir ${colaborador.nome}?` }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.excluirColaborador(colaborador);
-      }
-    });
-  }
-
-  excluirColaborador(colaborador: Colaborador): void {
-    const index = this.dataSource.data.indexOf(colaborador);
-    if (index >= 0) {
-      this.dataSource.data.splice(index, 1);  // Remove o colaborador da lista
-      this.dataSource = new MatTableDataSource<Colaborador>(this.dataSource.data);  // Atualiza o dataSource
-      this.snackBar.open(`${colaborador.nome} foi excluído com sucesso.`, 'Fechar', {
-        duration: 2000,
-      });
-    }
-  }
 }

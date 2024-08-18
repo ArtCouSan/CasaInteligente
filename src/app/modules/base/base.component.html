@@ -9,7 +9,9 @@
     [fixedInViewport]="true"
     fixedTopGap="0"
   >
-    <mat-nav-list>
+  <div class="sidenav-content">
+
+    <mat-nav-list >
       <mat-list-item 
         class="mat-list-item"
       >
@@ -50,7 +52,20 @@
         <fa-icon class="fa-icone" icon="user"></fa-icon>
         <span>Gerenciar Colaboradores</span>
       </mat-list-item>
+      <mat-list-item 
+        class="mat-list-item" 
+        (click)="mostrarComponente(componentAnalisarColaborador, 'percent')"
+        [class.selected]="selectedItem === 'percent'">
+        <fa-icon class="fa-icone" icon="percent"></fa-icon>
+        <span>Attrition</span>
+      </mat-list-item>
     </mat-nav-list>
+  </div>
+
+
+    <footer class="sidenav-footer">
+      <span> CidaAI &copy; 2024 <br /> Todos os direitos reservados.</span>
+    </footer>
   </mat-sidenav>
   <mat-sidenav-content class="mat-sidenav-content">
     <ng-container *ngIf="!conteudoDinamico">

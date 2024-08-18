@@ -7,13 +7,15 @@ import { EmConstrucaoComponent } from './em-construcao/em-construcao.component';
 import { ColaboradorEditComponent } from './modals/colaborador-edit/colaborador-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ConfirmarDelecaoComponent } from './modals/confirmar-delecao/confirmar-delecao.component';
+import { DetalheAnaliseColaboradorComponent } from './modals/detalhe-analise-colaborador/detalhe-analise-colaborador.component';
 
 
 @NgModule({
   declarations: [
     EmConstrucaoComponent,
     ColaboradorEditComponent,
-    ConfirmarDelecaoComponent
+    ConfirmarDelecaoComponent,
+    DetalheAnaliseColaboradorComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { ConfirmarDelecaoComponent } from './modals/confirmar-delecao/confirmar-
     MaterialModule,
     EmConstrucaoComponent,
     ColaboradorEditComponent,
-    ConfirmarDelecaoComponent
+    ConfirmarDelecaoComponent,
+    DetalheAnaliseColaboradorComponent
   ]
 })
 export class SharedModule { }
