@@ -110,4 +110,27 @@
 
 ::ng-deep .mat-expansion-indicator:after {
     color: white;
-  }
+}
+
+::ng-deep .mdc-label{
+    color: white;
+}
+
+::ng-deep .mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mdc-checkbox__ripple {
+    background-color: var(--verde-claro) !important;
+}
+
+::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:focus:checked~.mdc-checkbox__background {
+    background-color: var(--verde-claro) !important;
+}
+
+::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background, 
+.mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background,
+.mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled~.mdc-checkbox__background {
+    background-color: var(--verde-claro) !important;
+    border: 2px solid var(--verde-claro) !important;
+}
+
+::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+    border: 2px solid var(--verde-claro) !important;
+}

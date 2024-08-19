@@ -113,9 +113,22 @@ export class DetalheAnaliseColaboradorComponent {
     library.addIcons(faAngleLeft);
   }
 
-
   onVoltar() {
     this.voltar.emit(); 
+  }
+
+  getColor(predicao: number | undefined): string {
+    if (predicao === undefined) {
+      return 'white';
+    }
+
+    if (predicao <= 30) {
+      return 'green';
+    } else if (predicao >= 31 && predicao <= 50) {
+      return 'yellow';
+    } else {
+      return 'red';
+    }
   }
 
 }

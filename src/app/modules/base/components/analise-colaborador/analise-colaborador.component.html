@@ -33,7 +33,9 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> 
         <fa-icon icon="percent"></fa-icon> 
       </th>
-      <td mat-cell *matCellDef="let element"> {{element.predicao}} %</td>
+      <td class="texto-porcentagem" mat-cell *matCellDef="let element" [ngStyle]="{'color': getColor(element.predicao)}"> 
+        {{element.predicao}} %
+      </td>
     </ng-container>
 
 

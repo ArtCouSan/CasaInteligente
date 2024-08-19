@@ -24,5 +24,6 @@ export interface Colaborador {
   quantidadeEmpresasTrabalhou: number;
   quantidadeAnosTrabalhadosAnteriormente: number;
   nivelEscolaridade: string;
+  exFuncionario: boolean;
   acoes: string;
 }

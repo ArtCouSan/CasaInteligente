@@ -117,3 +117,23 @@
 ::ng-deep .mat-expansion-panel-header:not([aria-disabled=true]) {
     color: white;
 }
+
+.conteudo-cabecalho {
+    .texto-predicao {
+        text-align: end;
+        font-size: 40px;
+    }
+}
+
+.card-motivo {
+    margin-bottom: 20px;
+    background-color: var(--cinza-escuro);
+}
+
+.card-titulo {
+    color: white;
+}
+
+.card-descricao {
+    color: grey;
+}

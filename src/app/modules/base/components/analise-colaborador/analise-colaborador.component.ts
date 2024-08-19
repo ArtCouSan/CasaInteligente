@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AnaliseColaborador } from '../../../core/dto/analise-colaborador';
 
+
 const ELEMENT_DATA: AnaliseColaborador[] = [
   {
     nome: 'Arthur Coutinho',
@@ -37,7 +38,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 8,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:85
+    predicao: 85,
+    motivo: "Alta chance de demissão devido ao tempo significativo de trabalho na mesma empresa e possível estagnação na posição atual."
   },
   {
     nome: 'Beatriz Souza',
@@ -66,7 +68,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 5,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:72
+    predicao: 10,
+    motivo: "Baixa chance de demissão devido à curta duração no emprego atual e possível satisfação com a função."
   },
   {
     nome: 'Carlos Almeida',
@@ -95,7 +98,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 10,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:88
+    predicao: 40,
+    motivo: "Chance moderada de demissão, possivelmente devido à busca por melhores oportunidades financeiras ou mudanças de carreira."
   },
   {
     nome: 'Daniela Lima',
@@ -124,7 +128,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 6,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:80
+    predicao: 80,
+    motivo: "Alta chance de demissão, possivelmente devido ao desejo de progresso na carreira ou insatisfação com o ambiente de trabalho atual."
   },
   {
     nome: 'Eduardo Silva',
@@ -153,7 +158,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 7,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:87
+    predicao: 87,
+    motivo: "Muito alta chance de demissão devido à combinação de longo tempo de trabalho e possível busca por novas oportunidades."
   },
   {
     nome: 'Fernanda Costa',
@@ -182,7 +188,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 3,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:74
+    predicao: 74,
+    motivo: "Alta chance de demissão, possivelmente devido ao desejo de mudança para uma função de maior responsabilidade ou insatisfação."
   },
   {
     nome: 'Gabriel Moreira',
@@ -211,7 +218,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 4,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:69
+    predicao: 69,
+    motivo: "Chance considerável de demissão, possivelmente devido à estagnação na função atual e busca por crescimento profissional."
   },
   {
     nome: 'Helena Ferreira',
@@ -240,7 +248,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 1,
     nivelEscolaridade: "Ensino Superior - Incompleto",
     acoes: "Editar",
-    predicao:75
+    predicao: 75,
+    motivo: "Alta chance de demissão devido ao desejo de mudança ou insatisfação com a progressão na carreira."
   },
   {
     nome: 'Isabela Martins',
@@ -269,7 +278,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 15,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:90
+    predicao: 90,
+    motivo: "Muito alta chance de demissão, possivelmente devido à saturação na carreira atual e busca por novos desafios."
   },
   {
     nome: 'João Pereira',
@@ -298,7 +308,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 4,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:77
+    predicao: 77,
+    motivo: "Alta chance de demissão devido à possível busca por maiores responsabilidades ou mudança de setor."
   },
   {
     nome: 'Larissa Mendes',
@@ -327,7 +338,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 6,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:84
+    predicao: 84,
+    motivo: "Muito alta chance de demissão, possivelmente devido à insatisfação com o crescimento na carreira ou busca por novas oportunidades."
   },
   {
     nome: 'Marcos Oliveira',
@@ -356,7 +368,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 12,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:89
+    predicao: 89,
+    motivo: "Muito alta chance de demissão, possivelmente devido ao longo tempo de trabalho e busca por novos desafios profissionais."
   },
   {
     nome: 'Natalia Ribeiro',
@@ -385,7 +398,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 8,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:83
+    predicao: 83,
+    motivo: "Alta chance de demissão devido à possível insatisfação com a progressão de carreira e busca por novas oportunidades."
   },
   {
     nome: 'Otávio Fonseca',
@@ -414,7 +428,8 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 5,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:76
+    predicao: 76,
+    motivo: "Alta chance de demissão, possivelmente devido à busca por crescimento na carreira ou insatisfação com a função atual."
   },
   {
     nome: 'Paula Gomes',
@@ -443,10 +458,10 @@ const ELEMENT_DATA: AnaliseColaborador[] = [
     quantidadeAnosTrabalhadosAnteriormente: 3,
     nivelEscolaridade: "Ensino Superior - Completo",
     acoes: "Editar",
-    predicao:70
+    predicao: 70,
+    motivo: "Chance moderada de demissão, possivelmente devido à busca por maior estabilidade financeira ou crescimento profissional."
   }
 ];
-
 
 @Component({
   selector: 'app-analise-colaborador',
@@ -500,6 +515,16 @@ export class AnaliseColaboradorComponent {
 
   analisarColaborador(colaborador: AnaliseColaborador): void {
     this.colaboradorParaAnalisar = { ...colaborador };
+  }
+
+  getColor(predicao: number): string {
+    if (predicao <= 30) {
+      return 'green';
+    } else if (predicao >= 31 && predicao <= 50) {
+      return 'yellow';
+    } else {
+      return 'red';
+    }
   }
 
 }

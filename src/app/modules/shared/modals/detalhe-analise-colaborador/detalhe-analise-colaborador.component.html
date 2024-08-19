@@ -1,6 +1,21 @@
 <div class="container-modal">
     <div class="container-conteudo">
         <fa-icon class="fa-icone i-sair" icon="angle-left" (click)="onVoltar()"></fa-icon>
+
+        <div class="conteudo-cabecalho">
+            <h2 class="texto-predicao"  [ngStyle]="{'color': getColor(colaborador.predicao)}">{{colaborador.predicao}} %</h2>
+        </div>
+
+        <mat-card class="card-motivo" appearance="outlined">
+            <mat-card-header>
+                <mat-card-title class="card-titulo">Motivo</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="card-descricao">
+                  {{colaborador.motivo}}
+                </p>
+              </mat-card-content>
+        </mat-card>
          
         <!-- Seção de Dados Pessoais -->
         <mat-accordion>

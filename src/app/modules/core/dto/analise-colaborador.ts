@@ -25,5 +25,6 @@ export interface AnaliseColaborador {
   quantidadeAnosTrabalhadosAnteriormente: number;
   nivelEscolaridade: string;
   acoes: string;
-  predicao?: number
+  motivo: string;
+  predicao?: number;
 }

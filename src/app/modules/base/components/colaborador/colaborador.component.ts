@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faPen, faTrash, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash, faUserPlus, faBan, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Colaborador } from '../../../core/dto/colaborador';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -36,7 +36,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 8,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Beatriz Souza',
@@ -64,7 +65,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 5,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: true
   },
   {
     nome: 'Carlos Almeida',
@@ -92,7 +94,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 4,
     quantidadeAnosTrabalhadosAnteriormente: 10,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Daniela Lima',
@@ -120,7 +123,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 6,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Eduardo Silva',
@@ -148,7 +152,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 7,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Fernanda Costa',
@@ -176,7 +181,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 3,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Gabriel Moreira',
@@ -204,7 +210,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 4,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Helena Ferreira',
@@ -232,7 +239,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 1,
     quantidadeAnosTrabalhadosAnteriormente: 1,
     nivelEscolaridade: "Ensino Superior - Incompleto",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Isabela Martins',
@@ -260,7 +268,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 5,
     quantidadeAnosTrabalhadosAnteriormente: 15,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'João Pereira',
@@ -288,7 +297,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 4,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Larissa Mendes',
@@ -316,7 +326,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 6,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Marcos Oliveira',
@@ -344,7 +355,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 4,
     quantidadeAnosTrabalhadosAnteriormente: 12,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Natalia Ribeiro',
@@ -372,7 +384,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 3,
     quantidadeAnosTrabalhadosAnteriormente: 8,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Otávio Fonseca',
@@ -400,7 +413,8 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 5,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   },
   {
     nome: 'Paula Gomes',
@@ -428,10 +442,10 @@ const ELEMENT_DATA: Colaborador[] = [
     quantidadeEmpresasTrabalhou: 2,
     quantidadeAnosTrabalhadosAnteriormente: 3,
     nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar"
+    acoes: "Editar",
+    exFuncionario: false
   }
 ];
-
 
 @Component({
   selector: 'app-colaborador',
@@ -439,7 +453,7 @@ const ELEMENT_DATA: Colaborador[] = [
   styleUrl: './colaborador.component.scss'
 })
 export class ColaboradorComponent {
-  displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'acoes'];
+  displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'exFuncionario', 'acoes'];
   dataSource = new MatTableDataSource<Colaborador>(ELEMENT_DATA);
 
   colaboradorParaEditar: Colaborador | null = null;
@@ -462,6 +476,8 @@ export class ColaboradorComponent {
     library.addIcons(faPen);
     library.addIcons(faTrash);
     library.addIcons(faUserPlus);
+    library.addIcons(faBan);
+    library.addIcons(faCheck);
   }
 
   aplicarFiltro(valor: string): void {
@@ -501,6 +517,7 @@ export class ColaboradorComponent {
       quantidadeAnosTrabalhadosAnteriormente: 0,
       quantidadeEmpresasTrabalhou: 0,
       nivelEscolaridade: '',
+      exFuncionario: false,
       acoes: 'Adicionar'
     };
   }
