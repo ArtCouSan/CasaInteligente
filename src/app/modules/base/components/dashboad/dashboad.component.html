@@ -1,6 +1,16 @@
 <div class="dashboard">
-  <app-total-employees></app-total-employees>
-  <app-employee-timeline></app-employee-timeline>
-  <app-department-pie></app-department-pie>
-  <app-gender-bar></app-gender-bar>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile class="grid">
+      <app-g1></app-g1>
+    </mat-grid-tile>
+    <mat-grid-tile class="grid">
+      <app-g2></app-g2>
+    </mat-grid-tile>
+    <mat-grid-tile class="grid">
+      <app-g3></app-g3>
+    </mat-grid-tile>
+    <mat-grid-tile class="grid">
+      <app-g4></app-g4>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

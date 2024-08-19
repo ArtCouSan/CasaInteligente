@@ -15,8 +15,7 @@ import { AnaliseColaboradorComponent } from './components/analise-colaborador/an
     BaseComponent,
     ColaboradorComponent,
     DashboadComponent,
-    AnaliseColaboradorComponent,
-    
+    AnaliseColaboradorComponent
   ],
   imports: [CommonModule, BaseRoutingModule, FontAwesomeModule, SharedModule],
 })
