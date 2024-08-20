@@ -15,13 +15,14 @@ export class G1Component implements OnInit {
 
   ngOnInit() {
     this.chart = new Chart('g1', {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: ['2020', '2021', '2022', '2023', '2024'],
         datasets: [
           {
             data: [683, 722, 856, 906, 1000],
-            backgroundColor: '#055e4d'
+            backgroundColor: '#055e4d',
+            borderColor: '#155e4d'
           },
         ],
       },
