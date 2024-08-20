@@ -29,7 +29,7 @@ export class G10Component {
         plugins: {
           title: {
             display: true,
-            text: 'Reclamações ao Longos do Anos',
+            text: 'Reclamações ao longos do anos',
             font: {
               size: 20,
             },

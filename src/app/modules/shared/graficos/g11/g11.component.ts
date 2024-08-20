@@ -54,7 +54,7 @@ export class G11Component {
         plugins: {
           title: {
             display: true,
-            text: 'Razão da Demissão por Departamento',
+            text: 'Razão da demissão por departamento',
             font: {
               size: 20,
             },

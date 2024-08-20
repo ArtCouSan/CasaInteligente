@@ -30,7 +30,7 @@ export class G4Component {
         plugins: {
           title: {
             display: true,
-            text: 'Chance de evasão por Gestor',
+            text: 'Chance de evasão por gestor',
             font: {
               size: 20
             },

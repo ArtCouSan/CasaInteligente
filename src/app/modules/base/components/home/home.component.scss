@@ -2,32 +2,48 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    height: 100%;
+    justify-content: center;
+    background-color: rgba(22,23,27, 0.7);
 }
 
 .container-conteudo {
-    width: 80%;
-    padding: 10px 60px 10px 60px;
-    background-color: var(--cinza-escuro);
-    height: 500px;
+    width: 90%;
+    padding: 10px 60px;
+    background-color: inherit;
+    height: 275px;
     position: relative;
 }
 
 .header {
     display: flex;
-    justify-content: center; 
-    align-items: center;
+    justify-content: center; /* Alinha as imagens horizontalmente no centro */
+    align-items: center; /* Alinha as imagens verticalmente */
+    gap: 15px; /* Espaço entre as imagens */
+    margin-top: 35px;
+    margin-bottom: 35px;
 }
   
-.logo-sdc, .logo-fiap {
-    height: 200px;
+.logo-sdc {
+    height: 109px;
+    margin: 0 15px;
+    object-fit: contain;
+} 
+
+.logo-fiap {
+    height: 113px;
     margin: 0 15px;
     object-fit: contain;
 }
 
+.content {
+    text-align: center;
+}
+
 .titulo {
     color: grey;
-    font-size: 30px;
+    font-size: 50px;
+    font-family: "New Amsterdam", sans-serif;
 }
 
 .descricao {
@@ -65,7 +81,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background-color: var(--cinza-escuro-tom-mais);
     clip-path: polygon(0 0, 100% 0, 159% -16%, 0% 100%);
     z-index: -1;
 }

@@ -50,7 +50,7 @@ export class G9Component {
         plugins: {
           title: {
             display: true,
-            text: 'Principais Razões de Saída dos Colaboradores',
+            text: 'Principais razões de saída dos colaboradores',
             font: {
               size: 20,
             },
