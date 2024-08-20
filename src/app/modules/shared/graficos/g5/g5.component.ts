@@ -40,7 +40,7 @@ export class G5Component {
         plugins: {
           title: {
             display: true,
-            text: 'Demissõe x Promossões anuais',
+            text: 'Demissões x Promossões anuais',
             font: {
               size: 20,
             },

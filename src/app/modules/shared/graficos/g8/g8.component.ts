@@ -37,7 +37,7 @@ export class G8Component {
         plugins: {
           title: {
             display: true,
-            text: 'Demissões por departamento ao ano',
+            text: 'Reclamações por tema',
             font: {
               size: 20,
             },

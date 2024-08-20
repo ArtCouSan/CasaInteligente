@@ -52,7 +52,7 @@ export class G7Component {
         plugins: {
           title: {
             display: true,
-            text: 'Dimissões por departamento ao ano',
+            text: 'Reclamações por Departamento',
             font: {
               size: 20,
             },
