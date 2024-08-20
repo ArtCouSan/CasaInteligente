@@ -20,30 +20,30 @@ export class G6Component {
         datasets: [
           {
             label: 'TI',
-            data: [5, 10, 8, 15, 2], // Frequência de promoções
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            data: [5, 10, 8, 15, 3], // Frequência de promoções
+            backgroundColor: '#055e4d',
+            borderColor: '#055e4d',
             borderWidth: 1,
           },
           {
             label: 'Juridico',
-            data: [3, 7, 5, 12, 1],
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderColor: 'rgba(153, 102, 255, 1)',
-            borderWidth: 1,
-          },
-          {
-            label: 'RH',
-            data: [4, 9, 6, 10, 0],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
+            data: [3, 7, 5, 12, 4],
+            backgroundColor: '#377e70',
+            borderColor: '#377e70',
             borderWidth: 1,
           },
           {
             label: 'Atendimento',
-            data: [7, 9, 12, 10, 5],
-            backgroundColor: 'rgba(255, 19, 64, 0.2)',
-            borderColor: 'rgba(255, 19, 64, 1)',
+            data: [21, 11, 9, 10, 9],
+            backgroundColor: '#699e94',
+            borderColor: '#699e94',
+            borderWidth: 1,
+          },
+          {
+            label: 'RH',
+            data: [2, 3, 1, 4, 7],
+            backgroundColor: '#9bbeb7',
+            borderColor: '#9bbeb7',
             borderWidth: 1,
           },
         ],

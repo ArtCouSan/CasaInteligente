@@ -2,37 +2,26 @@ import { Component } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'app-g5',
-  templateUrl: './g5.component.html',
-  styleUrl: './g5.component.scss',
+  selector: 'app-g10',
+  templateUrl: './g10.component.html',
+  styleUrl: './g10.component.scss',
 })
-export class G5Component {
+export class G10Component {
   title = 'ng-chart';
   chart: any = [];
 
   constructor() {}
 
   ngOnInit() {
-    this.chart = new Chart('g5', {
+    this.chart = new Chart('g10', {
       type: 'line',
       data: {
-        labels: ['2020', '2021', '2022', '2023', '2024'], // Anos
+        labels: ['2020', '2021', '2022', '2023', '2024'],
         datasets: [
           {
-            label: 'Demissões',
-            data: [51, 41, 33, 37, 23], // Quantidade de demissões por ano
-            borderColor: '#055e4d',
+            data: [83, 75, 45, 50, 38],
             backgroundColor: '#055e4d',
-            fill: false,
-            tension: 0.1,
-          },
-          {
-            label: 'Promoções',
-            data: [5, 10, 12, 15, 18], // Quantidade de promoções por ano
-            borderColor: '#9bbeb7',
-            backgroundColor: '#9bbeb7',
-            fill: false,
-            tension: 0.1,
+            borderColor: '#155e4d',
           },
         ],
       },
@@ -40,7 +29,7 @@ export class G5Component {
         plugins: {
           title: {
             display: true,
-            text: 'Demissões x Promoções anuais',
+            text: 'Reclamações ao Longos do Anos',
             font: {
               size: 20,
             },

@@ -17,6 +17,10 @@ import { G5Component } from './graficos/g5/g5.component';
 import { G6Component } from './graficos/g6/g6.component';
 import { G7Component } from './graficos/g7/g7.component';
 import { G8Component } from './graficos/g8/g8.component';
+import { G9Component } from './graficos/g9/g9.component';
+import { G10Component } from './graficos/g10/g10.component';
+import { G11Component } from './graficos/g11/g11.component';
+import { G12Component } from './graficos/g12/g12.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { G8Component } from './graficos/g8/g8.component';
     G5Component,
     G6Component,
     G7Component,
-    G8Component
+    G8Component,
+    G9Component,
+    G10Component,
+    G11Component,
+    G12Component,
   ],
   imports: [
     CommonModule,
@@ -55,7 +63,11 @@ import { G8Component } from './graficos/g8/g8.component';
     G5Component,
     G6Component,
     G7Component,
-    G8Component
+    G8Component,
+    G9Component,
+    G10Component,
+    G11Component,
+    G12Component,
   ],
 })
 export class SharedModule {}
