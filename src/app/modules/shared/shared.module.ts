@@ -13,7 +13,10 @@ import { G1Component } from './graficos/g1/g1.component';
 import { G2Component } from './graficos/g2/g2.component';
 import { G3Component } from './graficos/g3/g3.component';
 import { G4Component } from './graficos/g4/g4.component';
-
+import { G5Component } from './graficos/g5/g5.component';
+import { G6Component } from './graficos/g6/g6.component';
+import { G7Component } from './graficos/g7/g7.component';
+import { G8Component } from './graficos/g8/g8.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,11 @@ import { G4Component } from './graficos/g4/g4.component';
     G1Component,
     G2Component,
     G3Component,
-    G4Component
+    G4Component,
+    G5Component,
+    G6Component,
+    G7Component,
+    G8Component
   ],
   imports: [
     CommonModule,
@@ -33,7 +40,7 @@ import { G4Component } from './graficos/g4/g4.component';
     FormsModule,
     FontAwesomeModule,
     BaseChartDirective,
-    MaterialModule
+    MaterialModule,
   ],
   exports: [
     MaterialModule,
@@ -44,7 +51,11 @@ import { G4Component } from './graficos/g4/g4.component';
     G1Component,
     G2Component,
     G3Component,
-    G4Component
-  ]
+    G4Component,
+    G5Component,
+    G6Component,
+    G7Component,
+    G8Component
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -4,12 +4,12 @@ import { Chart } from 'chart.js';
 @Component({
   selector: 'app-g2',
   templateUrl: './g2.component.html',
-  styleUrl: './g2.component.scss'
+  styleUrl: './g2.component.scss',
 })
 export class G2Component {
   title = 'ng-chart';
   g2: any = [];
- 
+
   constructor() {}
 
   ngOnInit() {
@@ -20,27 +20,27 @@ export class G2Component {
         datasets: [
           {
             data: [35, 65],
-            backgroundColor: '#055e4d'
+            backgroundColor: '#055e4d',
           },
         ],
       },
       options: {
         indexAxis: 'y',
         plugins: {
-            title: {
-                display: true,
-                text: 'Colaboradores com chance de evasão',
-                font: {
-                  size: 20
-                },
-                color: 'white', 
-                padding: {
-                  bottom: 20
-                }
+          title: {
+            display: true,
+            text: 'Colaboradores com chance de evasão',
+            font: {
+              size: 20,
             },
+            color: 'white',
+            padding: {
+              bottom: 20,
+            },
+          },
           legend: {
-            display: false
-        },
+            display: false,
+          },
         },
         responsive: false,
         scales: {
@@ -50,9 +50,9 @@ export class G2Component {
           x: {
             beginAtZero: true,
             ticks: {
-              callback: (value) => `${value}%`
-            }
-          }
+              callback: (value) => `${value}`,
+            },
+          },
         },
       },
     });
