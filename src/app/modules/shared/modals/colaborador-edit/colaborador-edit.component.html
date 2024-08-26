@@ -74,32 +74,32 @@
                 <div class="secao-endereco">
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Endereço</mat-label>
-                    <input matInput [(ngModel)]="colaborador.endereco.endereco" >
+                    <input matInput [(ngModel)]="colaborador.endereco" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Número</mat-label>
-                    <input matInput [(ngModel)]="colaborador.endereco.numero" >
+                    <input matInput [(ngModel)]="colaborador.numero" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Complemento</mat-label>
-                    <input matInput [(ngModel)]="colaborador.endereco.complemento" >
+                    <input matInput [(ngModel)]="colaborador.complemento" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Bairro</mat-label>
-                    <input matInput [(ngModel)]="colaborador.endereco.bairro" >
+                    <input matInput [(ngModel)]="colaborador.bairro" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Cidade</mat-label>
-                    <input matInput [(ngModel)]="colaborador.endereco.cidade" >
+                    <input matInput [(ngModel)]="colaborador.cidade" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Estado</mat-label>
-                    <mat-select [(ngModel)]="colaborador.endereco.estado">
+                    <mat-select [(ngModel)]="colaborador.estado">
                         <mat-option *ngFor="let estado of estados" [value]="estado">
                             {{ estado }}
                         </mat-option>
@@ -108,7 +108,7 @@
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">CEP</mat-label>
-                    <input matInput [(ngModel)]="colaborador.endereco.cep" >
+                    <input matInput [(ngModel)]="colaborador.cep" >
                 </mat-form-field>
             </div>
             </mat-expansion-panel>

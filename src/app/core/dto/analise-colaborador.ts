@@ -4,5 +4,7 @@ export interface AnaliseColaborador {
   colaborador: Colaborador;
   motivo: string;
   predicao: number;
+  sugestao: string;
+  observacao: string;
 }
 

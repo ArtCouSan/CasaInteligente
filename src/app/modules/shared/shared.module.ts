@@ -39,7 +39,7 @@ import { G12Component } from './graficos/g12/g12.component';
     G9Component,
     G10Component,
     G11Component,
-    G12Component,
+    G12Component
   ],
   imports: [
     CommonModule,

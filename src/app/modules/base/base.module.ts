@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColaboradorComponent } from './components/colaborador/colaborador.component';
 import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
+import { ColaboradorService } from '../../service/colaborador.service';
 
 @NgModule({
   declarations: [

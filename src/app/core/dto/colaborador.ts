@@ -1,4 +1,5 @@
 export interface Colaborador {
+  id?: number;
   nome: string;
   cpf: string;
   idade: number;
@@ -8,7 +9,13 @@ export interface Colaborador {
   email: string;
   formacao: Formacao;
   faculdade: Faculdade;
-  endereco: Endereco;
+  endereco: string;
+  numero: string;
+  complemento?: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
+  cep: string;
   departamento: Departamento;
   setor: Setor;
   faixaSalarial: FaixaSalarial;
@@ -40,17 +47,6 @@ export interface Formacao {
 export interface Faculdade {
   id: number;
   nome: string;
-}
-
-export interface Endereco {
-  id: number;
-  endereco: string;
-  numero: string;
-  complemento?: string;
-  bairro: string;
-  cidade: string;
-  estado: string;
-  cep: string;
 }
 
 export interface Departamento {

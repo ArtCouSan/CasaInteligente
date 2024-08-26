@@ -91,32 +91,32 @@
                 <div class="secao-endereco">
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Endereço</mat-label>
-                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.endereco" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco" disabled>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Número</mat-label>
-                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.numero" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.numero" disabled>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Complemento</mat-label>
-                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.complemento" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.complemento" disabled>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Bairro</mat-label>
-                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.bairro" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.bairro" disabled>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Cidade</mat-label>
-                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.cidade" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.cidade" disabled>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Estado</mat-label>
-                        <mat-select [(ngModel)]="analiseColaborador.colaborador.endereco.estado" disabled>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.estado" disabled>
                             <mat-option *ngFor="let estado of estados" [value]="estado">
                                 {{ estado }}
                             </mat-option>
@@ -125,7 +125,7 @@
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">CEP</mat-label>
-                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.cep" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.cep" disabled>
                     </mat-form-field>
                 </div>
             </mat-expansion-panel>
