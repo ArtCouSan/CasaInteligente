@@ -28,9 +28,9 @@
     <!-- Coluna Departamento -->
     <ng-container matColumnDef="departamento">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
-      <td mat-cell *matCellDef="let element"> {{element.departamento}} </td>
-    </ng-container>
-
+      <td mat-cell *matCellDef="let element"> {{element.departamento.nome}} </td>
+    </ng-container>    
+    
     <!-- Coluna Ex-Funcionario -->
     <ng-container matColumnDef="exFuncionario">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Ex-Funcionário </th>

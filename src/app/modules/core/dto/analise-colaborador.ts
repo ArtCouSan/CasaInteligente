@@ -1,30 +1,8 @@
+import { Colaborador }  from '../../core/dto/colaborador';
+
 export interface AnaliseColaborador {
-  nome: string;
-  cpf: string;
-  idade: number;
-  genero: string;
-  estadoCivil: string;
-  telefone: string;
-  email: string;
-  formacao: string;
-  faculdade: string;
-  endereco: string;
-  numero: string;
-  complemento?: string;
-  bairro: string;
-  cidade: string;
-  estado: string;
-  cep: string;
-  departamento: string;
-  setor: string;
-  faixaSalarial: string;
-  cargo: string;
-  gerente: string;
-  tempoTrabalho: string;
-  quantidadeEmpresasTrabalhou: number;
-  quantidadeAnosTrabalhadosAnteriormente: number;
-  nivelEscolaridade: string;
-  acoes: string;
+  colaborador: Colaborador;
   motivo: string;
-  predicao?: number;
+  predicao: number;
 }
+

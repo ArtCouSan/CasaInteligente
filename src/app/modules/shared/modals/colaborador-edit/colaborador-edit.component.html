@@ -25,19 +25,19 @@
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
-                    <mat-label class="titulo">Genero</mat-label>
-                    <mat-select [(ngModel)]="colaborador.genero" >
-                        <mat-option *ngFor="let genero of generos" [value]="genero">
-                            {{ genero }}
+                    <mat-label class="titulo">Gênero</mat-label>
+                    <mat-select [(ngModel)]="colaborador.genero.id">
+                        <mat-option *ngFor="let genero of generos" [value]="genero.id">
+                            {{ genero.descricao }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Estado Civil</mat-label>
-                    <mat-select [(ngModel)]="colaborador.estadoCivil" >
-                        <mat-option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil">
-                            {{ estadoCivil }}
+                    <mat-select [(ngModel)]="colaborador.estadoCivil.id">
+                        <mat-option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil.id">
+                            {{ estadoCivil.descricao }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -45,7 +45,7 @@
             </mat-expansion-panel>
         </mat-accordion>        
             
-        <!-- Seção de contato -->    
+        <!-- Seção de Contato -->    
         <mat-accordion>
             <mat-expansion-panel (opened)="panelContato.set(true)" (closed)="panelContato.set(false)">
                 <mat-expansion-panel-header>
@@ -74,32 +74,32 @@
                 <div class="secao-endereco">
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Endereço</mat-label>
-                    <input matInput [(ngModel)]="colaborador.endereco" >
+                    <input matInput [(ngModel)]="colaborador.endereco.endereco" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Número</mat-label>
-                    <input matInput [(ngModel)]="colaborador.numero" >
+                    <input matInput [(ngModel)]="colaborador.endereco.numero" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Complemento</mat-label>
-                    <input matInput [(ngModel)]="colaborador.complemento" >
+                    <input matInput [(ngModel)]="colaborador.endereco.complemento" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Bairro</mat-label>
-                    <input matInput [(ngModel)]="colaborador.bairro" >
+                    <input matInput [(ngModel)]="colaborador.endereco.bairro" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Cidade</mat-label>
-                    <input matInput [(ngModel)]="colaborador.cidade" >
+                    <input matInput [(ngModel)]="colaborador.endereco.cidade" >
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Estado</mat-label>
-                    <mat-select [(ngModel)]="colaborador.estado" >
+                    <mat-select [(ngModel)]="colaborador.endereco.estado">
                         <mat-option *ngFor="let estado of estados" [value]="estado">
                             {{ estado }}
                         </mat-option>
@@ -108,13 +108,13 @@
 
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">CEP</mat-label>
-                    <input matInput [(ngModel)]="colaborador.cep" >
+                    <input matInput [(ngModel)]="colaborador.endereco.cep" >
                 </mat-form-field>
             </div>
             </mat-expansion-panel>
         </mat-accordion>  
             
-        <!-- Seção de formação -->
+        <!-- Seção de Formação -->
         <mat-accordion>
             <mat-expansion-panel (opened)="panelFormacao.set(true)" (closed)="panelFormacao.set(false)">
             <mat-expansion-panel-header>
@@ -123,19 +123,27 @@
             <div class="secao-formacao">
                 <mat-form-field class="form-field select">
                     <mat-label class="titulo">Nível de Escolaridade</mat-label>
-                    <mat-select [(ngModel)]="colaborador.nivelEscolaridade" >
-                        <mat-option *ngFor="let nivelEscolaridade of niveisEscolaridade" [value]="nivelEscolaridade">
-                            {{ nivelEscolaridade }}
+                    <mat-select [(ngModel)]="colaborador.nivelEscolaridade.id">
+                        <mat-option *ngFor="let nivelEscolaridade of niveisEscolaridade" [value]="nivelEscolaridade.id">
+                            {{ nivelEscolaridade.descricao }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Faculdade</mat-label>
-                    <input matInput [(ngModel)]="colaborador.faculdade" >
+                    <mat-select [(ngModel)]="colaborador.faculdade.id">
+                        <mat-option *ngFor="let faculdade of faculdades" [value]="faculdade.id">
+                            {{ faculdade.nome }}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field class="form-field">
                     <mat-label class="titulo">Formação</mat-label>
-                    <input matInput [(ngModel)]="colaborador.formacao" >
+                    <mat-select [(ngModel)]="colaborador.formacao.id">
+                        <mat-option *ngFor="let formacao of formacoes" [value]="formacao.id">
+                            {{ formacao.descricao }}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             </mat-expansion-panel>
@@ -150,26 +158,38 @@
                 <div class="secao-dados-cargo">
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Departamento</mat-label>
-                        <input matInput [(ngModel)]="colaborador.departamento" >
+                        <mat-select [(ngModel)]="colaborador.departamento.id">
+                            <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">
+                                {{ departamento.nome }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Setor</mat-label>
-                        <input matInput [(ngModel)]="colaborador.setor" >
+                        <mat-select [(ngModel)]="colaborador.setor.id">
+                            <mat-option *ngFor="let setor of setores" [value]="setor.id">
+                                {{ setor.nome }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Faixa Salarial</mat-label>
-                        <mat-select [(ngModel)]="colaborador.faixaSalarial" >
-                            <mat-option *ngFor="let faixa of faixasSalariais" [value]="faixa">
-                                {{ faixa }}
+                        <mat-select [(ngModel)]="colaborador.faixaSalarial.id">
+                            <mat-option *ngFor="let faixa of faixasSalariais" [value]="faixa.id">
+                                {{ faixa.descricao }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Cargo</mat-label>
-                        <input matInput [(ngModel)]="colaborador.cargo" >
+                        <mat-select [(ngModel)]="colaborador.cargo.id">
+                            <mat-option *ngFor="let cargo of cargos" [value]="cargo.id">
+                                {{ cargo.nome }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
@@ -205,7 +225,7 @@
             </mat-expansion-panel>
         </mat-accordion>
 
-        <mat-checkbox [(ngModel)]="colaborador.exFuncionario" class="titulo">Ex-Funcionario?</mat-checkbox>
+        <mat-checkbox [(ngModel)]="colaborador.exFuncionario" class="titulo">Ex-Funcionário?</mat-checkbox>
 
         <fa-icon class="fa-icone i-salvar" icon="check" (click)="onSalvar()"></fa-icon>
     </div>

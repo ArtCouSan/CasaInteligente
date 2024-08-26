@@ -2,12 +2,48 @@ export interface Colaborador {
   nome: string;
   cpf: string;
   idade: number;
-  genero: string;
-  estadoCivil: string;
+  genero: Genero;
+  estadoCivil: EstadoCivil;
   telefone: string;
   email: string;
-  formacao: string;
-  faculdade: string;
+  formacao: Formacao;
+  faculdade: Faculdade;
+  endereco: Endereco;
+  departamento: Departamento;
+  setor: Setor;
+  faixaSalarial: FaixaSalarial;
+  cargo: Cargo;
+  gerente?: string;
+  tempoTrabalho: string;
+  quantidadeEmpresasTrabalhou: number;
+  quantidadeAnosTrabalhadosAnteriormente: number;
+  nivelEscolaridade: NivelEscolaridade;
+  exFuncionario: boolean;
+  acoes: string;
+}
+
+export interface Genero {
+  id: number;
+  descricao: string;
+}
+
+export interface EstadoCivil {
+  id: number;
+  descricao: string;
+}
+
+export interface Formacao {
+  id: number;
+  descricao: string;
+}
+
+export interface Faculdade {
+  id: number;
+  nome: string;
+}
+
+export interface Endereco {
+  id: number;
   endereco: string;
   numero: string;
   complemento?: string;
@@ -15,15 +51,29 @@ export interface Colaborador {
   cidade: string;
   estado: string;
   cep: string;
-  departamento: string;
-  setor: string;
-  faixaSalarial: string;
-  cargo: string;
-  gerente: string;
-  tempoTrabalho: string;
-  quantidadeEmpresasTrabalhou: number;
-  quantidadeAnosTrabalhadosAnteriormente: number;
-  nivelEscolaridade: string;
-  exFuncionario: boolean;
-  acoes: string;
+}
+
+export interface Departamento {
+  id: number;
+  nome: string;
+}
+
+export interface Setor {
+  id: number;
+  nome: string;
+}
+
+export interface FaixaSalarial {
+  id: number;
+  descricao: string;
+}
+
+export interface Cargo {
+  id: number;
+  nome: string;
+}
+
+export interface NivelEscolaridade {
+  id: number;
+  descricao: string;
 }

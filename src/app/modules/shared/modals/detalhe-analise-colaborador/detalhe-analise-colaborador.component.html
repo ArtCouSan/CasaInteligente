@@ -3,7 +3,9 @@
         <fa-icon class="fa-icone i-sair" icon="angle-left" (click)="onVoltar()"></fa-icon>
 
         <div class="conteudo-cabecalho">
-            <h2 class="texto-predicao"  [ngStyle]="{'color': getColor(colaborador.predicao)}">{{colaborador.predicao}} %</h2>
+            <h2 class="texto-predicao" [ngStyle]="{'color': getColor(analiseColaborador.predicao)}">
+                {{ analiseColaborador.predicao }} %
+            </h2>
         </div>
 
         <mat-card class="card-motivo" appearance="outlined">
@@ -12,69 +14,69 @@
             </mat-card-header>
             <mat-card-content>
                 <p class="card-descricao">
-                  {{colaborador.motivo}}
+                    {{ analiseColaborador.motivo }}
                 </p>
-              </mat-card-content>
+            </mat-card-content>
         </mat-card>
          
         <!-- Seção de Dados Pessoais -->
         <mat-accordion>
-            <mat-expansion-panel (opened)="panelDadosPessoais.set(true)" (closed)="panelDadosPessoais.set(false)">
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                <mat-panel-title class="titulo-secao"> Dados Pessoais </mat-panel-title>
+                    <mat-panel-title class="titulo-secao"> Dados Pessoais </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="secao-dados-pessoais">
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Nome</mat-label>
-                    <input matInput [(ngModel)]="colaborador.nome" disabled>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Nome</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.nome" disabled>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">CPF</mat-label>
-                    <input matInput [(ngModel)]="colaborador.cpf" disabled>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">CPF</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.cpf" disabled>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Idade</mat-label>
-                    <input matInput type="number" min="1" [(ngModel)]="colaborador.idade" disabled>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Idade</mat-label>
+                        <input matInput type="number" min="1" [(ngModel)]="analiseColaborador.colaborador.idade" disabled>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Genero</mat-label>
-                    <mat-select [(ngModel)]="colaborador.genero" disabled>
-                        <mat-option *ngFor="let genero of generos" [value]="genero">
-                            {{ genero }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Gênero</mat-label>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.genero.id" disabled>
+                            <mat-option *ngFor="let genero of generos" [value]="genero.id">
+                                {{ genero.descricao }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Estado Civil</mat-label>
-                    <mat-select [(ngModel)]="colaborador.estadoCivil" disabled>
-                        <mat-option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil">
-                            {{ estadoCivil }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Estado Civil</mat-label>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.estadoCivil.id" disabled>
+                            <mat-option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil.id">
+                                {{ estadoCivil.descricao }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>        
             
-        <!-- Seção de contato -->    
+        <!-- Seção de Contato -->    
         <mat-accordion>
-            <mat-expansion-panel (opened)="panelContato.set(true)" (closed)="panelContato.set(false)">
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                <mat-panel-title class="titulo-secao"> Contatos </mat-panel-title>
+                    <mat-panel-title class="titulo-secao"> Contatos </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="secao-contato">
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Telefone</mat-label>
-                        <input matInput [(ngModel)]="colaborador.telefone" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.telefone" disabled>
                     </mat-form-field>
         
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">E-mail</mat-label>
-                        <input matInput [(ngModel)]="colaborador.email" type="email" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.email" type="email" disabled>
                     </mat-form-field>
                 </div>
             </mat-expansion-panel>
@@ -82,119 +84,139 @@
             
         <!-- Seção de Endereço -->
         <mat-accordion>
-            <mat-expansion-panel (opened)="panelEndereco.set(true)" (closed)="panelEndereco.set(false)">
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                <mat-panel-title class="titulo-secao"> Endereço </mat-panel-title>
+                    <mat-panel-title class="titulo-secao"> Endereço </mat-panel-title>
                 </mat-expansion-panel-header>     
                 <div class="secao-endereco">
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Endereço</mat-label>
-                    <input matInput [(ngModel)]="colaborador.endereco" disabled>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Endereço</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.endereco" disabled>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Número</mat-label>
-                    <input matInput [(ngModel)]="colaborador.numero" disabled>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Número</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.numero" disabled>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Complemento</mat-label>
-                    <input matInput [(ngModel)]="colaborador.complemento" disabled>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Complemento</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.complemento" disabled>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Bairro</mat-label>
-                    <input matInput [(ngModel)]="colaborador.bairro" disabled>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Bairro</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.bairro" disabled>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Cidade</mat-label>
-                    <input matInput [(ngModel)]="colaborador.cidade" disabled>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Cidade</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.cidade" disabled>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Estado</mat-label>
-                    <mat-select [(ngModel)]="colaborador.estado" disabled>
-                        <mat-option *ngFor="let estado of estados" [value]="estado">
-                            {{ estado }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Estado</mat-label>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.endereco.estado" disabled>
+                            <mat-option *ngFor="let estado of estados" [value]="estado">
+                                {{ estado }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">CEP</mat-label>
-                    <input matInput [(ngModel)]="colaborador.cep" disabled>
-                </mat-form-field>
-            </div>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">CEP</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.endereco.cep" disabled>
+                    </mat-form-field>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>  
             
-        <!-- Seção de formação -->
+        <!-- Seção de Formação -->
         <mat-accordion>
-            <mat-expansion-panel (opened)="panelFormacao.set(true)" (closed)="panelFormacao.set(false)">
-            <mat-expansion-panel-header>
-                <mat-panel-title class="titulo-secao"> Formação </mat-panel-title>
-            </mat-expansion-panel-header>     
-            <div class="secao-formacao">
-                <mat-form-field class="form-field select">
-                    <mat-label class="titulo">Nível de Escolaridade</mat-label>
-                    <mat-select [(ngModel)]="colaborador.nivelEscolaridade" disabled>
-                        <mat-option *ngFor="let nivelEscolaridade of niveisEscolaridade" [value]="nivelEscolaridade">
-                            {{ nivelEscolaridade }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Faculdade</mat-label>
-                    <input matInput [(ngModel)]="colaborador.faculdade" disabled>
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Formação</mat-label>
-                    <input matInput [(ngModel)]="colaborador.formacao" disabled>
-                </mat-form-field>
-            </div>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="titulo-secao"> Formação </mat-panel-title>
+                </mat-expansion-panel-header>     
+                <div class="secao-formacao">
+                    <mat-form-field class="form-field select">
+                        <mat-label class="titulo">Nível de Escolaridade</mat-label>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.nivelEscolaridade.id" disabled>
+                            <mat-option *ngFor="let nivelEscolaridade of niveisEscolaridade" [value]="nivelEscolaridade.id">
+                                {{ nivelEscolaridade.descricao }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Faculdade</mat-label>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.faculdade.id" disabled>
+                            <mat-option *ngFor="let faculdade of faculdades" [value]="faculdade.id">
+                                {{ faculdade.nome }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Formação</mat-label>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.formacao.id" disabled>
+                            <mat-option *ngFor="let formacao of formacoes" [value]="formacao.id">
+                                {{ formacao.descricao }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>  
                 
         <!-- Seção de Dados do Cargo -->
         <mat-accordion>
-            <mat-expansion-panel (opened)="panelCargo.set(true)" (closed)="panelCargo.set(false)">
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                <mat-panel-title class="titulo-secao"> Dados do Cargo </mat-panel-title>
+                    <mat-panel-title class="titulo-secao"> Dados do Cargo </mat-panel-title>
                 </mat-expansion-panel-header>     
                 <div class="secao-dados-cargo">
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Departamento</mat-label>
-                        <input matInput [(ngModel)]="colaborador.departamento" disabled>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.departamento.id" disabled>
+                            <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">
+                                {{ departamento.nome }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Setor</mat-label>
-                        <input matInput [(ngModel)]="colaborador.setor" disabled>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.setor.id" disabled>
+                            <mat-option *ngFor="let setor of setores" [value]="setor.id">
+                                {{ setor.nome }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Faixa Salarial</mat-label>
-                        <mat-select [(ngModel)]="colaborador.faixaSalarial" disabled>
-                            <mat-option *ngFor="let faixa of faixasSalariais" [value]="faixa">
-                                {{ faixa }}
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.faixaSalarial.id" disabled>
+                            <mat-option *ngFor="let faixa of faixasSalariais" [value]="faixa.id">
+                                {{ faixa.descricao }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Cargo</mat-label>
-                        <input matInput [(ngModel)]="colaborador.cargo" disabled>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.cargo.id" disabled>
+                            <mat-option *ngFor="let cargo of cargos" [value]="cargo.id">
+                                {{ cargo.nome }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Gerente</mat-label>
-                        <input matInput [(ngModel)]="colaborador.gerente" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.gerente" disabled>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Tempo de Trabalho</mat-label>
-                        <input matInput [(ngModel)]="colaborador.tempoTrabalho" disabled>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.tempoTrabalho" disabled>
                     </mat-form-field>
                 </div>
             </mat-expansion-panel>
@@ -202,21 +224,21 @@
 
         <!-- Seção de Carreira -->
         <mat-accordion>
-            <mat-expansion-panel (opened)="panelCarreira.set(true)" (closed)="panelCarreira.set(false)">
-            <mat-expansion-panel-header>
-                <mat-panel-title class="titulo-secao"> Carreira </mat-panel-title>
-            </mat-expansion-panel-header>     
-            <div class="secao-dados-antiga-empresa">
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Quantas empresas trabalhou</mat-label>
-                    <input matInput type="number" min="0" [(ngModel)]="colaborador.quantidadeEmpresasTrabalhou" disabled>
-                </mat-form-field>
-                
-                <mat-form-field class="form-field">
-                    <mat-label class="titulo">Quantos anos de carreira</mat-label>
-                    <input matInput type="number" min="0" [(ngModel)]="colaborador.quantidadeAnosTrabalhadosAnteriormente" disabled>
-                </mat-form-field>
-            </div>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="titulo-secao"> Carreira </mat-panel-title>
+                </mat-expansion-panel-header>     
+                <div class="secao-dados-antiga-empresa">
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Quantas empresas trabalhou</mat-label>
+                        <input matInput type="number" min="0" [(ngModel)]="analiseColaborador.colaborador.quantidadeEmpresasTrabalhou" disabled>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Quantos anos de carreira</mat-label>
+                        <input matInput type="number" min="0" [(ngModel)]="analiseColaborador.colaborador.quantidadeAnosTrabalhadosAnteriormente" disabled>
+                    </mat-form-field>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

@@ -1,478 +1,23 @@
-import { Component, ViewChild } from '@angular/core';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { AnaliseColaborador }  from '../../../core/dto/analise-colaborador';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faEye, faPercent } from '@fortawesome/free-solid-svg-icons';
-import { Colaborador } from '../../../core/dto/colaborador';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AnaliseColaborador } from '../../../core/dto/analise-colaborador';
-
-
-const ELEMENT_DATA: AnaliseColaborador[] = [
-  {
-    nome: 'Arthur Coutinho',
-    cpf: "433.966.222-98",
-    idade: 35,
-    genero: "Masculino",
-    estadoCivil: "Casado",
-    telefone: "11 98765-4321",
-    email: "arthur.coutinho@empresa.com",
-    formacao: "Engenharia de Software",
-    faculdade: "USP",
-    endereco: "Rua A",
-    numero: "123",
-    complemento: "Apto 45",
-    bairro: "Centro",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "01000-000",
-    departamento: "TI",
-    setor: "Desenvolvimento",
-    faixaSalarial: "R$ 8.501 - R$ 9.000",
-    cargo: "Desenvolvedor Sênior",
-    gerente: "Carlos Silva",
-    tempoTrabalho: "5 anos",
-    quantidadeEmpresasTrabalhou: 3,
-    quantidadeAnosTrabalhadosAnteriormente: 8,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 85,
-    motivo: "Alta chance de demissão devido ao tempo significativo de trabalho na mesma empresa e possível estagnação na posição atual."
-  },
-  {
-    nome: 'Beatriz Souza',
-    cpf: "212.345.678-90",
-    idade: 28,
-    genero: "Feminino",
-    estadoCivil: "Solteira",
-    telefone: "11 91234-5678",
-    email: "beatriz.souza@empresa.com",
-    formacao: "Psicologia",
-    faculdade: "PUC-SP",
-    endereco: "Rua B",
-    numero: "456",
-    complemento: "",
-    bairro: "Bela Vista",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "01300-000",
-    departamento: "RH",
-    setor: "Recrutamento",
-    faixaSalarial: "R$ 5.001 - R$ 5.500",
-    cargo: "Analista de RH",
-    gerente: "Mariana Andrade",
-    tempoTrabalho: "3 anos",
-    quantidadeEmpresasTrabalhou: 2,
-    quantidadeAnosTrabalhadosAnteriormente: 5,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 10,
-    motivo: "Baixa chance de demissão devido à curta duração no emprego atual e possível satisfação com a função."
-  },
-  {
-    nome: 'Carlos Almeida',
-    cpf: "567.890.123-45",
-    idade: 40,
-    genero: "Masculino",
-    estadoCivil: "Casado",
-    telefone: "11 93456-7890",
-    email: "carlos.almeida@empresa.com",
-    formacao: "Contabilidade",
-    faculdade: "Mackenzie",
-    endereco: "Rua C",
-    numero: "789",
-    complemento: "Bloco B",
-    bairro: "Vila Mariana",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "04100-000",
-    departamento: "Financeiro",
-    setor: "Contabilidade",
-    faixaSalarial: "R$ 11.001 - R$ 11.500",
-    cargo: "Contador",
-    gerente: "Fernanda Braga",
-    tempoTrabalho: "7 anos",
-    quantidadeEmpresasTrabalhou: 4,
-    quantidadeAnosTrabalhadosAnteriormente: 10,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 40,
-    motivo: "Chance moderada de demissão, possivelmente devido à busca por melhores oportunidades financeiras ou mudanças de carreira."
-  },
-  {
-    nome: 'Daniela Lima',
-    cpf: "789.012.345-67",
-    idade: 32,
-    genero: "Feminino",
-    estadoCivil: "Divorciada",
-    telefone: "11 94321-0987",
-    email: "daniela.lima@empresa.com",
-    formacao: "Publicidade e Propaganda",
-    faculdade: "ESPM",
-    endereco: "Rua D",
-    numero: "101",
-    complemento: "Sala 5",
-    bairro: "Jardins",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "01400-000",
-    departamento: "Marketing",
-    setor: "Publicidade",
-    faixaSalarial: "R$ 7.001 - R$ 7.500",
-    cargo: "Coordenadora de Marketing",
-    gerente: "Patrícia Campos",
-    tempoTrabalho: "4 anos",
-    quantidadeEmpresasTrabalhou: 2,
-    quantidadeAnosTrabalhadosAnteriormente: 6,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 80,
-    motivo: "Alta chance de demissão, possivelmente devido ao desejo de progresso na carreira ou insatisfação com o ambiente de trabalho atual."
-  },
-  {
-    nome: 'Eduardo Silva',
-    cpf: "890.123.456-78",
-    idade: 37,
-    genero: "Masculino",
-    estadoCivil: "Solteiro",
-    telefone: "11 95555-1234",
-    email: "eduardo.silva@empresa.com",
-    formacao: "Sistemas de Informação",
-    faculdade: "FAAP",
-    endereco: "Rua E",
-    numero: "202",
-    complemento: "",
-    bairro: "Pinheiros",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "05400-000",
-    departamento: "TI",
-    setor: "Infraestrutura",
-    faixaSalarial: "R$ 9.001 - R$ 9.500",
-    cargo: "Administrador de Redes",
-    gerente: "Ricardo Almeida",
-    tempoTrabalho: "6 anos",
-    quantidadeEmpresasTrabalhou: 3,
-    quantidadeAnosTrabalhadosAnteriormente: 7,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 87,
-    motivo: "Muito alta chance de demissão devido à combinação de longo tempo de trabalho e possível busca por novas oportunidades."
-  },
-  {
-    nome: 'Fernanda Costa',
-    cpf: "901.234.567-89",
-    idade: 29,
-    genero: "Feminino",
-    estadoCivil: "Casada",
-    telefone: "11 96666-7890",
-    email: "fernanda.costa@empresa.com",
-    formacao: "Administração",
-    faculdade: "FGV",
-    endereco: "Rua F",
-    numero: "303",
-    complemento: "Apto 12",
-    bairro: "Moema",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "04500-000",
-    departamento: "Vendas",
-    setor: "Comercial",
-    faixaSalarial: "R$ 7.501 - R$ 8.000",
-    cargo: "Vendedora",
-    gerente: "Ana Paula Nunes",
-    tempoTrabalho: "2 anos",
-    quantidadeEmpresasTrabalhou: 2,
-    quantidadeAnosTrabalhadosAnteriormente: 3,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 74,
-    motivo: "Alta chance de demissão, possivelmente devido ao desejo de mudança para uma função de maior responsabilidade ou insatisfação."
-  },
-  {
-    nome: 'Gabriel Moreira',
-    cpf: "234.567.890-12",
-    idade: 33,
-    genero: "Masculino",
-    estadoCivil: "Solteiro",
-    telefone: "11 97777-0123",
-    email: "gabriel.moreira@empresa.com",
-    formacao: "Logística",
-    faculdade: "Unip",
-    endereco: "Rua G",
-    numero: "404",
-    complemento: "",
-    bairro: "Santana",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "02000-000",
-    departamento: "Logística",
-    setor: "Operações",
-    faixaSalarial: "R$ 4.501 - R$ 5.000",
-    cargo: "Supervisor de Logística",
-    gerente: "Júlio César",
-    tempoTrabalho: "5 anos",
-    quantidadeEmpresasTrabalhou: 3,
-    quantidadeAnosTrabalhadosAnteriormente: 4,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 69,
-    motivo: "Chance considerável de demissão, possivelmente devido à estagnação na função atual e busca por crescimento profissional."
-  },
-  {
-    nome: 'Helena Ferreira',
-    cpf: "345.678.901-23",
-    idade: 25,
-    genero: "Feminino",
-    estadoCivil: "Solteira",
-    telefone: "11 98888-3456",
-    email: "helena.ferreira@empresa.com",
-    formacao: "Tecnologia da Informação",
-    faculdade: "Senac",
-    endereco: "Rua H",
-    numero: "505",
-    complemento: "",
-    bairro: "Vila Olímpia",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "04547-000",
-    departamento: "TI",
-    setor: "Desenvolvimento",
-    faixaSalarial: "R$ 9.501 - R$ 10.000",
-    cargo: "Desenvolvedora Júnior",
-    gerente: "Roberto Oliveira",
-    tempoTrabalho: "1 ano",
-    quantidadeEmpresasTrabalhou: 1,
-    quantidadeAnosTrabalhadosAnteriormente: 1,
-    nivelEscolaridade: "Ensino Superior - Incompleto",
-    acoes: "Editar",
-    predicao: 75,
-    motivo: "Alta chance de demissão devido ao desejo de mudança ou insatisfação com a progressão na carreira."
-  },
-  {
-    nome: 'Isabela Martins',
-    cpf: "456.789.012-34",
-    idade: 45,
-    genero: "Feminino",
-    estadoCivil: "Casada",
-    telefone: "11 99999-5678",
-    email: "isabela.martins@empresa.com",
-    formacao: "Direito",
-    faculdade: "Mackenzie",
-    endereco: "Rua I",
-    numero: "606",
-    complemento: "Conj 8",
-    bairro: "Brooklin",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "04600-000",
-    departamento: "Jurídico",
-    setor: "Consultoria",
-    faixaSalarial: "R$ 12.001 - R$ 12.500",
-    cargo: "Advogada",
-    gerente: "Sérgio Fonseca",
-    tempoTrabalho: "10 anos",
-    quantidadeEmpresasTrabalhou: 5,
-    quantidadeAnosTrabalhadosAnteriormente: 15,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 90,
-    motivo: "Muito alta chance de demissão, possivelmente devido à saturação na carreira atual e busca por novos desafios."
-  },
-  {
-    nome: 'João Pereira',
-    cpf: "567.890.123-45",
-    idade: 30,
-    genero: "Masculino",
-    estadoCivil: "Casado",
-    telefone: "11 90000-1234",
-    email: "joao.pereira@empresa.com",
-    formacao: "Recursos Humanos",
-    faculdade: "Unesp",
-    endereco: "Rua J",
-    numero: "707",
-    complemento: "",
-    bairro: "Vila Prudente",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "03100-000",
-    departamento: "RH",
-    setor: "Treinamento",
-    faixaSalarial: "R$ 6.501 - R$ 7.000",
-    cargo: "Instrutor de RH",
-    gerente: "Camila Santos",
-    tempoTrabalho: "3 anos",
-    quantidadeEmpresasTrabalhou: 2,
-    quantidadeAnosTrabalhadosAnteriormente: 4,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 77,
-    motivo: "Alta chance de demissão devido à possível busca por maiores responsabilidades ou mudança de setor."
-  },
-  {
-    nome: 'Larissa Mendes',
-    cpf: "678.901.234-56",
-    idade: 27,
-    genero: "Feminino",
-    estadoCivil: "Solteira",
-    telefone: "11 91111-2345",
-    email: "larissa.mendes@empresa.com",
-    formacao: "Engenharia de Software",
-    faculdade: "FIAP",
-    endereco: "Rua K",
-    numero: "808",
-    complemento: "",
-    bairro: "Itaim Bibi",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "04530-000",
-    departamento: "TI",
-    setor: "Desenvolvimento",
-    faixaSalarial: "R$ 9.501 - R$ 10.000",
-    cargo: "Desenvolvedora Pleno",
-    gerente: "Fernando Rocha",
-    tempoTrabalho: "4 anos",
-    quantidadeEmpresasTrabalhou: 3,
-    quantidadeAnosTrabalhadosAnteriormente: 6,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 84,
-    motivo: "Muito alta chance de demissão, possivelmente devido à insatisfação com o crescimento na carreira ou busca por novas oportunidades."
-  },
-  {
-    nome: 'Marcos Oliveira',
-    cpf: "789.012.345-67",
-    idade: 42,
-    genero: "Masculino",
-    estadoCivil: "Divorciado",
-    telefone: "11 92222-3456",
-    email: "marcos.oliveira@empresa.com",
-    formacao: "Economia",
-    faculdade: "FEA-USP",
-    endereco: "Rua L",
-    numero: "909",
-    complemento: "",
-    bairro: "Vila Madalena",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "05430-000",
-    departamento: "Financeiro",
-    setor: "Tesouraria",
-    faixaSalarial: "R$ 11.001 - R$ 11.500",
-    cargo: "Tesoureiro",
-    gerente: "Patrícia Lima",
-    tempoTrabalho: "8 anos",
-    quantidadeEmpresasTrabalhou: 4,
-    quantidadeAnosTrabalhadosAnteriormente: 12,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 89,
-    motivo: "Muito alta chance de demissão, possivelmente devido ao longo tempo de trabalho e busca por novos desafios profissionais."
-  },
-  {
-    nome: 'Natalia Ribeiro',
-    cpf: "890.123.456-78",
-    idade: 31,
-    genero: "Feminino",
-    estadoCivil: "Casada",
-    telefone: "11 93333-4567",
-    email: "natalia.ribeiro@empresa.com",
-    formacao: "Marketing",
-    faculdade: "Anhembi Morumbi",
-    endereco: "Rua M",
-    numero: "1010",
-    complemento: "",
-    bairro: "Perdizes",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "05030-000",
-    departamento: "Marketing",
-    setor: "Branding",
-    faixaSalarial: "R$ 7.501 - R$ 8.000",
-    cargo: "Gerente de Marca",
-    gerente: "Carlos Almeida",
-    tempoTrabalho: "6 anos",
-    quantidadeEmpresasTrabalhou: 3,
-    quantidadeAnosTrabalhadosAnteriormente: 8,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 83,
-    motivo: "Alta chance de demissão devido à possível insatisfação com a progressão de carreira e busca por novas oportunidades."
-  },
-  {
-    nome: 'Otávio Fonseca',
-    cpf: "901.234.567-89",
-    idade: 34,
-    genero: "Masculino",
-    estadoCivil: "Solteiro",
-    telefone: "11 94444-5678",
-    email: "otavio.fonseca@empresa.com",
-    formacao: "Administração",
-    faculdade: "SENAC",
-    endereco: "Rua N",
-    numero: "1111",
-    complemento: "Sala 9",
-    bairro: "Butantã",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "05530-000",
-    departamento: "Vendas",
-    setor: "Relacionamento",
-    faixaSalarial: "R$ 6.001 - R$ 6.500",
-    cargo: "Executivo de Contas",
-    gerente: "Adriana Freitas",
-    tempoTrabalho: "4 anos",
-    quantidadeEmpresasTrabalhou: 2,
-    quantidadeAnosTrabalhadosAnteriormente: 5,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 76,
-    motivo: "Alta chance de demissão, possivelmente devido à busca por crescimento na carreira ou insatisfação com a função atual."
-  },
-  {
-    nome: 'Paula Gomes',
-    cpf: "234.567.890-12",
-    idade: 30,
-    genero: "Feminino",
-    estadoCivil: "Solteira",
-    telefone: "11 95555-6789",
-    email: "paula.gomes@empresa.com",
-    formacao: "Logística",
-    faculdade: "Metodista",
-    endereco: "Rua O",
-    numero: "1212",
-    complemento: "",
-    bairro: "Lapa",
-    cidade: "São Paulo",
-    estado: "SP",
-    cep: "05050-000",
-    departamento: "Logística",
-    setor: "Distribuição",
-    faixaSalarial: "R$ 5.501 - R$ 6.000",
-    cargo: "Analista de Logística",
-    gerente: "Jorge Santos",
-    tempoTrabalho: "2 anos",
-    quantidadeEmpresasTrabalhou: 2,
-    quantidadeAnosTrabalhadosAnteriormente: 3,
-    nivelEscolaridade: "Ensino Superior - Completo",
-    acoes: "Editar",
-    predicao: 70,
-    motivo: "Chance moderada de demissão, possivelmente devido à busca por maior estabilidade financeira ou crescimento profissional."
-  }
-];
 
 @Component({
   selector: 'app-analise-colaborador',
   templateUrl: './analise-colaborador.component.html',
-  styleUrl: './analise-colaborador.component.scss'
+  styleUrls: ['./analise-colaborador.component.scss']
 })
-export class AnaliseColaboradorComponent {
+export class AnaliseColaboradorComponent implements OnInit {
 
   displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'predicao', 'acoes'];
   dataSource = new MatTableDataSource<AnaliseColaborador>(ELEMENT_DATA);
-
   colaboradorParaAnalisar: AnaliseColaborador | null = null;
 
   @ViewChild(MatPaginator)
@@ -480,11 +25,6 @@ export class AnaliseColaboradorComponent {
 
   @ViewChild(MatSort)
   sort!: MatSort;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
   constructor(library: FaIconLibrary,
     private dialog: MatDialog, 
@@ -494,37 +34,105 @@ export class AnaliseColaboradorComponent {
     library.addIcons(faPercent);
   }
 
-  aplicarFiltro(valor: string): void {
-    this.dataSource.filter = valor.trim().toLowerCase();    
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   filtrar(event: Event) {
-    const filterValue = (event.target as HTMLInputElement)?.value || '';
-    this.aplicarFiltro(filterValue);
-    this.resetar();
+    const filtroValor = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtroValor.trim().toLowerCase();
   }
 
-  resetar(): void {
+  analisarColaborador(analise: AnaliseColaborador) {
+    this.colaboradorParaAnalisar = analise;
+  }
+
+  voltar() {
     this.colaboradorParaAnalisar = null;
   }
 
-  voltar(): void {
-    this.aplicarFiltro(' ');
-    this.resetar();
-  }
-
-  analisarColaborador(colaborador: AnaliseColaborador): void {
-    this.colaboradorParaAnalisar = { ...colaborador };
-  }
-
   getColor(predicao: number): string {
-    if (predicao <= 30) {
-      return 'green';
-    } else if (predicao >= 31 && predicao <= 50) {
-      return 'yellow';
-    } else {
-      return 'red';
-    }
+    if (predicao >= 75) return 'red';
+    if (predicao >= 50) return 'orange';
+    return 'green';
   }
-
 }
+
+// Dados de exemplo
+const ELEMENT_DATA: AnaliseColaborador[] = [
+  {
+    colaborador: {
+      nome: 'João da Silva',
+      cpf: '123.456.789-00',
+      idade: 30,
+      genero: { id: 1, descricao: 'Masculino' },
+      estadoCivil: { id: 1, descricao: 'Solteiro' },
+      telefone: '11 98765-4321',
+      email: 'joao.silva@empresa.com',
+      formacao: { id: 1, descricao: 'Ciência da Computação' },
+      faculdade: { id: 1, nome: 'USP' },
+      endereco: {
+        id: 1,
+        endereco: 'Rua A',
+        numero: '100',
+        complemento: 'Apto 101',
+        bairro: 'Centro',
+        cidade: 'São Paulo',
+        estado: 'SP',
+        cep: '01000-000'
+      },
+      departamento: { id: 1, nome: 'TI' },
+      setor: { id: 1, nome: 'Desenvolvimento' },
+      faixaSalarial: { id: 1, descricao: 'R$ 6.000 - R$ 8.000' },
+      cargo: { id: 1, nome: 'Desenvolvedor' },
+      gerente: "Carlos",
+      tempoTrabalho: '5 anos',
+      quantidadeEmpresasTrabalhou: 1,
+      quantidadeAnosTrabalhadosAnteriormente: 3,
+      nivelEscolaridade: { id: 2, descricao: 'Graduação' },
+      exFuncionario: false,
+      acoes: 'Analisar'
+    },
+    motivo: 'Alta probabilidade de saída devido à baixa satisfação no trabalho.',
+    predicao: 85
+  },
+  {
+    colaborador: {
+      nome: 'Ana Maria',
+      cpf: '321.654.987-00',
+      idade: 28,
+      genero: { id: 2, descricao: 'Feminino' },
+      estadoCivil: { id: 1, descricao: 'Solteiro' },
+      telefone: '21 91234-5678',
+      email: 'ana.maria@empresa.com',
+      formacao: { id: 3, descricao: 'Administração' },
+      faculdade: { id: 3, nome: 'FGV' },
+      endereco: {
+        id: 3,
+        endereco: 'Av. Atlântica',
+        numero: '1500',
+        complemento: 'Sala 20',
+        bairro: 'Copacabana',
+        cidade: 'Rio de Janeiro',
+        estado: 'RJ',
+        cep: '22000-000'
+      },
+      departamento: { id: 2, nome: 'Financeiro' },
+      setor: { id: 2, nome: 'Contabilidade' },
+      faixaSalarial: { id: 3, descricao: 'R$ 4.000 - R$ 6.000' },
+      cargo: { id: 3, nome: 'Analista Financeiro' },
+      gerente: undefined, // Gerente não definido
+      tempoTrabalho: '2 anos',
+      quantidadeEmpresasTrabalhou: 1,
+      quantidadeAnosTrabalhadosAnteriormente: 4,
+      nivelEscolaridade: { id: 2, descricao: 'Graduação' },
+      exFuncionario: false,
+      acoes: 'Analisar'
+    },
+    motivo: 'Baixa probabilidade de saída, mas precisa de atenção devido à estagnação.',
+    predicao: 40
+  }
+];
