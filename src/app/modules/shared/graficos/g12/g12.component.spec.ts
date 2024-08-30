@@ -10,8 +10,8 @@ describe('G12Component', () => {
     await TestBed.configureTestingModule({
       imports: [G12Component]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(G12Component);
     component = fixture.componentInstance;
     fixture.detectChanges();

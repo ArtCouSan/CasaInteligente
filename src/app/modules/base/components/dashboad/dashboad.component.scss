@@ -1,15 +1,16 @@
 .dashboard {
-    margin: 30px 30px 60px 30px;
-    width: 93%;
+  margin: 30px 30px 60px 30px;
+  width: 93%;
 }
 
 .grid {
-    background-color: var(--cinza-escuro);
-    border: 8px solid var(--cinza-escuro-tom-mais);
-    padding: 10px;
+  background-color: var(--cinza-escuro);
+  border: 8px solid var(--cinza-escuro-tom-mais);
+  padding: 10px;
 }
 
-app-g1, app-g2 {
-    width: 100%;
-    height: 100%;
+app-g1,
+app-g2 {
+  width: 100%;
+  height: 100%;
 }

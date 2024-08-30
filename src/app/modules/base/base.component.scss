@@ -1,46 +1,45 @@
 .mat-sidenav {
-    display: flex;
+  display: flex;
   flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    background-color: var(--cinza-escuro);
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  background-color: var(--cinza-escuro);
 }
 
 .mat-sidenav-content {
-    padding: 0;
-    margin: 0; 
-    height: 100%; 
+  padding: 0;
+  margin: 0;
+  height: 100%;
 }
 
 .mat-sidenav-container {
-    height: 100%;
-    background-color: var(--cinza-escuro-tom-mais);
+  height: 100%;
+  background-color: var(--cinza-escuro-tom-mais);
 }
 
-
 mat-nav-list {
-    --mdc-list-list-item-label-text-color: white !important;
-    --mdc-list-list-item-hover-label-text-color: var(--verde-claro) !important;
+  --mdc-list-list-item-label-text-color: white !important;
+  --mdc-list-list-item-hover-label-text-color: var(--verde-claro) !important;
 }
 
 .mdc-list-item:hover .mdc-list-item__primary-text {
-    --mdc-list-list-item-hover-label-text-color: var(--verde-claro) !important;
+  --mdc-list-list-item-hover-label-text-color: var(--verde-claro) !important;
 }
 
-.container-nome{
-    margin-left: 30px;
-    margin-top: 30px;
-    color: white;
+.container-nome {
+  margin-left: 30px;
+  margin-top: 30px;
+  color: white;
 }
 
 .profile-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-  
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
 .circle {
   width: 40px; /* Tamanho da bolinha */
   height: 40px; /* Tamanho da bolinha */

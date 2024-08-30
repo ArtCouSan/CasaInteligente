@@ -1,114 +1,117 @@
 .container-table {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px 60px 50px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 60px 50px 60px;
 }
 
-.container-filtro{
-    padding: 40px 60px 20px 60px;
-    display: flex;
-    align-items: baseline;
+.container-filtro {
+  padding: 40px 60px 20px 60px;
+  display: flex;
+  align-items: baseline;
 }
-  
+
 table {
-    // border: 2px solid var(--verde-escuro);
-    overflow: hidden; /* Important for rounded corners */
-    width: 100%; /* Optional: adjust based on your layout */
-    max-width: 600px; /* Optional: to limit the table width */
-    background-color: var(--cinza-escuro);
+  // border: 2px solid var(--verde-escuro);
+  overflow: hidden; /* Important for rounded corners */
+  width: 100%; /* Optional: adjust based on your layout */
+  max-width: 600px; /* Optional: to limit the table width */
+  background-color: var(--cinza-escuro);
 }
 
 tbody {
-    // border: 2px solid var(--verde-escuro);  
+  // border: 2px solid var(--verde-escuro);
 }
 
 th {
-    color: gray;
-    border-top: 2px solid var(--cinza-escuro-tom-mais);
+  color: gray;
+  border-top: 2px solid var(--cinza-escuro-tom-mais);
 }
 
 td {
-    color: white;
-    border-top: 3px solid var(--cinza-escuro-tom-mais);
+  color: white;
+  border-top: 3px solid var(--cinza-escuro-tom-mais);
 }
 
 tr:hover {
-    background-color: var(--verde-escuro);
+  background-color: var(--verde-escuro);
 }
 
 .fa-icone {
-    margin: 10px;
-    cursor: pointer;
+  margin: 10px;
+  cursor: pointer;
 }
 
 .fa-icone-filtro {
-    margin: 20px;
-    cursor: pointer;
+  margin: 20px;
+  cursor: pointer;
 }
 
-.fa-icone:hover, .fa-icone-filtro:hover {
-    color: var(--laranja);
+.fa-icone:hover,
+.fa-icone-filtro:hover {
+  color: var(--laranja);
 }
-  
+
 mat-paginator {
-    margin-top: 15px;
-    border-radius: 15px;
-    overflow: hidden; /* Para bordas arredondadas */
-    width: 100%; /* Ocupe toda a largura disponível */
-    max-width: 800px; /* Limita a largura do paginador */
-    display: flex;
-    justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+  margin-top: 15px;
+  border-radius: 15px;
+  overflow: hidden; /* Para bordas arredondadas */
+  width: 100%; /* Ocupe toda a largura disponível */
+  max-width: 800px; /* Limita a largura do paginador */
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
 }
 
 .mat-mdc-paginator {
-    background-color: var(--cinza-escuro) !important;
-    color: white !important;
+  background-color: var(--cinza-escuro) !important;
+  color: white !important;
 }
 
-.filtro{
-    width: 95%;
+.filtro {
+  width: 95%;
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-    background-color: var(--cinza-escuro) !important;
-  }
+  background-color: var(--cinza-escuro) !important;
+}
 
 ::ng-deep mat-label {
-    color: white;
+  color: white;
 }
 
-::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
-    color: white !important;
+::ng-deep
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-text-field__input {
+  color: white !important;
 }
 
-::ng-deep .mat-input-element::placeholder{
-    color: white !important;
+::ng-deep .mat-input-element::placeholder {
+  color: white !important;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__s {
-    border-radius: 0px !important;
+  border-radius: 0px !important;
 }
 
 .i-adicionar {
-    color: white;
-    font-size: 35px;
+  color: white;
+  font-size: 35px;
 }
 
 .botao-adicionar {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-::ng-deep .mat-mdc-icon-button .mat-mdc-button-touch-target{
-    color: white;
+::ng-deep .mat-mdc-icon-button .mat-mdc-button-touch-target {
+  color: white;
 }
 
 .fa-check {
-    color: green;
+  color: green;
 }
 
 .fa-ban {
-    color: red;
+  color: red;
 }

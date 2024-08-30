@@ -10,8 +10,8 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 export class G3Component {
   title = 'ng-chart';
   g3: any = [];
- 
-  constructor() {}
+
+  constructor() { }
 
   ngOnInit() {
     this.g3 = new Chart('g3', {

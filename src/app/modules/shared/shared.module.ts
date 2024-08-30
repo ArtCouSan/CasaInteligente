@@ -70,4 +70,4 @@ import { G12Component } from './graficos/g12/g12.component';
     G12Component,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

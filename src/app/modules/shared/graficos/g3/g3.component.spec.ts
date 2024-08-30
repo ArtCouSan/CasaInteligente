@@ -10,8 +10,8 @@ describe('G3Component', () => {
     await TestBed.configureTestingModule({
       imports: [G3Component]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(G3Component);
     component = fixture.componentInstance;
     fixture.detectChanges();

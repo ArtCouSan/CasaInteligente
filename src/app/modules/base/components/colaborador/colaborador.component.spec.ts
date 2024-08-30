@@ -10,8 +10,8 @@ describe('ColaboradorComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ColaboradorComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ColaboradorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,50 +1,49 @@
 .container-modal {
-    background-color: var(--cinza-escuro);
-    height: 170px;
-    width: 550px;
+  background-color: var(--cinza-escuro);
+  height: 170px;
+  width: 550px;
 }
 
 .container-conteudo {
-    height: 100px;
-    margin-top: 10px;
+  height: 100px;
+  margin-top: 10px;
 }
 
 .titulo {
-    color: gray;
+  color: gray;
 }
 
 .mensagem {
-    color: white;
+  color: white;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__s {
-    border-radius: 0px !important;
+  border-radius: 0px !important;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
-    border-radius: 0px !important;
+  border-radius: 0px !important;
 }
 
 .mat-dialog-container {
-    border-radius: 0 !important; /* Remove a borda arredondada */
+  border-radius: 0 !important; /* Remove a borda arredondada */
 }
 
 .mat-mdc-button:not(:disabled) {
-    color: white;
+  color: white;
 }
 
 .botao-nao {
-    background-color: var(--verde-claro);
+  background-color: var(--verde-claro);
 }
 
 .botao-sim {
-    background-color: var(--laranja);
-
+  background-color: var(--laranja);
 }
 
 .botoes {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px; 
-    margin-right: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-right: 20px;
 }

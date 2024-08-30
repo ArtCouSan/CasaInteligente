@@ -1,4 +1,4 @@
-import { Colaborador }  from '../../core/dto/colaborador';
+import { Colaborador } from '../../core/dto/colaborador';
 
 export interface AnaliseColaborador {
   colaborador: Colaborador;

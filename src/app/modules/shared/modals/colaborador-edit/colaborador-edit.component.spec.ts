@@ -10,8 +10,8 @@ describe('ColaboradorEditComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ColaboradorEditComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ColaboradorEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

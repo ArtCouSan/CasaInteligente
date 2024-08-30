@@ -10,7 +10,7 @@ export class G2Component {
   title = 'ng-chart';
   g2: any = [];
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.g2 = new Chart('g2', {

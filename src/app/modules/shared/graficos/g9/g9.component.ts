@@ -11,7 +11,7 @@ export class G9Component {
   title = 'ng-chart';
   chart: any = [];
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.chart = new Chart('g9', {

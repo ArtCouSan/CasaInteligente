@@ -4,9 +4,10 @@ import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faHouse, faDatabase, faUser, faChartPie, faPercent} from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud } from '@fortawesome/free-solid-svg-icons';
 import { ColaboradorComponent } from './components/colaborador/colaborador.component';
 import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
+import { PesquisaClimaComponent } from './components/pesquisa-clima/pesquisa-clima.component';
 
 @Component({
   selector: 'app-base',
@@ -20,12 +21,13 @@ export class BaseComponent implements OnDestroy {
   componentDashboard = DashboadComponent;
   componentColaborador = ColaboradorComponent;
   componentAnalisarColaborador = AnaliseColaboradorComponent;
+  componentPesquisaClima = PesquisaClimaComponent;
   mobileQuery: MediaQueryList;
   selectedItem: string = "";
-  
+
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, 
+  constructor(changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     library: FaIconLibrary) {
     this.conteudoDinamico = null;
@@ -38,6 +40,8 @@ export class BaseComponent implements OnDestroy {
     library.addIcons(faUser);
     library.addIcons(faChartPie);
     library.addIcons(faPercent);
+    library.addIcons(faGaugeHigh);
+    library.addIcons(faCloud);
   }
 
   mostrarComponente(componente: ComponentType<any>, item: string) {

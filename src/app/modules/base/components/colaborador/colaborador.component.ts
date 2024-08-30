@@ -29,7 +29,7 @@ export class ColaboradorComponent implements OnInit {
 
   constructor(
     library: FaIconLibrary,
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private colaboradorService: ColaboradorService
   ) {
@@ -46,7 +46,7 @@ export class ColaboradorComponent implements OnInit {
   }
 
   aplicarFiltro(valor: string): void {
-    this.dataSource.filter = valor.trim().toLowerCase();    
+    this.dataSource.filter = valor.trim().toLowerCase();
   }
 
   filtrar(event: Event) {

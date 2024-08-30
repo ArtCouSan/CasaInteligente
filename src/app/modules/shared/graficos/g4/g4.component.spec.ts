@@ -10,8 +10,8 @@ describe('G4Component', () => {
     await TestBed.configureTestingModule({
       imports: [G4Component]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(G4Component);
     component = fixture.componentInstance;
     fixture.detectChanges();

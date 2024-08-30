@@ -39,7 +39,7 @@ export class ColaboradorEditComponent implements OnInit {
 
   constructor(
     library: FaIconLibrary,
-    private listasService: SelecoesService 
+    private listasService: SelecoesService
   ) {
     library.addIcons(faCheck);
     library.addIcons(faAngleLeft);
@@ -62,7 +62,7 @@ export class ColaboradorEditComponent implements OnInit {
   }
 
   onVoltar() {
-    this.voltar.emit(); 
+    this.voltar.emit();
   }
 
   onSalvar(): void {

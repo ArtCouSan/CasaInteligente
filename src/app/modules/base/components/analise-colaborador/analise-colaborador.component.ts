@@ -28,7 +28,7 @@ export class AnaliseColaboradorComponent implements OnInit {
 
   constructor(
     library: FaIconLibrary,
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private analiseColaboradorService: AnaliseColaboradorService // Injeção do serviço
   ) {

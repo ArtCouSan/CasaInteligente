@@ -10,8 +10,8 @@ describe('ConfirmarDelecaoComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ConfirmarDelecaoComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ConfirmarDelecaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

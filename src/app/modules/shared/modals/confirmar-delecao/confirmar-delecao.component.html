@@ -1,12 +1,12 @@
 <div class="container-modal">
-    <div class="container-conteudo">
-        <h1 class="titulo" mat-dialog-title>Confirmação</h1>
-        <div class="mensagem" mat-dialog-content>
-          <p>{{data.message}}</p>
-        </div>
+  <div class="container-conteudo">
+    <h1 class="titulo" mat-dialog-title>Confirmação</h1>
+    <div class="mensagem" mat-dialog-content>
+      <p>{{data.message}}</p>
     </div>
-    <div class="botoes" mat-dialog-actions>
-      <button mat-button class="botao-nao" (click)="onNoClick()">Não</button>
-      <button mat-button class="botao-sim" [mat-dialog-close]="true" cdkFocusInitial>Sim</button>
-    </div>
+  </div>
+  <div class="botoes" mat-dialog-actions>
+    <button mat-button class="botao-nao" (click)="onNoClick()">Não</button>
+    <button mat-button class="botao-sim" [mat-dialog-close]="true" cdkFocusInitial>Sim</button>
+  </div>
 </div>

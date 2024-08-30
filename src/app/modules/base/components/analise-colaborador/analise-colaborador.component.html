@@ -8,65 +8,64 @@
   </div>
 
   <div class="container-table">
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    
-    <!-- Coluna CPF -->
-    <ng-container matColumnDef="cpf">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> CPF </th>
-      <td mat-cell *matCellDef="let element"> {{element.colaborador?.cpf}} </td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-    <!-- Coluna Nome -->
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.colaborador?.nome}} </td>
-    </ng-container>
+      <!-- Coluna CPF -->
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CPF </th>
+        <td mat-cell *matCellDef="let element"> {{element.colaborador?.cpf}} </td>
+      </ng-container>
 
-    <!-- Coluna Departamento -->
-    <ng-container matColumnDef="departamento">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
-      <td mat-cell *matCellDef="let element"> {{element.colaborador?.departamento.nome}} </td>
-    </ng-container>
+      <!-- Coluna Nome -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.colaborador?.nome}} </td>
+      </ng-container>
 
-    <!-- Coluna Gênero -->
-    <ng-container matColumnDef="genero">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gênero </th>
-      <td mat-cell *matCellDef="let element"> {{element.colaborador?.genero.descricao}} </td>
-    </ng-container>
+      <!-- Coluna Departamento -->
+      <ng-container matColumnDef="departamento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+        <td mat-cell *matCellDef="let element"> {{element.colaborador?.departamento.nome}} </td>
+      </ng-container>
 
-    <!-- Coluna Porcentagem -->
-    <ng-container matColumnDef="predicao">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
-        <fa-icon icon="percent"></fa-icon> 
-      </th>
-      <td class="texto-porcentagem" mat-cell *matCellDef="let element" [ngStyle]="{'color': getColor(element.predicao)}"> 
-        {{element.predicao}} %
-      </td>
-    </ng-container>
+      <!-- Coluna Gênero -->
+      <ng-container matColumnDef="genero">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gênero </th>
+        <td mat-cell *matCellDef="let element"> {{element.colaborador?.genero.descricao}} </td>
+      </ng-container>
 
-    <!-- Coluna Ações -->
-    <ng-container matColumnDef="acoes">
-      <th mat-header-cell *matHeaderCellDef> Ações </th>
-      <td mat-cell *matCellDef="let element"> 
-        <fa-icon class="fa-icone" icon="eye" (click)="analisarColaborador(element)"></fa-icon> 
-      </td>
-    </ng-container>
+      <!-- Coluna Porcentagem -->
+      <ng-container matColumnDef="predicao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <fa-icon icon="percent"></fa-icon>
+        </th>
+        <td class="texto-porcentagem" mat-cell *matCellDef="let element"
+          [ngStyle]="{'color': getColor(element.predicao)}">
+          {{element.predicao}} %
+        </td>
+      </ng-container>
 
-    <!-- Linhas da Tabela -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <!-- Coluna Ações -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let element">
+          <fa-icon class="fa-icone" icon="eye" (click)="analisarColaborador(element)"></fa-icon>
+        </td>
+      </ng-container>
 
-  <!-- Paginação -->
-  <mat-paginator [pageSizeOptions]="[7]" [hidePageSize]="true">
-  </mat-paginator>
+      <!-- Linhas da Tabela -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Paginação -->
+    <mat-paginator [pageSizeOptions]="[7]" [hidePageSize]="true">
+    </mat-paginator>
   </div>
 </div>
 
 <ng-template #analisarTemplate>
-  <app-detalhe-analise-colaborador
-    *ngIf="colaboradorParaAnalisar"
-    [analiseColaborador]="colaboradorParaAnalisar" 
+  <app-detalhe-analise-colaborador *ngIf="colaboradorParaAnalisar" [analiseColaborador]="colaboradorParaAnalisar"
     (voltar)="voltar()">
   </app-detalhe-analise-colaborador>
 </ng-template>

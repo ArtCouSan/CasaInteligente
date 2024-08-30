@@ -10,8 +10,8 @@ export class G1Component implements OnInit {
 
   title = 'ng-chart';
   chart: any = [];
- 
-  constructor() {}
+
+  constructor() { }
 
   ngOnInit() {
     this.chart = new Chart('g1', {
@@ -28,20 +28,20 @@ export class G1Component implements OnInit {
       },
       options: {
         plugins: {
-            title: {
-                display: true,
-                text: 'Colaboradores por ano',
-                font: {
-                  size: 20
-                },
-                color: 'white', 
-                padding: {
-                  bottom: 20
-                }
+          title: {
+            display: true,
+            text: 'Colaboradores por ano',
+            font: {
+              size: 20
             },
+            color: 'white',
+            padding: {
+              bottom: 20
+            }
+          },
           legend: {
             display: false
-        },
+          },
         },
         responsive: false,
         scales: {

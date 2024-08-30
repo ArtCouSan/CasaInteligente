@@ -1,44 +1,44 @@
 .container-modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .container-conteudo {
-    width: 80%;
-    padding: 80px 60px 60px 60px;
-    background-color: var(--cinza-escuro);
-    position: relative;
-    border-left: 8px solid var(--laranja);
+  width: 80%;
+  padding: 80px 60px 60px 60px;
+  background-color: var(--cinza-escuro);
+  position: relative;
+  border-left: 8px solid var(--laranja);
 }
 
 .titulo {
-    color: var(--cinza);
+  color: var(--cinza);
 }
 
 .form-field {
-    margin-left: 5px;
-    margin-right: 5px;
-    font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-weight: bold;
 }
 
 .fa-icone {
-    color: white;
-    margin: 10px;
-    cursor: pointer;
-    font-size: 30px;
+  color: white;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 30px;
 }
 
 .fa-icone:hover {
-    color: var(--laranja);
+  color: var(--laranja);
 }
 
 .i-salvar {
-    position: absolute;
-    bottom: 35px;
-    right: 40px;
+  position: absolute;
+  bottom: 35px;
+  right: 40px;
 }
 
 .i-sair {
@@ -47,93 +47,99 @@
   left: 20px;
 }
 
-.secao-dados-pessoais, .secao-endereco, 
-.secao-dados-cargo, .secao-contato, .secao-formacao,
+.secao-dados-pessoais,
+.secao-endereco,
+.secao-dados-cargo,
+.secao-contato,
+.secao-formacao,
 .secao-dados-antiga-empresa {
-    margin-bottom: 20px;
-    margin-top: 30px;
+  margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 ::ng-deep .mat-mdc-select-value {
-    color: gray;
-    font-weight: bold;
+  color: gray;
+  font-weight: bold;
 }
 
-::ng-deep div.mat-mdc-select-panel{
-    background-color: var(--cinza-escuro) !important;
+::ng-deep div.mat-mdc-select-panel {
+  background-color: var(--cinza-escuro) !important;
 }
 
 ::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
-    color: gray !important;
+  color: gray !important;
 }
 
 ::ng-deep .mat-mdc-select-arrow {
-    color: gray !important;
+  color: gray !important;
 }
 
 ::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
-    background-color: var(--cinza-escuro);
+  background-color: var(--cinza-escuro);
 }
 
-::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input{
-    color: gray !important;
+::ng-deep
+  .mdc-text-field--filled.mdc-text-field--disabled
+  .mdc-text-field__input {
+  color: gray !important;
 }
 
 .select {
-    width: 270px;
+  width: 270px;
 }
 
 ::ng-deep .mat-expansion-panel-body {
-    background-color: var(--cinza-escuro) !important;
+  background-color: var(--cinza-escuro) !important;
 }
 
 ::ng-deep .mat-expansion-panel-body:hover {
-    background-color: var(--cinza-escuro) !important;
+  background-color: var(--cinza-escuro) !important;
 }
 
-::ng-deep .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover {
-    background-color: #34353b !important;
+::ng-deep .mat-expansion-panel-header.mat-expanded:focus,
+.mat-expansion-panel-header.mat-expanded:hover {
+  background-color: #34353b !important;
 }
 
 ::ng-deep mat-expansion-panel {
-    border-radius: 0px !important;
-    margin-bottom: 10px !important;
+  border-radius: 0px !important;
+  margin-bottom: 10px !important;
 }
 
 ::ng-deep mat-expansion-panel-header {
-    background-color: #34353b;
-    .titulo-secao {
-        color: white;
-    }
+  background-color: #34353b;
+  .titulo-secao {
+    color: white;
+  }
 }
 
 ::ng-deep mat-expansion-panel-header:hover {
-    background-color: #34353b !important;
-    .titulo-secao {
-        color: white;
-    }
+  background-color: #34353b !important;
+  .titulo-secao {
+    color: white;
+  }
 }
 
-::ng-deep .mat-expansion-panel-header:not([aria-disabled=true]) {
-    color: white;
+::ng-deep .mat-expansion-panel-header:not([aria-disabled="true"]) {
+  color: white;
 }
 
 .conteudo-cabecalho {
-    .texto-predicao {
-        text-align: end;
-        font-size: 40px;
-    }
+  .texto-predicao {
+    text-align: end;
+    font-size: 40px;
+  }
 }
 
 .card-motivo {
-    margin-bottom: 20px;
-    background-color: var(--cinza-escuro);
+  margin-bottom: 20px;
+  background-color: var(--cinza-escuro);
 }
 
 .card-titulo {
-    color: white;
+  color: white;
 }
 
 .card-descricao {
-    color: grey;
+  color: grey;
 }

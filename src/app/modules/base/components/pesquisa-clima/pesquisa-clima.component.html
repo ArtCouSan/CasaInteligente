@@ -1,0 +1,18 @@
+<div class="container-modal">
+    <div class="container-formulario">
+        <!-- Seção de Dados Pessoais -->
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelDadosPessoais.set(true)" (closed)="panelDadosPessoais.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="titulo-secao"> Dados Pessoais </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="secao-dados-pessoais">
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Nome</mat-label>
+                        <input matInput [(ngModel)]="colaborador.nome">
+                    </mat-form-field>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

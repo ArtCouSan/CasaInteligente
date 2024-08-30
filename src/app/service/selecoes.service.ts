@@ -9,7 +9,7 @@ import { Cargo, Departamento, EstadoCivil, Faculdade, FaixaSalarial, Formacao, G
 export class SelecoesService {
   private apiUrl = 'http://localhost:5000/api';  // Base URL para as APIs
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Listar Gêneros
   listarGeneros(): Observable<Genero[]> {

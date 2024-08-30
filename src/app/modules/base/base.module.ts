@@ -8,7 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColaboradorComponent } from './components/colaborador/colaborador.component';
 import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
-import { ColaboradorService } from '../../service/colaborador.service';
+import { PesquisaClimaComponent } from './components/pesquisa-clima/pesquisa-clima.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,9 @@ import { ColaboradorService } from '../../service/colaborador.service';
     BaseComponent,
     ColaboradorComponent,
     DashboadComponent,
-    AnaliseColaboradorComponent
+    AnaliseColaboradorComponent,
+    PesquisaClimaComponent
   ],
   imports: [CommonModule, BaseRoutingModule, FontAwesomeModule, SharedModule],
 })
-export class BaseModule {}
+export class BaseModule { }

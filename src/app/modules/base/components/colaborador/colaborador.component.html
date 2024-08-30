@@ -6,65 +6,62 @@
       <input (input)="filtrar($event)" matInput placeholder="Digite pelo conteúdo de uma das colunas">
     </mat-form-field>
     <div class="botao-adicionar">
-      <fa-icon class="fa-icone-filtro i-adicionar" icon="user-plus" (click)="adicionarColaborador()"></fa-icon> 
+      <fa-icon class="fa-icone-filtro i-adicionar" icon="user-plus" (click)="adicionarColaborador()"></fa-icon>
     </div>
   </div>
 
   <div class="container-table">
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    
-    <!-- Coluna CPF -->
-    <ng-container matColumnDef="cpf">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> CPF </th>
-      <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-    <!-- Coluna Nome -->
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
-    </ng-container>
+      <!-- Coluna CPF -->
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CPF </th>
+        <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
+      </ng-container>
 
-    <!-- Coluna Departamento -->
-    <ng-container matColumnDef="departamento">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
-      <td mat-cell *matCellDef="let element"> {{element.departamento.nome}} </td>
-    </ng-container>    
-    
-    <!-- Coluna Ex-Funcionario -->
-    <ng-container matColumnDef="exFuncionario">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ex-Funcionário </th>
-      <td mat-cell *matCellDef="let element">
-        <fa-icon class="fa-check" icon="check" *ngIf="!element.exFuncionario"></fa-icon> 
-        <fa-icon class="fa-ban" icon="ban" *ngIf="element.exFuncionario"></fa-icon> 
-      </td>
-    </ng-container>
+      <!-- Coluna Nome -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+      </ng-container>
 
-    <!-- Coluna Ações -->
-    <ng-container matColumnDef="acoes">
-      <th mat-header-cell *matHeaderCellDef> Ações </th>
-      <td mat-cell *matCellDef="let element"> 
-        <fa-icon class="fa-icone" icon="pen" (click)="editarColaborador(element)"></fa-icon> 
-        <fa-icon class="fa-icone" icon="trash" (click)="confirmarExclusao(element)"></fa-icon> 
-      </td>
-    </ng-container>
+      <!-- Coluna Departamento -->
+      <ng-container matColumnDef="departamento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+        <td mat-cell *matCellDef="let element"> {{element.departamento.nome}} </td>
+      </ng-container>
 
-    <!-- Linhas da Tabela -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <!-- Coluna Ex-Funcionario -->
+      <ng-container matColumnDef="exFuncionario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ex-Funcionário </th>
+        <td mat-cell *matCellDef="let element">
+          <fa-icon class="fa-check" icon="check" *ngIf="!element.exFuncionario"></fa-icon>
+          <fa-icon class="fa-ban" icon="ban" *ngIf="element.exFuncionario"></fa-icon>
+        </td>
+      </ng-container>
 
-  <!-- Paginação -->
-  <mat-paginator [pageSizeOptions]="[7]" [hidePageSize]="true">
-  </mat-paginator>
+      <!-- Coluna Ações -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let element">
+          <fa-icon class="fa-icone" icon="pen" (click)="editarColaborador(element)"></fa-icon>
+          <fa-icon class="fa-icone" icon="trash" (click)="confirmarExclusao(element)"></fa-icon>
+        </td>
+      </ng-container>
+
+      <!-- Linhas da Tabela -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Paginação -->
+    <mat-paginator [pageSizeOptions]="[7]" [hidePageSize]="true">
+    </mat-paginator>
   </div>
 </div>
 
 <ng-template #editTemplate>
-  <app-colaborador-edit 
-    *ngIf="colaboradorParaEditar"
-    [colaborador]="colaboradorParaEditar" 
-    (salvar)="salvarColaborador($event)"
-    (voltar)="voltar()">
+  <app-colaborador-edit *ngIf="colaboradorParaEditar" [colaborador]="colaboradorParaEditar"
+    (salvar)="salvarColaborador($event)" (voltar)="voltar()">
   </app-colaborador-edit>
 </ng-template>

@@ -63,7 +63,7 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
   }
 
   onVoltar() {
-    this.voltar.emit(); 
+    this.voltar.emit();
   }
 
   getColor(predicao: number | undefined): string {

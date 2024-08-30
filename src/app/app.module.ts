@@ -21,4 +21,4 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   providers: [DatePipe],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
