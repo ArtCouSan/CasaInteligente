@@ -21,6 +21,8 @@ import { G9Component } from './graficos/g9/g9.component';
 import { G10Component } from './graficos/g10/g10.component';
 import { G11Component } from './graficos/g11/g11.component';
 import { G12Component } from './graficos/g12/g12.component';
+import { ChatComponent } from './chat/chat.component';
+import { NbModule } from '../../nebular.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { G12Component } from './graficos/g12/g12.component';
     G9Component,
     G10Component,
     G11Component,
-    G12Component
+    G12Component,
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -49,8 +52,10 @@ import { G12Component } from './graficos/g12/g12.component';
     FontAwesomeModule,
     BaseChartDirective,
     MaterialModule,
+    NbModule
   ],
   exports: [
+    NbModule,
     MaterialModule,
     EmConstrucaoComponent,
     ColaboradorEditComponent,
@@ -68,6 +73,7 @@ import { G12Component } from './graficos/g12/g12.component';
     G10Component,
     G11Component,
     G12Component,
+    ChatComponent
   ],
 })
 export class SharedModule { }
