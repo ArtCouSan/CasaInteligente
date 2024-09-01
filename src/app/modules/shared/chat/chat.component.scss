@@ -1,9 +1,133 @@
-::ng-deep nb-layout-column {
-  justify-content: end;
-  display: flex;
+.floating-chat {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background-color: white;
+  z-index: 1000;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--laranja);
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 50px;
+  }
+
+  .chat-content {
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-color: var(--laranja) white;
+
+    /* Estilos da barra de rolagem */
+    ::-webkit-scrollbar {
+      width: 8px; /* Largura da barra de rolagem */
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: var(
+        --laranja
+      ) !important; /* Cor do fundo da barra de rolagem */
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #3f51b5; /* Cor da barra de rolagem */
+      border-radius: 10px;
+      border: 2px solid var(--laranja) !important; /* Borda da barra de rolagem para um efeito mais suave */
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(
+        --laranja
+      ) !important; /* Cor da barra de rolagem ao passar o mouse */
+    }
+  }
+
+  .chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    height: 120px;
+
+    textarea {
+      height: 82px !important;
+      flex-grow: 1;
+      padding: 8px;
+      margin-right: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px;
+      background-color: #3f51b5;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+
+      mat-icon {
+        color: white;
+      }
+    }
+  }
+
+  .message {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    word-wrap: break-word; /* Permite a quebra de palavras longas */
+    word-break: break-word; /* Quebra palavras longas */
+    white-space: pre-wrap; /* Preserva espaços em branco e permite a quebra de linha */
+  }
+
+  .user-message {
+    background-color: #f1f1f1;
+    text-align: right;
+  }
+
+  .bot-message {
+    background-color: #e0e0e0;
+    text-align: left;
+  }
 }
 
-nb-chat {
-  width: 500px;
-  margin: 0.5rem 0 2rem 2rem;
+.minimized-floating-chat {
+  width: 65px;
+  height: 65px;
+  background-color: var(--laranja);
+  border-radius: 50%;
+  right: 60px;
+  bottom: 25px;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+}
+
+.fa-icone {
+  margin: 10px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.fa-icone-chat {
+  margin: 10px;
+  font-size: 30px;
+  color: var(--laranja);
+  cursor: pointer;
 }

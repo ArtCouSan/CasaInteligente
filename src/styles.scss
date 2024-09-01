@@ -59,13 +59,13 @@ body {
 
 /* Aplica o estilo à parte deslizante do scrollbar */
 ::-webkit-scrollbar-thumb {
-  background-color: var(--verde-claro); /* Cor do thumb (parte deslizante) */
+  background-color: var(--cinza-escuro); /* Cor do thumb (parte deslizante) */
   border-radius: 10px; /* Borda arredondada do thumb */
 }
 
 /* Aplica o estilo ao canto entre scrollbars horizontal e vertical (se aplicável) */
 ::-webkit-scrollbar-corner {
-  background-color: var(--verde-claro); /* Cor do canto */
+  background-color: var(--cinza-escuro); /* Cor do canto */
 }
 
 :root {
@@ -77,6 +77,3 @@ body {
   --laranja: #f05724;
   --laranja-escuro: #b53c14;
 }
-
-@import "~@nebular/theme/styles/theming";
-@import "~@nebular/theme/styles/themes/cosmic";

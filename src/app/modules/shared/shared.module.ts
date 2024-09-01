@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { EmConstrucaoComponent } from './em-construcao/em-construcao.component';
 import { ColaboradorEditComponent } from './modals/colaborador-edit/colaborador-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -22,58 +22,53 @@ import { G10Component } from './graficos/g10/g10.component';
 import { G11Component } from './graficos/g11/g11.component';
 import { G12Component } from './graficos/g12/g12.component';
 import { ChatComponent } from './chat/chat.component';
-import { NbModule } from '../../nebular.module';
 
 @NgModule({
-  declarations: [
-    EmConstrucaoComponent,
-    ColaboradorEditComponent,
-    ConfirmarDelecaoComponent,
-    DetalheAnaliseColaboradorComponent,
-    G1Component,
-    G2Component,
-    G3Component,
-    G4Component,
-    G5Component,
-    G6Component,
-    G7Component,
-    G8Component,
-    G9Component,
-    G10Component,
-    G11Component,
-    G12Component,
-    ChatComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    FontAwesomeModule,
-    BaseChartDirective,
-    MaterialModule,
-    NbModule
-  ],
-  exports: [
-    NbModule,
-    MaterialModule,
-    EmConstrucaoComponent,
-    ColaboradorEditComponent,
-    ConfirmarDelecaoComponent,
-    DetalheAnaliseColaboradorComponent,
-    G1Component,
-    G2Component,
-    G3Component,
-    G4Component,
-    G5Component,
-    G6Component,
-    G7Component,
-    G8Component,
-    G9Component,
-    G10Component,
-    G11Component,
-    G12Component,
-    ChatComponent
-  ],
+    declarations: [
+        EmConstrucaoComponent,
+        ColaboradorEditComponent,
+        ConfirmarDelecaoComponent,
+        DetalheAnaliseColaboradorComponent,
+        G1Component,
+        G2Component,
+        G3Component,
+        G4Component,
+        G5Component,
+        G6Component,
+        G7Component,
+        G8Component,
+        G9Component,
+        G10Component,
+        G11Component,
+        G12Component,
+        ChatComponent
+    ],
+    exports: [
+        MaterialModule,
+        EmConstrucaoComponent,
+        ColaboradorEditComponent,
+        ConfirmarDelecaoComponent,
+        DetalheAnaliseColaboradorComponent,
+        G1Component,
+        G2Component,
+        G3Component,
+        G4Component,
+        G5Component,
+        G6Component,
+        G7Component,
+        G8Component,
+        G9Component,
+        G10Component,
+        G11Component,
+        G12Component,
+        ChatComponent
+    ], imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        FontAwesomeModule,
+        BaseChartDirective,
+        MaterialModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class SharedModule { }
