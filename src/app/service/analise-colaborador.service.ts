@@ -35,4 +35,12 @@ export class AnaliseColaboradorService {
   deleteAnaliseColaborador(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
+
+  gerarNovoMotivo(colaboradorId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${colaboradorId}/gerar-novo-motivo`, {});
+  }
+
+  gerarNovaSugestao(colaboradorId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${colaboradorId}/gerar-nova-sugestao`, {});
+  }
 }

@@ -1,14 +1,15 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faPen, faTrash, faUserPlus, faBan, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash, faUserPlus, faBan, faCheck, faFileArrowUp, faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { Colaborador } from '../../../../core/dto/colaborador';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmarDelecaoComponent } from '../../../shared/modals/confirmar-delecao/confirmar-delecao.component';
 import { ColaboradorService } from '../../../../service/colaborador.service';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-colaborador',
@@ -27,13 +28,18 @@ export class ColaboradorComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
+  @ViewChild('fileInput')
+  fileInput!: ElementRef<HTMLInputElement>;
+
+  @Input() baseComponent!: BaseComponent;
+
   constructor(
     library: FaIconLibrary,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private colaboradorService: ColaboradorService
   ) {
-    library.addIcons(faPen, faTrash, faUserPlus, faBan, faCheck);
+    library.addIcons(faPen, faTrash, faUserPlus, faBan, faCheck, faFileArrowUp, faFileArrowDown);
   }
 
   ngOnInit(): void {
@@ -153,4 +159,30 @@ export class ColaboradorComponent implements OnInit {
     this.aplicarFiltro(' ');
     this.resetar();
   }
+
+  triggerFileInput(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  subirArquivo(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.colaboradorService.uploadColaboradoresCsv(file).subscribe({
+        next: (response) => {
+          this.snackBar.open('Upload realizado com sucesso!', 'Fechar', {
+            duration: 3000,
+          });
+          this.baseComponent.recarregarComponenteAtual();
+        },
+        error: (err) => {
+          this.snackBar.open(`${err.error.error}`, 'Fechar', {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center'
+          });
+        }
+      });
+    }
+  }
+
 }

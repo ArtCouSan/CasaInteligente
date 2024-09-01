@@ -35,4 +35,10 @@ export class ColaboradorService {
   deleteColaborador(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
+
+  uploadColaboradoresCsv(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/upload`, formData);
+  }
 }

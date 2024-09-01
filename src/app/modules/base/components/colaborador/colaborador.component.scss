@@ -33,7 +33,7 @@ td {
   border-top: 3px solid var(--cinza-escuro-tom-mais);
 }
 
-tr:hover {
+.linhas:hover {
   background-color: var(--verde-escuro);
 }
 
@@ -43,7 +43,7 @@ tr:hover {
 }
 
 .fa-icone-filtro {
-  margin: 20px;
+  margin: 10px;
   cursor: pointer;
 }
 
@@ -69,7 +69,7 @@ mat-paginator {
 }
 
 .filtro {
-  width: 95%;
+  width: 85%;
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {

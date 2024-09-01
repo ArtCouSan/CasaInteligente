@@ -11,7 +11,7 @@
   padding: 80px 60px 60px 60px;
   background-color: var(--cinza-escuro);
   position: relative;
-  border-left: 8px solid var(--laranja);
+  border-left: 8px solid var(--cinza-escuro);
 }
 
 .titulo {
@@ -35,6 +35,17 @@
   color: var(--laranja);
 }
 
+.fa-icone-card {
+  color: white;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.fa-icone-card:hover {
+  color: var(--laranja);
+}
+
 .i-salvar {
   position: absolute;
   bottom: 35px;
@@ -52,13 +63,14 @@
 .secao-dados-cargo,
 .secao-contato,
 .secao-formacao,
-.secao-dados-antiga-empresa {
+.secao-dados-antiga-empresa,
+.secao-pesquisa-clima {
   margin-bottom: 20px;
   margin-top: 30px;
 }
 
 ::ng-deep .mat-mdc-select-value {
-  color: gray;
+  color: var(--cinza);
   font-weight: bold;
 }
 
@@ -67,11 +79,11 @@
 }
 
 ::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
-  color: gray !important;
+  color: var(--cinza) !important;
 }
 
 ::ng-deep .mat-mdc-select-arrow {
-  color: gray !important;
+  color: var(--cinza) !important;
 }
 
 ::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
@@ -81,7 +93,7 @@
 ::ng-deep
   .mdc-text-field--filled.mdc-text-field--disabled
   .mdc-text-field__input {
-  color: gray !important;
+  color: var(--cinza) !important;
 }
 
 .select {
@@ -134,12 +146,104 @@
 .card-motivo {
   margin-bottom: 20px;
   background-color: var(--cinza-escuro);
+  border-left: 4px solid red;
+}
+
+.card-sugestao {
+  margin-bottom: 20px;
+  background-color: var(--cinza-escuro);
+  border-left: 4px solid green;
+}
+
+.card-feature {
+  margin-bottom: 20px;
+  background-color: var(--cinza-escuro);
+  border-left: 4px solid var(--cinza);
 }
 
 .card-titulo {
   color: white;
 }
 
+::ng-deep .mat-mdc-card-header-text {
+  width: 95% !important;
+}
+
 .card-descricao {
-  color: grey;
+  color: var(--cinza);
+}
+
+.container-card-resposta {
+  border: 2px solid var(--verde-escuro);
+  background-color: var(--cinza-escuro);
+  margin-bottom: 10px;
+
+  .fa-icone {
+    margin: 10px;
+    font-size: 20px;
+  }
+}
+
+.estrela-n-clicada {
+  color: var(--laranja);
+}
+
+.estrela-n-clicada:hover {
+  color: var(--laranja);
+}
+
+.estrela-clicada {
+  color: var(--laranja);
+}
+
+.container-card-pergunta {
+  background-color: var(--verde-escuro);
+  margin-bottom: 10px;
+}
+
+.pergunta {
+  color: white;
+}
+
+::ng-deep .mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
+  color: white !important;
+}
+
+::ng-deep .mdc-tab__text-label {
+  color: white !important;
+}
+
+::ng-deep .mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: var(--laranja) !important;
+  --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38);
+  --mat-tab-header-pagination-icon-color: black;
+  --mat-tab-header-inactive-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-active-label-text-color: white !important;
+  --mat-tab-header-active-ripple-color: var(--verde-escuro) !important;
+  --mat-tab-header-inactive-ripple-color: white !important;
+  --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-inactive-hover-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-active-focus-label-text-color: white !important;
+  --mat-tab-header-active-hover-label-text-color: white !important;
+  --mat-tab-header-active-focus-indicator-color: var(--laranja) !important;
+  --mat-tab-header-active-hover-indicator-color: var(--laranja) !important;
+}
+
+::ng-deep .mat-mdc-tab.mdc-tab {
+  height: 75px !important;
+}
+
+::ng-deep .mat-mdc-tab.mdc-tab:hover {
+  height: 50px !important;
+  background-color: var(--laranja);
+  height: 75px !important;
+}
+
+.container-perguntas-respostas {
+  margin-top: 20px;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  color: #fff !important;
 }
