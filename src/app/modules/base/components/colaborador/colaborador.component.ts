@@ -169,10 +169,10 @@ export class ColaboradorComponent implements OnInit {
     if (file) {
       this.colaboradorService.uploadColaboradoresCsv(file).subscribe({
         next: (response) => {
+          this.carregarColaboradores();
           this.snackBar.open('Upload realizado com sucesso!', 'Fechar', {
             duration: 3000,
           });
-          this.baseComponent.recarregarComponenteAtual();
         },
         error: (err) => {
           this.snackBar.open(`${err.error.error}`, 'Fechar', {

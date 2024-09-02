@@ -49,14 +49,6 @@ export class BaseComponent implements OnDestroy {
     this.conteudoDinamico = componente;
   }
 
-  recarregarComponenteAtual() {
-    if (this.conteudoDinamico) {
-      const currentComponent = this.conteudoDinamico;
-      this.conteudoDinamico = null; // Remove o componente atual
-      setTimeout(() => this.conteudoDinamico = currentComponent, 0); // Recarrega o mesmo componente
-    }
-  }
-
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
