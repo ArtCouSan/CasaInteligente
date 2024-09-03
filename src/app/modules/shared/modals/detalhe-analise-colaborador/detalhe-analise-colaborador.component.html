@@ -1,6 +1,6 @@
 <div class="container-modal">
     <div class="container-conteudo">
-        <fa-icon class="fa-icone i-sair" icon="angle-left" (click)="onVoltar()"></fa-icon>
+        <fa-icon matTooltip="Voltar" class="fa-icone i-sair" icon="angle-left" (click)="onVoltar()"></fa-icon>
 
         <div class="conteudo-cabecalho">
             <h2 class="texto-predicao" [ngStyle]="{'color': getColor(analiseColaborador.predicao)}">
@@ -11,7 +11,8 @@
         <mat-card class="card-motivo" appearance="outlined">
             <mat-card-header>
                 <mat-card-title class="card-titulo">Motivo</mat-card-title>
-                <fa-icon class="fa-icone-card" icon="rotate" (click)="gerarNovoMotivo()"></fa-icon>
+                <fa-icon class="fa-icone-card" icon="rotate" matTooltip="Recarregar analise"
+                    (click)="gerarNovoMotivo()"></fa-icon>
             </mat-card-header>
             <mat-card-content>
                 <p class="card-descricao">
@@ -23,7 +24,8 @@
         <mat-card class="card-sugestao" appearance="outlined">
             <mat-card-header>
                 <mat-card-title class="card-titulo">Sugestão</mat-card-title>
-                <fa-icon class="fa-icone-card" icon="rotate" (click)="gerarNovaSugestao()"></fa-icon>
+                <fa-icon class="fa-icone-card" matTooltip="Recarregar analise" icon="rotate"
+                    (click)="gerarNovaSugestao()"></fa-icon>
             </mat-card-header>
             <mat-card-content>
                 <p class="card-descricao">

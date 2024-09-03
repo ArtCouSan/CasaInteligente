@@ -6,8 +6,8 @@
       <input (input)="filtrar($event)" matInput placeholder="Digite pelo conteúdo de uma das colunas">
     </mat-form-field>
     <div class="botao-adicionar">
-      <fa-icon class="fa-icone-filtro i-adicionar" matTooltip="Adicionar colaborador" icon="user-plus"
-        (click)="adicionarColaborador()"></fa-icon>
+      <fa-icon style="margin-left: 20px;" class="fa-icone-filtro i-adicionar" matTooltip="Adicionar colaborador"
+        icon="user-plus" (click)="adicionarColaborador()"></fa-icon>
       <fa-icon class="fa-icone-filtro i-adicionar" (click)="triggerFileInput()" matTooltip="Subir arquivo para cadastro"
         icon="file-arrow-up"></fa-icon>
       <input type="file" #fileInput style="display: none;" (change)="subirArquivo($event)" />

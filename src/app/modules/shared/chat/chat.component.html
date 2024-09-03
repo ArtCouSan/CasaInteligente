@@ -20,6 +20,6 @@
 </div>
 
 <!-- Ícone do chat minimizado -->
-<div class="minimized-floating-chat" (click)="toggleMinimize()" *ngIf="isMinimized">
+<div matTooltip="Fale com a CidaAi" class="minimized-floating-chat" (click)="toggleMinimize()" *ngIf="isMinimized">
     <fa-icon class="fa-icone" [icon]="['fas', 'comments']"></fa-icon>
 </div>

@@ -9,6 +9,7 @@ import { ColaboradorComponent } from './components/colaborador/colaborador.compo
 import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
 import { PesquisaClimaComponent } from './components/pesquisa-clima/pesquisa-clima.component';
+import { PesquisaComponent } from './components/pesquisa/pesquisa.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PesquisaClimaComponent } from './components/pesquisa-clima/pesquisa-cli
     ColaboradorComponent,
     DashboadComponent,
     AnaliseColaboradorComponent,
-    PesquisaClimaComponent
+    PesquisaClimaComponent,
+    PesquisaComponent
   ],
   imports: [CommonModule, BaseRoutingModule, FontAwesomeModule, SharedModule],
 })

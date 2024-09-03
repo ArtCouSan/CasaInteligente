@@ -24,6 +24,17 @@ export class PesquisaService {
         return this.http.post<Pergunta>(this.apiUrlPerguntas, pergunta);
     }
 
+    // Atualizar uma pergunta existente
+    updatePergunta(perguntaId: number, pergunta: Pergunta): Observable<Pergunta> {
+        return this.http.put<Pergunta>(`${this.apiUrlPerguntas}/${perguntaId}`, pergunta);
+    }
+
+    // Deletar uma pergunta existente
+    deletePergunta(perguntaId: number): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrlPerguntas}/${perguntaId}`);
+    }
+
+    // Obter todas as respostas de um colaborador específico para um determinado trimestre e ano
     getRespostas(colaboradorId: number, trimestre: string, ano: number): Observable<Resposta[]> {
         return this.http.get<Resposta[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/respostas?trimestre=${trimestre}&ano=${ano}`);
     }

@@ -4,10 +4,11 @@ import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck } from '@fortawesome/free-solid-svg-icons';
 import { ColaboradorComponent } from './components/colaborador/colaborador.component';
 import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
 import { PesquisaClimaComponent } from './components/pesquisa-clima/pesquisa-clima.component';
+import { PesquisaComponent } from './components/pesquisa/pesquisa.component';
 
 @Component({
   selector: 'app-base',
@@ -22,6 +23,8 @@ export class BaseComponent implements OnDestroy {
   componentColaborador = ColaboradorComponent;
   componentAnalisarColaborador = AnaliseColaboradorComponent;
   componentPesquisaClima = PesquisaClimaComponent;
+  componentPerguntas = PesquisaComponent;
+
   mobileQuery: MediaQueryList;
   selectedItem: string = "";
 
@@ -42,6 +45,7 @@ export class BaseComponent implements OnDestroy {
     library.addIcons(faPercent);
     library.addIcons(faGaugeHigh);
     library.addIcons(faCloud);
+    library.addIcons(faListCheck);
   }
 
   mostrarComponente(componente: ComponentType<any>, item: string) {
