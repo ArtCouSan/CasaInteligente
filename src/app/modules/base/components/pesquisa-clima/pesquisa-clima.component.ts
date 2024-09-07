@@ -5,6 +5,8 @@ import { faStar as fasStar, faPaperPlane } from '@fortawesome/free-solid-svg-ico
 import { Pergunta } from '../../../../core/dto/pergunta';
 import { PesquisaService } from '../../../../service/pesquisa.service';
 import { Resposta } from '../../../../core/dto/resposta';
+import { AuthService } from '../../../../auth/auth.service';
+import { Colaborador } from '../../../../core/dto/colaborador';
 
 @Component({
   selector: 'app-pesquisa-clima',
@@ -15,13 +17,14 @@ export class PesquisaClimaComponent {
 
   readonly panel = signal(true);
   perguntas: Pergunta[] = [];
-  colaboradorId = 1;  // Supondo que o ID do colaborador seja 1, substitua pelo valor real
+  colaboradorId: number = 0;  // Supondo que o ID do colaborador seja 1, substitua pelo valor real
   trimestre = 'Q1';  // Ajuste conforme o trimestre real
   ano = new Date().getFullYear();
 
   constructor(
     library: FaIconLibrary,
-    private pesquisaService: PesquisaService
+    private pesquisaService: PesquisaService,
+    private authService: AuthService
   ) {
     library.addIcons(farStar, fasStar);
     library.addIcons(faPaperPlane);
@@ -29,6 +32,10 @@ export class PesquisaClimaComponent {
 
   ngOnInit(): void {
     this.carregarPerguntas();
+    var colaborador: Colaborador = this.authService.getCurrentUser();
+    if (colaborador.id) {
+      this.colaboradorId = colaborador.id;
+    }
   }
 
   carregarPerguntas(): void {

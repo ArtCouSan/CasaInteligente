@@ -89,7 +89,8 @@ export class ColaboradorComponent implements OnInit {
       quantidadeAnosTrabalhadosAnteriormente: 0,
       nivelEscolaridade: { id: 0, descricao: '' },
       exFuncionario: false,
-      acoes: 'Adicionar'
+      acoes: 'Adicionar',
+      perfis: []
     };
   }
 

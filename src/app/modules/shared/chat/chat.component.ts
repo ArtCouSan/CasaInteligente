@@ -2,6 +2,8 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faComments, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { ChatService } from '../../../service/chat.service';
+import { AuthService } from '../../../auth/auth.service';
+import { Colaborador } from '../../../core/dto/colaborador';
 
 @Component({
   selector: 'app-chat',
@@ -11,17 +13,23 @@ import { ChatService } from '../../../service/chat.service';
 })
 export class ChatComponent {
 
-  @Input() colaboradorId!: number;  // O ID do colaborador será passado como input
+  colaboradorId!: number;  // O ID do colaborador será passado como input
   isMinimized = true;
   message = '';
   messages: any[] = [];
 
   constructor(
     private chatService: ChatService,
-    library: FaIconLibrary
+    library: FaIconLibrary,
+    private authService: AuthService
   ) {
     library.addIcons(faComments);
     library.addIcons(faCircleArrowUp);
+
+    var colaborador: Colaborador = this.authService.getCurrentUser();
+    if (colaborador.id) {
+      this.colaboradorId = colaborador.id;
+    }
   }
 
   ngOnInit(): void {

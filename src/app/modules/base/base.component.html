@@ -1,7 +1,7 @@
 <mat-sidenav-container class="mat-sidenav-container">
-  <mat-sidenav class="mat-sidenav" #snav opened [mode]="'side'" [fixedInViewport]="true" fixedTopGap="0">
+  <mat-sidenav [ngClass]="{'blur-background': isLoginVisible}" class="mat-sidenav" #snav opened [mode]="'side'"
+    [fixedInViewport]="true" fixedTopGap="0">
     <div class="sidenav-content">
-
       <mat-nav-list>
         <mat-list-item class="mat-list-item">
           <div class="profile-container">
@@ -10,7 +10,7 @@
                 src="data:image/jpeg;base64,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"
                 alt="Profile Photo" class="profile-photo">
             </div>
-            <span class="name">Seja bem-vindo(a) Arthur</span>
+            <span class="name">Seja bem-vindo(a) {{usuario.nome}}</span>
           </div>
         </mat-list-item>
         <mat-list-item class="mat-list-item" (click)="mostrarComponente(componentHome, 'home')"
@@ -18,39 +18,46 @@
           <fa-icon class="fa-icone" icon="house"></fa-icon>
           <span>Home</span>
         </mat-list-item>
-        <mat-list-item class="mat-list-item">
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item">
           <span class="item-titulo">Dashboards</span>
         </mat-list-item>
-        <mat-list-item class="mat-list-item" (click)="mostrarComponente(componentDashboard, 'dashboard')"
-          [class.selected]="selectedItem === 'dashboard'">
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
+          (click)="mostrarComponente(componentDashboard, 'dashboard')" [class.selected]="selectedItem === 'dashboard'">
           <fa-icon class="fa-icone" icon="chart-pie"></fa-icon>
           <span>Analytics</span>
         </mat-list-item>
-        <mat-list-item class="mat-list-item">
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item">
           <span class="item-titulo">Colaborador</span>
         </mat-list-item>
-        <mat-list-item class="mat-list-item" (click)="mostrarComponente(componentColaborador, 'user')"
-          [class.selected]="selectedItem === 'user'">
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
+          (click)="mostrarComponente(componentColaborador, 'user')" [class.selected]="selectedItem === 'user'">
           <fa-icon class="fa-icone" icon="user"></fa-icon>
           <span>Colaboradores</span>
         </mat-list-item>
-        <mat-list-item class="mat-list-item" (click)="mostrarComponente(componentAnalisarColaborador, 'percent')"
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
+          (click)="mostrarComponente(componentAnalisarColaborador, 'percent')"
           [class.selected]="selectedItem === 'percent'">
           <fa-icon class="fa-icone" icon="percent"></fa-icon>
           <span>Attrition</span>
         </mat-list-item>
-        <mat-list-item class="mat-list-item">
-          <span class="item-titulo">Análise de Clima</span>
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor') || hasPerfil('colaborador')"
+          class="mat-list-item">
+          <span class="item-titulo">Pesquisa fechada</span>
         </mat-list-item>
-        <mat-list-item class="mat-list-item" (click)="mostrarComponente(componentPesquisaClima, 'pesquisaClima')"
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor') || hasPerfil('colaborador')"
+          class="mat-list-item" (click)="mostrarComponente(componentPesquisaClima, 'pesquisaClima')"
           [class.selected]="selectedItem === 'pesquisaClima'">
           <fa-icon class="fa-regular fa-icone" icon="cloud"></fa-icon>
           <span>Pesquisa de Clima</span>
         </mat-list-item>
-        <mat-list-item class="mat-list-item" (click)="mostrarComponente(componentPerguntas, 'perguntas')"
-          [class.selected]="selectedItem === 'perguntas'">
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
+          (click)="mostrarComponente(componentPerguntas, 'perguntas')" [class.selected]="selectedItem === 'perguntas'">
           <fa-icon class="fa-icone" icon="list-check"></fa-icon>
           <span>Perguntas</span>
+        </mat-list-item>
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor') || hasPerfil('colaborador')"
+          class="mat-list-item">
+          <span class="item-titulo">Pesquisa anônima</span>
         </mat-list-item>
       </mat-nav-list>
     </div>
@@ -60,12 +67,16 @@
       <span> CidaAI &copy; 2024 <br /> Todos os direitos reservados.</span>
     </footer>
   </mat-sidenav>
-  <mat-sidenav-content class="mat-sidenav-content">
+  <mat-sidenav-content [ngClass]="{'blur-background': isLoginVisible}" class="mat-sidenav-content">
     <ng-container *ngIf="!conteudoDinamico">
-      <app-home></app-home>
     </ng-container>
     <ng-container *ngIf="conteudoDinamico">
       <ng-template [ngComponentOutlet]="conteudoDinamico"></ng-template>
     </ng-container>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-container *ngIf="isLoginVisible">
+  <div class="overlay-background"></div>
+  <app-login *ngIf="isLoginVisible" (loginSuccess)="onLoginSuccess()"></app-login>
+</ng-container>

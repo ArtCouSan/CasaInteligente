@@ -27,6 +27,7 @@ export interface Colaborador {
   nivelEscolaridade: NivelEscolaridade;
   exFuncionario: boolean;
   acoes: string;
+  perfis: Perfil[];
 }
 
 export interface Genero {
@@ -72,4 +73,9 @@ export interface Cargo {
 export interface NivelEscolaridade {
   id: number;
   descricao: string;
+}
+
+export interface Perfil {
+  id: number;
+  nome: string;
 }

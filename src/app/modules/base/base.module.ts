@@ -10,6 +10,8 @@ import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
 import { PesquisaClimaComponent } from './components/pesquisa-clima/pesquisa-clima.component';
 import { PesquisaComponent } from './components/pesquisa/pesquisa.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,9 @@ import { PesquisaComponent } from './components/pesquisa/pesquisa.component';
     DashboadComponent,
     AnaliseColaboradorComponent,
     PesquisaClimaComponent,
-    PesquisaComponent
+    PesquisaComponent,
+    LoginComponent
   ],
-  imports: [CommonModule, BaseRoutingModule, FontAwesomeModule, SharedModule],
+  imports: [CommonModule, ReactiveFormsModule, BaseRoutingModule, FontAwesomeModule, SharedModule],
 })
 export class BaseModule { }
