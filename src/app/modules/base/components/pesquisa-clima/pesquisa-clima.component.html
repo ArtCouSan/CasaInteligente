@@ -1,29 +1,21 @@
-<div class="container-modal">
+<!-- <div class="container-modal">
     <div class="container-formulario">
-        <div class="legenda">
-            <div class="legenda-item">
-                <fa-icon class="fa-icone estrela-clicada" [icon]="['fas', 'star']"></fa-icon> Bom
-            </div>
-            <div class="legenda-item">
-                <fa-icon class="fa-icone estrela-n-clicada" [icon]="['far', 'star']"></fa-icon> Ruim
-            </div>
-        </div>
-        <div class="container-perguntas-respostas" *ngFor="let pergunta of perguntas; let i = index">
-            <mat-card class="container-card-pergunta" appearance="outlined">
-                <mat-card-content class="pergunta">{{ pergunta.texto }}</mat-card-content>
-            </mat-card>
-            <mat-card class="container-card-resposta" appearance="outlined">
-                <mat-card-content class="resposta">
-                    <fa-icon [ngClass]="j < pergunta.nota ? 'estrela-clicada' : 'estrela-n-clicada'"
-                        *ngFor="let star of [1, 2, 3, 4, 5]; let j = index" class="fa-icone" (click)="rate(i, j + 1)"
-                        [icon]="j < pergunta.nota ? ['fas', 'star'] : ['far', 'star']"></fa-icon>
-                </mat-card-content>
-            </mat-card>
-        </div>
-
-        <fa-icon class="fa-icone-enviar i-enviar" icon="paper-plane" matTooltip="Enviar pesquisa"
-            (click)="enviarNotas()"></fa-icon>
-    </div>
+<div class="container-perguntas-respostas" *ngFor="let pergunta of perguntas; let i = index">
+    <mat-card class="container-card-pergunta" appearance="outlined">
+        <mat-card-content class="pergunta">{{ pergunta.texto }}</mat-card-content>
+    </mat-card>
+    <mat-card class="container-card-resposta" appearance="outlined">
+        <mat-card-content class="resposta">
+            <mat-checkbox *ngFor="let j of [1, 2, 3, 4, 5]" [(ngModel)]="pergunta.respostas[j]" (change)="rate(i, j)">
+                {{ j }}
+            </mat-checkbox>
+        </mat-card-content>
+    </mat-card>
 </div>
 
-<app-chat></app-chat>
+<fa-icon class="fa-icone-enviar i-enviar" icon="paper-plane" matTooltip="Enviar pesquisa"
+    (click)="enviarNotas()"></fa-icon>
+</div>
+</div>
+
+<app-chat></app-chat> -->

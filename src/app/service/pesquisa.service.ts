@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pergunta } from '../core/dto/pergunta';
 import { Resposta } from '../core/dto/resposta';
+import { Pesquisa } from '../core/dto/pesquisa';
 
 @Injectable({
     providedIn: 'root'
@@ -10,6 +11,7 @@ import { Resposta } from '../core/dto/resposta';
 export class PesquisaService {
     private apiUrlPerguntas = 'http://localhost:5000/api/perguntas';
     private apiUrlRespostas = 'http://localhost:5000/api/respostas';
+    private apiUrlPesquisa = 'http://localhost:5000/api/pesquisa';
     private apiUrlColaboradorRespostas = 'http://localhost:5000/api/colaborador';
 
     constructor(private http: HttpClient) { }
@@ -57,5 +59,21 @@ export class PesquisaService {
     // Deletar uma resposta existente
     deleteResposta(respostaId: number): Observable<any> {
         return this.http.delete<any>(`${this.apiUrlRespostas}/${respostaId}`);
+    }
+
+    getPesquisas(): Observable<Pesquisa[]> {
+        return this.http.get<Pesquisa[]>(this.apiUrlPesquisa);
+    }
+
+    createPesquisa(resposta: Pesquisa): Observable<Pesquisa> {
+        return this.http.post<Pesquisa>(`${this.apiUrlPesquisa}`, resposta);
+    }
+
+    updatePesquisa(pesquisaId: number, pesquisa: Pesquisa): Observable<Resposta> {
+        return this.http.put<Resposta>(`${this.apiUrlPesquisa}/${pesquisaId}`, pesquisa);
+    }
+
+    deletePesquisa(pesquisaId: number): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrlPesquisa}/${pesquisaId}`);
     }
 }

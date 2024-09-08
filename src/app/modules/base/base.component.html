@@ -40,6 +40,20 @@
           <fa-icon class="fa-icone" icon="percent"></fa-icon>
           <span>Attrition</span>
         </mat-list-item>
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item">
+          <span class="item-titulo">Pesquisa</span>
+        </mat-list-item>
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
+          (click)="mostrarComponente(componentPerguntas, 'perguntas')" [class.selected]="selectedItem === 'perguntas'">
+          <fa-icon class="fa-icone" icon="list-check"></fa-icon>
+          <span>Perguntas</span>
+        </mat-list-item>
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
+          (click)="mostrarComponente(componentQuestionario, 'questionario')"
+          [class.selected]="selectedItem === 'questionario'">
+          <fa-icon class="fa-icone" icon="clipboard-question"></fa-icon>
+          <span>Questionário</span>
+        </mat-list-item>
         <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor') || hasPerfil('colaborador')"
           class="mat-list-item">
           <span class="item-titulo">Pesquisa fechada</span>
@@ -50,14 +64,15 @@
           <fa-icon class="fa-regular fa-icone" icon="cloud"></fa-icon>
           <span>Pesquisa de Clima</span>
         </mat-list-item>
-        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
-          (click)="mostrarComponente(componentPerguntas, 'perguntas')" [class.selected]="selectedItem === 'perguntas'">
-          <fa-icon class="fa-icone" icon="list-check"></fa-icon>
-          <span>Perguntas</span>
-        </mat-list-item>
         <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor') || hasPerfil('colaborador')"
           class="mat-list-item">
           <span class="item-titulo">Pesquisa anônima</span>
+        </mat-list-item>
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor') || hasPerfil('colaborador')"
+          class="mat-list-item" (click)="mostrarComponente(componentPesquisaClima, 'pesquisaClima')"
+          [class.selected]="selectedItem === 'pesquisaClima'">
+          <fa-icon class="fa-regular fa-icone" icon="cloud"></fa-icon>
+          <span>Pesquisa de Clima</span>
         </mat-list-item>
       </mat-nav-list>
     </div>

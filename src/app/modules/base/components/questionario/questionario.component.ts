@@ -1,26 +1,25 @@
-import { Component, ViewChild, OnInit, ElementRef, Input } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPen, faTrash, faListCheck, faBan, faCheck, faFileArrowUp, faFileArrowDown, faBookMedical } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { PesquisaService } from '../../../../service/pesquisa.service';
 import { ConfirmarDelecaoComponent } from '../../../shared/modals/confirmar-delecao/confirmar-delecao.component';
-import { PesquisaService } from '../../../../service/pesquisa.service'; // Serviço de Pesquisa
 import { BaseComponent } from '../../base.component';
-import { Pergunta } from '../../../../core/dto/pergunta';
+import { Pesquisa } from '../../../../core/dto/pesquisa';
 
 @Component({
-  selector: 'app-pesquisa',
-  templateUrl: './pesquisa.component.html',
-  styleUrls: ['./pesquisa.component.scss']
+  selector: 'app-questionario',
+  templateUrl: './questionario.component.html',
+  styleUrl: './questionario.component.scss'
 })
-export class PesquisaComponent implements OnInit {
-  displayedColumns: string[] = ['texto', 'acoes']; // Colunas para Pesquisa
-  dataSource = new MatTableDataSource<Pergunta>(); // Tabela para Pesquisa
+export class QuestionarioComponent {
+  displayedColumns: string[] = ['titulo', 'ano', 'acoes']; // Colunas para Pesquisa
+  dataSource = new MatTableDataSource<Pesquisa>(); // Tabela para Pesquisa
 
-  pesquisaParaEditar: Pergunta | null = null;
+  pesquisaParaEditar: Pesquisa | null = null;
 
   @ViewChild(MatSort)
   sort!: MatSort;
@@ -60,19 +59,22 @@ export class PesquisaComponent implements OnInit {
   adicionarPesquisa(): void {
     this.pesquisaParaEditar = {
       id: 0,
-      texto: '',
+      descricao: '',
+      ano: 0,
+      titulo: '',
+      respostas: [],
       acoes: 'Adicionar'
     };
   }
 
-  editarPesquisa(pesquisa: Pergunta): void {
+  editarPesquisa(pesquisa: Pesquisa): void {
     this.pesquisaParaEditar = { ...pesquisa };
   }
 
-  salvarPesquisa(pesquisa: Pergunta): void {
+  salvarPesquisa(pesquisa: Pesquisa): void {
     if (this.pesquisaParaEditar) {
       if (pesquisa.id) {
-        this.pesquisaService.updatePergunta(pesquisa.id!, pesquisa).subscribe(
+        this.pesquisaService.updatePesquisa(pesquisa.id!, pesquisa).subscribe(
           () => {
             this.snackBar.open('Pesquisa atualizada com sucesso!', 'Fechar', { duration: 2000 });
             this.carregarPesquisas();
@@ -80,21 +82,21 @@ export class PesquisaComponent implements OnInit {
           error => this.snackBar.open('Erro ao atualizar pesquisa.', 'Fechar', { duration: 2000 })
         );
       } else {
-        this.pesquisaService.createPergunta(pesquisa).subscribe(
+        this.pesquisaService.createPesquisa(pesquisa).subscribe(
           () => {
             this.snackBar.open('Pergunta criada com sucesso!', 'Fechar', { duration: 2000 });
             this.carregarPesquisas();
           },
-          error => this.snackBar.open('Erro ao criar pergunta.', 'Fechar', { duration: 2000 })
+          error => this.snackBar.open('Erro ao criar pesquisa.', 'Fechar', { duration: 2000 })
         );
       }
       this.pesquisaParaEditar = null;
     }
   }
 
-  confirmarExclusao(pesquisa: Pergunta) {
+  confirmarExclusao(pesquisa: Pesquisa) {
     const dialogRef = this.dialog.open(ConfirmarDelecaoComponent, {
-      data: { message: `Tem certeza que deseja excluir a pergunta ${pesquisa.texto}?` }
+      data: { message: `Tem certeza que deseja excluir a pesquisa ${pesquisa.titulo}?` }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -104,22 +106,22 @@ export class PesquisaComponent implements OnInit {
     });
   }
 
-  excluirPesquisa(pesquisa: Pergunta): void {
-    this.pesquisaService.deletePergunta(pesquisa.id!).subscribe(
+  excluirPesquisa(pesquisa: Pesquisa): void {
+    this.pesquisaService.deletePesquisa(pesquisa.id!).subscribe(
       () => {
-        this.snackBar.open(`${pesquisa.texto} foi excluída com sucesso.`, 'Fechar', { duration: 2000 });
+        this.snackBar.open(`${pesquisa.titulo} foi excluída com sucesso.`, 'Fechar', { duration: 2000 });
         this.carregarPesquisas();
       },
-      error => this.snackBar.open('Erro ao excluir pergunta.', 'Fechar', { duration: 2000 })
+      error => this.snackBar.open('Erro ao excluir pesquisa.', 'Fechar', { duration: 2000 })
     );
   }
 
   carregarPesquisas(): void {
-    this.pesquisaService.getPerguntas().subscribe(
-      (pesquisas: Pergunta[]) => {
+    this.pesquisaService.getPesquisas().subscribe(
+      (pesquisas: Pesquisa[]) => {
         this.dataSource.data = pesquisas;
       },
-      error => this.snackBar.open('Erro ao carregar perguntas.', 'Fechar', { duration: 2000 })
+      error => this.snackBar.open('Erro ao carregar pesquisas.', 'Fechar', { duration: 2000 })
     );
   }
 

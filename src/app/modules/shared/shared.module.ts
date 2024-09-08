@@ -22,9 +22,11 @@ import { G10Component } from './graficos/g10/g10.component';
 import { G11Component } from './graficos/g11/g11.component';
 import { G12Component } from './graficos/g12/g12.component';
 import { ChatComponent } from './chat/chat.component';
+import { QuestionarioEditComponent } from './modals/questionario-edit/questionario-edit.component';
 
 @NgModule({
     declarations: [
+        QuestionarioEditComponent,
         EmConstrucaoComponent,
         ColaboradorEditComponent,
         ConfirmarDelecaoComponent,
@@ -45,6 +47,7 @@ import { ChatComponent } from './chat/chat.component';
     ],
     exports: [
         MaterialModule,
+        QuestionarioEditComponent,
         EmConstrucaoComponent,
         ColaboradorEditComponent,
         ConfirmarDelecaoComponent,

@@ -4,13 +4,14 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck, faClipboardQuestion } from '@fortawesome/free-solid-svg-icons';
 import { ColaboradorComponent } from './components/colaborador/colaborador.component';
 import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
 import { PesquisaClimaComponent } from './components/pesquisa-clima/pesquisa-clima.component';
 import { PesquisaComponent } from './components/pesquisa/pesquisa.component';
 import { AuthService } from '../../auth/auth.service';
 import { Perfil } from '../../core/dto/colaborador';
+import { QuestionarioComponent } from './components/questionario/questionario.component';
 
 @Component({
   selector: 'app-base',
@@ -26,6 +27,7 @@ export class BaseComponent implements OnDestroy, OnInit {
   componentAnalisarColaborador = AnaliseColaboradorComponent;
   componentPesquisaClima = PesquisaClimaComponent;
   componentPerguntas = PesquisaComponent;
+  componentQuestionario = QuestionarioComponent;
 
   mobileQuery: MediaQueryList;
   selectedItem: string = "";
@@ -45,7 +47,7 @@ export class BaseComponent implements OnDestroy, OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    library.addIcons(faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck);
+    library.addIcons(faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck, faClipboardQuestion);
   }
 
   ngOnInit(): void {
