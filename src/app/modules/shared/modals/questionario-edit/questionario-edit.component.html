@@ -2,6 +2,65 @@
     <div class="container-formulario">
         <fa-icon class="fa-icone i-sair" icon="angle-left" matTooltip="Voltar" (click)="onVoltar()"></fa-icon>
 
+        <div class="secao">
+            <mat-form-field class="form-field-titulo">
+                <mat-label class="titulo">Título</mat-label>
+                <input matInput [(ngModel)]="pesquisa.titulo">
+            </mat-form-field>
+
+            <mat-form-field class="form-field-ano">
+                <mat-label class="titulo">Ano</mat-label>
+                <input matInput value="2023" type="number" min="2023" [(ngModel)]="pesquisa.ano">
+            </mat-form-field>
+
+            <mat-form-field class="form-field-descricao">
+                <mat-label class="titulo">Descrição</mat-label>
+                <textarea matInput [(ngModel)]="pesquisa.descricao"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="container-filtro">
+            <mat-form-field class="filtro" appearance="fill">
+                <mat-label>Filtrar Perguntas</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+            </mat-form-field>
+        </div>
+
+        <div class="container-table">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                <!-- Checkbox para selecionar perguntas -->
+                <ng-container matColumnDef="selecionada">
+                    <th mat-header-cell *matHeaderCellDef> Selecionar </th>
+                    <td mat-cell *matCellDef="let pergunta">
+                        <mat-checkbox [(ngModel)]="pergunta.selecionada"></mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <!-- Coluna de texto da pergunta -->
+                <ng-container matColumnDef="texto">
+                    <th mat-header-cell *matHeaderCellDef> Pergunta </th>
+                    <td mat-cell *matCellDef="let pergunta"> {{ pergunta.texto }} </td>
+                </ng-container>
+
+                <!-- Coluna de opções de resposta -->
+                <ng-container matColumnDef="opcoes_resposta">
+                    <th mat-header-cell *matHeaderCellDef> Respostas </th>
+                    <td mat-cell *matCellDef="let pergunta">
+                        <button mat-button (click)="abrirModal(pergunta)">Ver Respostas</button>
+                    </td>
+                </ng-container>
+
+                <!-- Linhas da Tabela -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr class="linhas" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <!-- Paginação -->
+            <mat-paginator [pageSizeOptions]="[7]" [hidePageSize]="true">
+            </mat-paginator>
+        </div>
+
         <fa-icon matTooltip="Salvar pesquisa" class="fa-icone i-salvar" icon="check" (click)="onSalvar()"></fa-icon>
     </div>
 </div>

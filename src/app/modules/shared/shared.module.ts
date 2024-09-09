@@ -23,6 +23,8 @@ import { G11Component } from './graficos/g11/g11.component';
 import { G12Component } from './graficos/g12/g12.component';
 import { ChatComponent } from './chat/chat.component';
 import { QuestionarioEditComponent } from './modals/questionario-edit/questionario-edit.component';
+import { PerguntaEditComponent } from './modals/pergunta-edit/pergunta-edit.component';
+import { RespostasComponent } from './modals/respostas/respostas.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +33,7 @@ import { QuestionarioEditComponent } from './modals/questionario-edit/questionar
         ColaboradorEditComponent,
         ConfirmarDelecaoComponent,
         DetalheAnaliseColaboradorComponent,
+        PerguntaEditComponent,
         G1Component,
         G2Component,
         G3Component,
@@ -43,7 +46,8 @@ import { QuestionarioEditComponent } from './modals/questionario-edit/questionar
         G10Component,
         G11Component,
         G12Component,
-        ChatComponent
+        ChatComponent,
+        RespostasComponent
     ],
     exports: [
         MaterialModule,
@@ -52,6 +56,7 @@ import { QuestionarioEditComponent } from './modals/questionario-edit/questionar
         ColaboradorEditComponent,
         ConfirmarDelecaoComponent,
         DetalheAnaliseColaboradorComponent,
+        PerguntaEditComponent,
         G1Component,
         G2Component,
         G3Component,
@@ -64,7 +69,8 @@ import { QuestionarioEditComponent } from './modals/questionario-edit/questionar
         G10Component,
         G11Component,
         G12Component,
-        ChatComponent
+        ChatComponent,
+        RespostasComponent
     ], imports: [
         CommonModule,
         ReactiveFormsModule,

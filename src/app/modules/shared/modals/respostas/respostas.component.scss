@@ -1,0 +1,52 @@
+.container-modal {
+  background-color: var(--cinza-escuro);
+  min-height: 460px;
+  min-width: 550px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.container-conteudo {
+  height: 100px;
+  margin-top: 10px;
+}
+
+.titulo {
+  color: gray;
+}
+
+.mensagem {
+  color: white;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__s {
+  border-radius: 0px !important;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 0px !important;
+}
+
+.mat-dialog-container {
+  border-radius: 0 !important; /* Remove a borda arredondada */
+}
+
+.mat-mdc-button:not(:disabled) {
+  color: white;
+}
+
+.botao-nao {
+  background-color: var(--verde-claro);
+}
+
+.botao-sim {
+  background-color: var(--laranja);
+}
+
+.botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-right: 20px;
+}

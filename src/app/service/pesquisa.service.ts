@@ -9,7 +9,7 @@ import { Pesquisa } from '../core/dto/pesquisa';
     providedIn: 'root'
 })
 export class PesquisaService {
-    private apiUrlPerguntas = 'http://localhost:5000/api/perguntas';
+    private apiUrlPerguntas = 'http://localhost:5000/api/pergunta';
     private apiUrlRespostas = 'http://localhost:5000/api/respostas';
     private apiUrlPesquisa = 'http://localhost:5000/api/pesquisa';
     private apiUrlColaboradorRespostas = 'http://localhost:5000/api/colaborador';

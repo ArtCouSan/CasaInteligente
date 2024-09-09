@@ -20,6 +20,12 @@
     <div class="container-table">
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
+            <!-- Coluna ID -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
             <!-- Coluna Pesquisa -->
             <ng-container matColumnDef="texto">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Pergunta </th>
@@ -45,9 +51,9 @@
 </div>
 
 <ng-template #editTemplate>
-    <!-- <app-colaborador-edit *ngIf="colaboradorParaEditar" [colaborador]="colaboradorParaEditar"
-        (salvar)="salvarColaborador($event)" (voltar)="voltar()">
-    </app-colaborador-edit> -->
+    <app-pergunta-edit *ngIf="pesquisaParaEditar" [pergunta]="pesquisaParaEditar" (salvar)="salvarPesquisa($event)"
+        (voltar)="voltar()">
+    </app-pergunta-edit>
 </ng-template>
 
 <app-chat></app-chat>

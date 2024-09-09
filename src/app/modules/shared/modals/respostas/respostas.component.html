@@ -1,0 +1,14 @@
+<div class="container-modal">
+    <div class="container-conteudo">
+        <span class="titulo" mat-dialog-title>
+            {{ data.texto }}
+        </span>
+        <div class="mensagem" mat-dialog-content>
+            <ol>
+                <li *ngFor="let opcao of data.opcoes_resposta">
+                    {{ opcao.texto }}
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

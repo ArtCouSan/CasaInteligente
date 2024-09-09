@@ -1,8 +1,9 @@
-import { Resposta } from "./resposta";
+import { RespostaOpcao } from "./resposta-opcao";
 
 export interface Pergunta {
     id: number;
     texto: string;
     acoes: string;
-    respostas?: Resposta[];  // Respostas podem ser opcionais, como no `include_respostas=False`
+    opcoes_resposta?: RespostaOpcao[];
+    selecionada: boolean;
 }

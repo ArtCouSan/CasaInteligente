@@ -1,0 +1,41 @@
+<div class="container-modal">
+    <div class="container-formulario">
+        <fa-icon class="fa-icone i-sair" icon="angle-left" matTooltip="Voltar" (click)="onVoltar()"></fa-icon>
+
+        <div class="secao">
+            <h4 class="titulo-secao">Pergunta</h4>
+            <mat-form-field class="form-field">
+                <input placeholder="Digite a pergunta" matInput [(ngModel)]="pergunta.texto">
+            </mat-form-field>
+        </div>
+
+        <div class="secao">
+            <h4 class="titulo-secao">Adicionar Opções de Resposta</h4>
+            <div class="opcao-nova">
+                <mat-form-field class="form-field-resposta">
+                    <mat-label>Digite uma opção de resposta</mat-label>
+                    <input matInput [(ngModel)]="novaOpcao.texto">
+                </mat-form-field>
+
+                <mat-form-field class="form-field-nota">
+                    <mat-label>Nota</mat-label>
+                    <input matInput type="number" min="1" [(ngModel)]="novaOpcao.nota">
+                </mat-form-field>
+
+                <fa-icon matTooltip="Adicionar opção" class="fa-icone-add" icon="circle-plus"
+                    (click)="adicionarOpcao()"></fa-icon>
+            </div>
+        </div>
+
+        <div class="secao" *ngIf="pergunta.opcoes_resposta?.length">
+            <h4 class="titulo-secao">Opções de Resposta</h4>
+            <div *ngFor="let opcao of pergunta.opcoes_resposta; let i = index" class="opcao-resposta">
+                <span class="texto-opcao">{{ opcao.texto }} (Nota: {{ opcao.nota }})</span>
+                <fa-icon matTooltip="Remover opção" class="fa-icone-remove" icon="trash-can"
+                    (click)="removerOpcao(i)"></fa-icon>
+            </div>
+        </div>
+
+        <fa-icon matTooltip="Salvar pesquisa" class="fa-icone i-salvar" icon="check" (click)="onSalvar()"></fa-icon>
+    </div>
+</div>

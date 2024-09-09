@@ -17,8 +17,8 @@ import { Pergunta } from '../../../../core/dto/pergunta';
   styleUrls: ['./pesquisa.component.scss']
 })
 export class PesquisaComponent implements OnInit {
-  displayedColumns: string[] = ['texto', 'acoes']; // Colunas para Pesquisa
-  dataSource = new MatTableDataSource<Pergunta>(); // Tabela para Pesquisa
+  displayedColumns: string[] = ['id', 'texto', 'acoes'];
+  dataSource = new MatTableDataSource<Pergunta>();
 
   pesquisaParaEditar: Pergunta | null = null;
 
@@ -34,13 +34,13 @@ export class PesquisaComponent implements OnInit {
     library: FaIconLibrary,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private pesquisaService: PesquisaService // Injetando o serviço de Pesquisa
+    private pesquisaService: PesquisaService
   ) {
     library.addIcons(faPen, faTrash, faListCheck, faBan, faCheck, faFileArrowUp, faFileArrowDown, faBookMedical);
   }
 
   ngOnInit(): void {
-    this.carregarPesquisas(); // Carregar as pesquisas na inicialização
+    this.carregarPesquisas();
   }
 
   ngAfterViewInit() {
@@ -61,7 +61,8 @@ export class PesquisaComponent implements OnInit {
     this.pesquisaParaEditar = {
       id: 0,
       texto: '',
-      acoes: 'Adicionar'
+      acoes: 'Adicionar',
+      selecionada: false
     };
   }
 
