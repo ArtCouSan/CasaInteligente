@@ -1,3 +1,4 @@
+import { Pergunta } from "./pergunta";
 import { Resposta } from "./resposta";
 
 export interface Pesquisa {
@@ -6,5 +7,8 @@ export interface Pesquisa {
     descricao: string;
     ano: number;
     respostas?: Resposta[];
+    perguntas?: Pergunta[];
     acoes: string;
+    is_pesquisa_fechada?: number;
+    is_pesquisa_anonima?: number;
 }

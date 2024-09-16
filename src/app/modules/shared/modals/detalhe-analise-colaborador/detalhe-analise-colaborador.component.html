@@ -3,9 +3,10 @@
         <fa-icon matTooltip="Voltar" class="fa-icone i-sair" icon="angle-left" (click)="onVoltar()"></fa-icon>
 
         <div class="conteudo-cabecalho">
-            <h2 class="texto-predicao" [ngStyle]="{'color': getColor(analiseColaborador.predicao)}">
-                {{ analiseColaborador.predicao }} %
-            </h2>
+            <fa-icon [ngStyle]="{'color': getColor(analiseColaborador.evasao)}"
+                *ngIf="analiseColaborador.evasao == 'Não'" class="fa-icone-evasao" icon="face-laugh-wink"></fa-icon>
+            <fa-icon [ngStyle]="{'color': getColor(analiseColaborador.evasao)}"
+                *ngIf="analiseColaborador.evasao == 'Sim'" class="fa-icone-evasao" icon="face-sad-cry"></fa-icon>
         </div>
 
         <mat-card class="card-motivo" appearance="outlined">

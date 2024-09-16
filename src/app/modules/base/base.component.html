@@ -3,7 +3,7 @@
     [fixedInViewport]="true" fixedTopGap="0">
     <div class="sidenav-content">
       <mat-nav-list>
-        <mat-list-item class="mat-list-item">
+        <mat-list-item class="mat-list-item container-profile">
           <div class="profile-container">
             <div class="circle">
               <img
@@ -69,15 +69,13 @@
           <span class="item-titulo">Pesquisa anônima</span>
         </mat-list-item>
         <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor') || hasPerfil('colaborador')"
-          class="mat-list-item" (click)="mostrarComponente(componentPesquisaClima, 'pesquisaClima')"
-          [class.selected]="selectedItem === 'pesquisaClima'">
+          class="mat-list-item" (click)="mostrarComponente(componentPesquisaAnonima, 'pesquisaAnonima')"
+          [class.selected]="selectedItem === 'pesquisaAnonima'">
           <fa-icon class="fa-regular fa-icone" icon="cloud"></fa-icon>
           <span>Pesquisa de Clima</span>
         </mat-list-item>
       </mat-nav-list>
     </div>
-
-
     <footer class="sidenav-footer">
       <span> CidaAI &copy; 2024 <br /> Todos os direitos reservados.</span>
     </footer>

@@ -76,6 +76,16 @@
   color: var(--laranja);
 }
 
+.fa-icone-ver-respostas {
+  color: white;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.fa-icone-ver-respostas:hover {
+  color: var(--laranja);
+}
+
 .i-salvar {
   position: absolute;
   bottom: 35px;
@@ -251,7 +261,7 @@ td {
   border-top: 3px solid var(--cinza-escuro-tom-mais);
 }
 
-tr:hover {
+.linhas:hover {
   background-color: var(--verde-escuro);
 }
 

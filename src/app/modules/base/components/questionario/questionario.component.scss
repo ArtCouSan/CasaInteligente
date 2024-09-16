@@ -40,6 +40,7 @@ td {
 .fa-icone {
   margin: 10px;
   cursor: pointer;
+  font-size: 18px;
 }
 
 .fa-icone-filtro {
@@ -114,4 +115,12 @@ mat-paginator {
 
 .fa-ban {
   color: red;
+}
+
+.coluna-titulo {
+  width: 390px;
+}
+
+.coluna-descricao {
+  width: 450px;
 }

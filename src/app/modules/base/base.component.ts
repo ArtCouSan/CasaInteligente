@@ -12,6 +12,7 @@ import { PesquisaComponent } from './components/pesquisa/pesquisa.component';
 import { AuthService } from '../../auth/auth.service';
 import { Perfil } from '../../core/dto/colaborador';
 import { QuestionarioComponent } from './components/questionario/questionario.component';
+import { PesquisaAnonimaComponent } from './components/pesquisa-anonima/pesquisa-anonima.component';
 
 @Component({
   selector: 'app-base',
@@ -26,6 +27,7 @@ export class BaseComponent implements OnDestroy, OnInit {
   componentColaborador = ColaboradorComponent;
   componentAnalisarColaborador = AnaliseColaboradorComponent;
   componentPesquisaClima = PesquisaClimaComponent;
+  componentPesquisaAnonima = PesquisaAnonimaComponent;
   componentPerguntas = PesquisaComponent;
   componentQuestionario = QuestionarioComponent;
 

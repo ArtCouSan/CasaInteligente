@@ -35,13 +35,11 @@
       </ng-container>
 
       <!-- Coluna Porcentagem -->
-      <ng-container matColumnDef="predicao">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          <fa-icon icon="percent"></fa-icon>
-        </th>
+      <ng-container matColumnDef="evasao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Evasão </th>
         <td class="texto-porcentagem" mat-cell *matCellDef="let element"
-          [ngStyle]="{'color': getColor(element.predicao)}">
-          {{element.predicao}} %
+          [ngStyle]="{'color': getColor(element.evasao)}">
+          {{element.evasao}}
         </td>
       </ng-container>
 

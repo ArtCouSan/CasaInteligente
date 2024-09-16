@@ -16,7 +16,7 @@ import { AnaliseColaboradorService } from '../../../../service/analise-colaborad
 })
 export class AnaliseColaboradorComponent implements OnInit {
 
-  displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'predicao', 'acoes'];
+  displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'evasao', 'acoes'];
   dataSource = new MatTableDataSource<AnaliseColaborador>();
   colaboradorParaAnalisar: AnaliseColaborador | null = null;
 
@@ -70,9 +70,9 @@ export class AnaliseColaboradorComponent implements OnInit {
     this.colaboradorParaAnalisar = null;
   }
 
-  getColor(predicao: number): string {
-    if (predicao >= 75) return 'red';
-    if (predicao >= 50) return 'orange';
+  getColor(evasao: string): string {
+    if (evasao == "Não") return 'green';
+    if (evasao == "Sim") return 'red';
     return 'green';
   }
 }

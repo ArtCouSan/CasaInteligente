@@ -13,6 +13,7 @@ import { PesquisaComponent } from './components/pesquisa/pesquisa.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { QuestionarioComponent } from './components/questionario/questionario.component';
+import { PesquisaAnonimaComponent } from './components/pesquisa-anonima/pesquisa-anonima.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { QuestionarioComponent } from './components/questionario/questionario.co
     AnaliseColaboradorComponent,
     PesquisaClimaComponent,
     PesquisaComponent,
+    PesquisaAnonimaComponent,
     QuestionarioComponent,
     LoginComponent
   ],

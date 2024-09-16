@@ -1,19 +1,19 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { Pergunta } from '../../../../core/dto/pergunta';
-import { PesquisaService } from '../../../../service/pesquisa.service';
-import { Resposta } from '../../../../core/dto/resposta';
 import { AuthService } from '../../../../auth/auth.service';
 import { Colaborador } from '../../../../core/dto/colaborador';
+import { Pergunta } from '../../../../core/dto/pergunta';
+import { Resposta } from '../../../../core/dto/resposta';
+import { PesquisaService } from '../../../../service/pesquisa.service';
 import { Pesquisa } from '../../../../core/dto/pesquisa';
 
 @Component({
-  selector: 'app-pesquisa-clima',
-  templateUrl: './pesquisa-clima.component.html',
-  styleUrls: ['./pesquisa-clima.component.scss']
+  selector: 'app-pesquisa-anonima',
+  templateUrl: './pesquisa-anonima.component.html',
+  styleUrl: './pesquisa-anonima.component.scss'
 })
-export class PesquisaClimaComponent {
+export class PesquisaAnonimaComponent {
   perguntas: Pergunta[] = [];  // Array de perguntas com opções de resposta
   colaboradorId: number = 0;  // Armazena o ID do colaborador logado
   ano = new Date().getFullYear();  // Pega o ano atual
@@ -45,7 +45,7 @@ export class PesquisaClimaComponent {
 
   // Carrega as perguntas e inicializa suas notas como 0
   carregarPerguntas(): void {
-    this.pesquisaService.getPesquisaFechada().subscribe({
+    this.pesquisaService.getPesquisaAnonima().subscribe({
       next: (pesquisa) => {
         this.pesquisa = pesquisa;
         if (pesquisa.perguntas) {  // Verifica se a lista de perguntas está definida
@@ -58,21 +58,21 @@ export class PesquisaClimaComponent {
         }
         this.carregarRespostasExistentes();  // Carrega as respostas já dadas pelo colaborador
       },
-      error: (err) => console.error('Erro ao carregar pesquisa fechada:', err)
+      error: (err) => console.error('Erro ao carregar pesquisa anônima:', err)
     });
   }
 
   carregarRespostasExistentes(): void {
     if (this.pesquisa?.id) {
       // Verifica se a pesquisa está fechada
-      if (this.pesquisa.is_pesquisa_fechada === 1) {
+      if (this.pesquisa.is_pesquisa_anonima === 1) {
         this.pesquisaService.getRespostas(this.colaboradorId, this.pesquisa?.id).subscribe({
           next: (respostas) => {
             respostas.forEach(resposta => {
               const perguntaIndex = this.perguntas.findIndex(p => p.id === resposta.pergunta_id);
               if (perguntaIndex !== -1) {
                 // Verifica se a pesquisa não é anônima
-                if (this.pesquisa.is_pesquisa_anonima !== 1) {
+                if (this.pesquisa.is_pesquisa_fechada !== 1) {
                   this.perguntas[perguntaIndex].nota = resposta.nota;  // Preenche a nota com a resposta existente
                 } else {
                   // Se for anônima, pode exibir de forma diferente ou não exibir a resposta diretamente
@@ -107,7 +107,7 @@ export class PesquisaClimaComponent {
       pesquisa_id: this.pesquisa?.id!,       // ID da pesquisa (agora sabemos que é um número)
       pergunta_id: pergunta.id,            // ID da pergunta
       nota: pergunta.nota !== undefined ? pergunta.nota : 0, // Garante que a nota seja um número
-      is_pesquisa_fechada: 1
+      is_pesquisa_anonima: 1
     }));
 
     respostas.forEach(resposta => {

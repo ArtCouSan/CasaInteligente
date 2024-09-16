@@ -19,12 +19,12 @@
             </mat-form-field>
         </div>
 
-        <div class="container-filtro">
+        <!-- <div class="container-filtro">
             <mat-form-field class="filtro" appearance="fill">
                 <mat-label>Filtrar Perguntas</mat-label>
                 <input matInput (keyup)="applyFilter($event)">
             </mat-form-field>
-        </div>
+        </div> -->
 
         <div class="container-table">
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -47,7 +47,8 @@
                 <ng-container matColumnDef="opcoes_resposta">
                     <th mat-header-cell *matHeaderCellDef> Respostas </th>
                     <td mat-cell *matCellDef="let pergunta">
-                        <button mat-button (click)="abrirModal(pergunta)">Ver Respostas</button>
+                        <fa-icon matTooltip="Ver respostas" class="fa-icone-ver-respostas" icon="eye"
+                            (click)="abrirModal(pergunta)"></fa-icon>
                     </td>
                 </ng-container>
 

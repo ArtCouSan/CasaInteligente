@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChil
 import { MatTableDataSource } from '@angular/material/table';
 import { MatInput } from '@angular/material/input';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faCheck, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faAngleLeft, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Pesquisa } from '../../../../core/dto/pesquisa';
 import { Pergunta } from '../../../../core/dto/pergunta';
 import { PesquisaService } from '../../../../service/pesquisa.service';
@@ -40,8 +40,7 @@ export class QuestionarioEditComponent implements AfterViewInit, OnInit {
     private pesquisaService: PesquisaService,
     private dialog: MatDialog
   ) {
-    library.addIcons(faCheck);
-    library.addIcons(faAngleLeft);
+    library.addIcons(faCheck, faEye, faAngleLeft);
   }
 
   ngAfterViewInit(): void {
@@ -56,15 +55,22 @@ export class QuestionarioEditComponent implements AfterViewInit, OnInit {
   carregarPerguntas(): void {
     this.pesquisaService.getPerguntas().subscribe({
       next: (perguntas) => {
+        // Verificar se a pesquisa tem perguntas associadas
+        const perguntasPesquisa = this.pesquisa.perguntas || [];  // Garantir que não seja undefined
+
+        // Verificar se a pergunta está na lista de perguntas da pesquisa atual
         this.perguntas = perguntas.map(pergunta => ({
           ...pergunta,
-          selecionada: false  // Adiciona a propriedade 'selecionada' para controle
+          selecionada: perguntasPesquisa.some(p => p.id === pergunta.id)  // Verifica se a pergunta está na pesquisa
         }));
-        this.dataSource.data = this.perguntas;  // Atualiza a tabela com os dados
+
+        // Atualiza a tabela com os dados
+        this.dataSource.data = this.perguntas;
       },
       error: (err) => console.error('Erro ao carregar perguntas:', err)
     });
   }
+
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
@@ -79,6 +85,7 @@ export class QuestionarioEditComponent implements AfterViewInit, OnInit {
     const perguntasSelecionadas = this.perguntas
       .filter(pergunta => pergunta.selecionada)
       .map(pergunta => ({
+        ...pergunta,  // Mantém as propriedades adicionais da Pergunta (como acoes, selecionada)
         id: pergunta.id,
         texto: pergunta.texto,
         opcoes_resposta: pergunta.opcoes_resposta
@@ -91,6 +98,7 @@ export class QuestionarioEditComponent implements AfterViewInit, OnInit {
 
     this.salvar.emit(pesquisaFinalizada);
   }
+
 
   abrirModal(pergunta: Pergunta): void {
     this.perguntaSelecionada = pergunta;

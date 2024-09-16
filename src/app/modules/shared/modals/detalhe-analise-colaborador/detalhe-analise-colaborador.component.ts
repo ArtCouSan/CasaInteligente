@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit, signal } from '@angular/core';
 import { AnaliseColaborador } from '../../../../core/dto/analise-colaborador';
-import { faCheck, faAngleLeft, faRotate, faStar as fasStar, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faCheck, faAngleLeft, faRotate, faStar as fasStar, faPaperPlane, faFaceLaughWink, faFaceSadCry } from '@fortawesome/free-solid-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { Cargo, Departamento, EstadoCivil, Faculdade, FaixaSalarial, Formacao, Genero, NivelEscolaridade, Setor } from '../../../../core/dto/colaborador';
 import { SelecoesService } from '../../../../service/selecoes.service';
@@ -66,7 +66,7 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
     private analiseColaboradorService: AnaliseColaboradorService,
     private pesquisaClimaService: PesquisaService
   ) {
-    library.addIcons(faCheck, faRotate, faAngleLeft, farStar, fasStar, faPaperPlane);
+    library.addIcons(faCheck, faRotate, faAngleLeft, farStar, fasStar, faPaperPlane, faFaceSadCry, faFaceLaughWink);
   }
 
   ngOnInit(): void {
@@ -87,7 +87,7 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
   }
 
   carregarRespostas(colaboradorId: number, trimestre: Trimestre, ano: number): void {
-    this.pesquisaClimaService.getRespostas(colaboradorId, trimestre, ano).subscribe(
+    this.pesquisaClimaService.getRespostas(colaboradorId, ano).subscribe(
       (respostas: any[]) => {
         console.log(`Respostas recebidas para ${trimestre} ${ano}:`, respostas);
 
@@ -137,15 +137,13 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
     this.voltar.emit();
   }
 
-  getColor(predicao: number | undefined): string {
-    if (predicao === undefined) {
+  getColor(evasao: string | undefined): string {
+    if (evasao === undefined) {
       return 'white';
     }
 
-    if (predicao <= 30) {
+    if (evasao == "Não") {
       return 'green';
-    } else if (predicao >= 31 && predicao <= 50) {
-      return 'yellow';
     } else {
       return 'red';
     }

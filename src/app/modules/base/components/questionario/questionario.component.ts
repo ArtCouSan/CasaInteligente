@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faPen, faTrash, faListCheck, faBan, faCheck, faFileArrowUp, faFileArrowDown, faBookMedical } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash, faListCheck, faBan, faCheck, faFileArrowUp, faFileArrowDown, faBookMedical, faUserSecret, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { PesquisaService } from '../../../../service/pesquisa.service';
 import { ConfirmarDelecaoComponent } from '../../../shared/modals/confirmar-delecao/confirmar-delecao.component';
 import { BaseComponent } from '../../base.component';
@@ -16,7 +16,7 @@ import { Pesquisa } from '../../../../core/dto/pesquisa';
   styleUrl: './questionario.component.scss'
 })
 export class QuestionarioComponent {
-  displayedColumns: string[] = ['titulo', 'ano', 'acoes']; // Colunas para Pesquisa
+  displayedColumns: string[] = ['titulo', 'descricao', 'ano', 'acoes']; // Colunas para Pesquisa
   dataSource = new MatTableDataSource<Pesquisa>(); // Tabela para Pesquisa
 
   pesquisaParaEditar: Pesquisa | null = null;
@@ -35,7 +35,7 @@ export class QuestionarioComponent {
     private snackBar: MatSnackBar,
     private pesquisaService: PesquisaService // Injetando o serviço de Pesquisa
   ) {
-    library.addIcons(faPen, faTrash, faListCheck, faBan, faCheck, faFileArrowUp, faFileArrowDown, faBookMedical);
+    library.addIcons(faPen, faTrash, faListCheck, faBan, faCheck, faFileArrowUp, faFileArrowDown, faBookMedical, faUserSecret, faUserTie);
   }
 
   ngOnInit(): void {
@@ -157,5 +157,25 @@ export class QuestionarioComponent {
     //     }
     //   });
     // }
+  }
+
+  marcarComoAnonima(pesquisa: Pesquisa): void {
+    this.pesquisaService.marcarPesquisa(pesquisa.id!, { is_pesquisa_anonima: 1 }).subscribe(
+      () => {
+        this.snackBar.open('Pesquisa marcada como anônima.', 'Fechar', { duration: 2000 });
+        this.carregarPesquisas();
+      },
+      error => this.snackBar.open('Erro ao marcar pesquisa como anônima.', 'Fechar', { duration: 2000 })
+    );
+  }
+
+  marcarComoFechada(pesquisa: Pesquisa): void {
+    this.pesquisaService.marcarPesquisa(pesquisa.id!, { is_pesquisa_fechada: 1 }).subscribe(
+      () => {
+        this.snackBar.open('Pesquisa marcada como fechada.', 'Fechar', { duration: 2000 });
+        this.carregarPesquisas();
+      },
+      error => this.snackBar.open('Erro ao marcar pesquisa como fechada.', 'Fechar', { duration: 2000 })
+    );
   }
 }

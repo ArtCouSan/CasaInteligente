@@ -99,6 +99,8 @@ mat-nav-list {
   flex: 1;
   overflow-y: auto;
   height: 92%;
+  padding-left: 10px;
+  padding-bottom: 20px;
 }
 
 app-login {
@@ -121,4 +123,8 @@ app-login {
   height: 100%;
   background: rgba(0, 0, 0, 0.5); // Escurece o fundo
   z-index: 999; // Menor que o app-login para ficar atrás do modal
+}
+
+.container-profile {
+  margin: 10px 0px;
 }

@@ -21,6 +21,11 @@ export class PesquisaService {
         return this.http.get<Pergunta[]>(this.apiUrlPerguntas);
     }
 
+    // Obter perguntas por pesquisa
+    getPerguntasPorPesquisa(pesquisaId: number): Observable<Pergunta[]> {
+        return this.http.get<Pergunta[]>(`${this.apiUrlPesquisa}/${pesquisaId}/perguntas`);
+    }
+
     // Criar uma nova pergunta
     createPergunta(pergunta: Pergunta): Observable<Pergunta> {
         return this.http.post<Pergunta>(this.apiUrlPerguntas, pergunta);
@@ -37,8 +42,8 @@ export class PesquisaService {
     }
 
     // Obter todas as respostas de um colaborador específico para um determinado trimestre e ano
-    getRespostas(colaboradorId: number, trimestre: string, ano: number): Observable<Resposta[]> {
-        return this.http.get<Resposta[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/respostas?trimestre=${trimestre}&ano=${ano}`);
+    getRespostas(colaboradorId: number, pesquisaId: number): Observable<Resposta[]> {
+        return this.http.get<Resposta[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/respostas?pesquisaId=${pesquisaId}`);
     }
 
     // Obter todas as respostas de um colaborador específico
@@ -61,19 +66,38 @@ export class PesquisaService {
         return this.http.delete<any>(`${this.apiUrlRespostas}/${respostaId}`);
     }
 
+    // Obter todas as pesquisas
     getPesquisas(): Observable<Pesquisa[]> {
         return this.http.get<Pesquisa[]>(this.apiUrlPesquisa);
     }
 
-    createPesquisa(resposta: Pesquisa): Observable<Pesquisa> {
-        return this.http.post<Pesquisa>(`${this.apiUrlPesquisa}`, resposta);
+    // Criar uma nova pesquisa
+    createPesquisa(pesquisa: Pesquisa): Observable<Pesquisa> {
+        return this.http.post<Pesquisa>(`${this.apiUrlPesquisa}`, pesquisa);
     }
 
-    updatePesquisa(pesquisaId: number, pesquisa: Pesquisa): Observable<Resposta> {
-        return this.http.put<Resposta>(`${this.apiUrlPesquisa}/${pesquisaId}`, pesquisa);
+    // Atualizar uma pesquisa existente
+    updatePesquisa(pesquisaId: number, pesquisa: Pesquisa): Observable<Pesquisa> {
+        return this.http.put<Pesquisa>(`${this.apiUrlPesquisa}/${pesquisaId}`, pesquisa);
     }
 
+    // Deletar uma pesquisa existente
     deletePesquisa(pesquisaId: number): Observable<any> {
         return this.http.delete<any>(`${this.apiUrlPesquisa}/${pesquisaId}`);
+    }
+
+    // Marcar pesquisa como anônima ou fechada
+    marcarPesquisa(id: number, data: { is_pesquisa_anonima?: number, is_pesquisa_fechada?: number }): Observable<any> {
+        return this.http.patch(`${this.apiUrlPesquisa}/marcar/${id}`, data);
+    }
+
+    // Busca a pesquisa fechada
+    getPesquisaFechada(): Observable<Pesquisa> {
+        return this.http.get<Pesquisa>(`${this.apiUrlPesquisa}/fechada`);
+    }
+
+    // Busca a pesquisa anônima
+    getPesquisaAnonima(): Observable<Pesquisa> {
+        return this.http.get<Pesquisa>(`${this.apiUrlPesquisa}/anonima`);
     }
 }

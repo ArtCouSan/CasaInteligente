@@ -5,5 +5,6 @@ export interface Pergunta {
     texto: string;
     acoes: string;
     opcoes_resposta?: RespostaOpcao[];
+    nota?: number;
     selecionada: boolean;
 }
