@@ -19,6 +19,7 @@ export class AnaliseColaboradorComponent implements OnInit {
   displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'evasao', 'acoes'];
   dataSource = new MatTableDataSource<AnaliseColaborador>();
   colaboradorParaAnalisar: AnaliseColaborador | null = null;
+  isLoadingTabela = false;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -45,14 +46,19 @@ export class AnaliseColaboradorComponent implements OnInit {
   }
 
   carregarAnalises(): void {
+    this.isLoadingTabela = true;
     this.analiseColaboradorService.getAnalisesColaboradores().subscribe(
       (analises: AnaliseColaborador[]) => {
         this.dataSource.data = analises;
+        setTimeout(() => {
+          this.isLoadingTabela = false;
+        }, 1000);
       },
       error => {
         this.snackBar.open('Erro ao carregar análises de colaboradores.', 'Fechar', {
           duration: 3000
         });
+        this.isLoadingTabela = false;
       }
     );
   }

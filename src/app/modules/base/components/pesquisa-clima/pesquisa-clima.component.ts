@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { Pergunta } from '../../../../core/dto/pergunta';
@@ -26,6 +26,7 @@ export class PesquisaClimaComponent {
     perguntas: [],
     respostas: []
   };
+  isLoadingTela = false;
 
   constructor(
     library: FaIconLibrary,
@@ -45,6 +46,7 @@ export class PesquisaClimaComponent {
 
   // Carrega as perguntas e inicializa suas notas como 0
   carregarPerguntas(): void {
+    this.isLoadingTela = true;
     this.pesquisaService.getPesquisaFechada().subscribe({
       next: (pesquisa) => {
         this.pesquisa = pesquisa;
@@ -54,7 +56,7 @@ export class PesquisaClimaComponent {
             nota: 0  // Inicializa a nota como 0
           }));
         } else {
-          console.error('Nenhuma pergunta encontrada para a pesquisa anônima.');
+          console.error('Nenhuma pergunta encontrada para a pesquisa fechada.');
         }
         this.carregarRespostasExistentes();  // Carrega as respostas já dadas pelo colaborador
       },
@@ -62,30 +64,28 @@ export class PesquisaClimaComponent {
     });
   }
 
+  // Carrega as respostas existentes de uma pesquisa fechada
   carregarRespostasExistentes(): void {
     if (this.pesquisa?.id) {
-      // Verifica se a pesquisa está fechada
-      if (this.pesquisa.is_pesquisa_fechada === 1) {
-        this.pesquisaService.getRespostas(this.colaboradorId, this.pesquisa?.id).subscribe({
-          next: (respostas) => {
-            respostas.forEach(resposta => {
-              const perguntaIndex = this.perguntas.findIndex(p => p.id === resposta.pergunta_id);
-              if (perguntaIndex !== -1) {
-                // Verifica se a pesquisa não é anônima
-                if (this.pesquisa.is_pesquisa_anonima !== 1) {
-                  this.perguntas[perguntaIndex].nota = resposta.nota;  // Preenche a nota com a resposta existente
-                } else {
-                  // Se for anônima, pode exibir de forma diferente ou não exibir a resposta diretamente
-                  console.log('Pesquisa anônima, respostas não são exibidas diretamente.');
-                }
-              }
-            });
-          },
-          error: (err) => console.error('Erro ao carregar respostas existentes:', err)
-        });
-      } else {
-        console.log('A pesquisa não está fechada, portanto, as respostas não podem ser carregadas.');
-      }
+      this.pesquisaService.getRespostasFechadas(this.colaboradorId).subscribe({
+        next: (respostas) => {
+          respostas.forEach(resposta => {
+            const perguntaIndex = this.perguntas.findIndex(p => p.id === resposta.pergunta_id);
+            if (perguntaIndex !== -1) {
+              this.perguntas[perguntaIndex].nota = resposta.nota;
+            }
+            setTimeout(() => {
+              this.isLoadingTela = false;
+            }, 1000);
+          });
+        },
+        error: (err) => {
+          console.error('Erro ao carregar respostas existentes:', err)
+          setTimeout(() => {
+            this.isLoadingTela = false;
+          }, 1000);
+        }
+      });
     }
   }
 
@@ -97,17 +97,17 @@ export class PesquisaClimaComponent {
 
   enviarNotas(): void {
     // Verifica se pesquisaId é válido
-    if (this.pesquisa?.id === null || this.pesquisa?.id === undefined) {
+    if (!this.pesquisa?.id) {
       console.error('Nenhuma pesquisa carregada');
       return;
     }
 
     const respostas: Resposta[] = this.perguntas.map(pergunta => ({
       colaborador_id: this.colaboradorId,  // ID do colaborador
-      pesquisa_id: this.pesquisa?.id!,       // ID da pesquisa (agora sabemos que é um número)
-      pergunta_id: pergunta.id,            // ID da pergunta
-      nota: pergunta.nota !== undefined ? pergunta.nota : 0, // Garante que a nota seja um número
-      is_pesquisa_fechada: 1
+      pesquisa_id: this.pesquisa?.id!,    // ID da pesquisa
+      pergunta_id: pergunta.id,           // ID da pergunta
+      nota: pergunta.nota ?? 0,           // Garante que a nota seja um número
+      is_pesquisa_fechada: 1              // Marca como pesquisa fechada
     }));
 
     respostas.forEach(resposta => {

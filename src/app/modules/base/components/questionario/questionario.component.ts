@@ -18,8 +18,8 @@ import { Pesquisa } from '../../../../core/dto/pesquisa';
 export class QuestionarioComponent {
   displayedColumns: string[] = ['titulo', 'descricao', 'ano', 'acoes']; // Colunas para Pesquisa
   dataSource = new MatTableDataSource<Pesquisa>(); // Tabela para Pesquisa
-
   pesquisaParaEditar: Pesquisa | null = null;
+  isLoadingTabela = false;
 
   @ViewChild(MatSort)
   sort!: MatSort;
@@ -117,11 +117,18 @@ export class QuestionarioComponent {
   }
 
   carregarPesquisas(): void {
+    this.isLoadingTabela = true;
     this.pesquisaService.getPesquisas().subscribe(
       (pesquisas: Pesquisa[]) => {
         this.dataSource.data = pesquisas;
+        setTimeout(() => {
+          this.isLoadingTabela = false;
+        }, 1000);
       },
-      error => this.snackBar.open('Erro ao carregar pesquisas.', 'Fechar', { duration: 2000 })
+      error => {
+        this.snackBar.open('Erro ao carregar pesquisas.', 'Fechar', { duration: 2000 })
+        this.isLoadingTabela = false;
+      }
     );
   }
 

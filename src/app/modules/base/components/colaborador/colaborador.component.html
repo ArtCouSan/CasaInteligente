@@ -1,5 +1,4 @@
-<div *ngIf="colaboradorParaEditar === null; else editTemplate">
-
+<div *ngIf="colaboradorParaEditar === null && !isLoadingTabela; else editTemplate">
   <div class="container-filtro">
     <mat-form-field class="filtro" appearance="fill">
       <mat-label>Buscar o colaborador</mat-label>
@@ -16,7 +15,6 @@
       </a>
     </div>
   </div>
-
   <div class="container-table">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
@@ -64,9 +62,13 @@
     </table>
 
     <!-- Paginação -->
-    <mat-paginator [pageSizeOptions]="[7]" [hidePageSize]="true">
+    <mat-paginator [pageSizeOptions]="[2]" [pageSize]="2" [hidePageSize]="true">
     </mat-paginator>
   </div>
+</div>
+
+<div class="spinner-container" *ngIf="isLoadingTabela">
+  <mat-spinner class="custom-spinner" diameter="150"></mat-spinner>
 </div>
 
 <ng-template #editTemplate>

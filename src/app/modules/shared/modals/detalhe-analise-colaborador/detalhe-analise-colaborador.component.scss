@@ -179,38 +179,6 @@
   color: var(--cinza);
 }
 
-.container-card-resposta {
-  border: 2px solid var(--verde-escuro);
-  background-color: var(--cinza-escuro);
-  margin-bottom: 10px;
-
-  .fa-icone {
-    margin: 10px;
-    font-size: 20px;
-  }
-}
-
-.estrela-n-clicada {
-  color: var(--laranja);
-}
-
-.estrela-n-clicada:hover {
-  color: var(--laranja);
-}
-
-.estrela-clicada {
-  color: var(--laranja);
-}
-
-.container-card-pergunta {
-  background-color: var(--verde-escuro);
-  margin-bottom: 10px;
-}
-
-.pergunta {
-  color: white;
-}
-
 ::ng-deep .mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
   color: white !important;
 }
@@ -221,7 +189,7 @@
 
 ::ng-deep .mat-mdc-tab-group,
 .mat-mdc-tab-nav-bar {
-  --mdc-tab-indicator-active-indicator-color: var(--laranja) !important;
+  --mdc-tab-indicator-active-indicator-color: none !important;
   --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38);
   --mat-tab-header-pagination-icon-color: black;
   --mat-tab-header-inactive-label-text-color: rgba(0, 0, 0, 0.6);
@@ -252,4 +220,108 @@
 
 ::ng-deep .mat-expansion-indicator::after {
   color: #fff !important;
+}
+
+.container-modal-formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.container-formulario {
+  width: 80%;
+  padding: 0px 60px 0px 60px;
+  background-color: var(--cinza-escuro);
+  position: relative;
+}
+
+.container-card-pergunta {
+  background-color: var(--verde-escuro);
+  margin-bottom: 10px;
+}
+
+.pergunta {
+  color: white;
+}
+
+.container-card-resposta {
+  border: 2px solid var(--verde-escuro);
+  background-color: var(--cinza-escuro);
+  margin-bottom: 10px;
+}
+
+.legenda {
+  display: inline-flex;
+  flex-direction: row;
+  font-size: 14px;
+  color: white;
+  align-content: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.fa-icone-enviar {
+  margin: 10px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--laranja);
+  }
+}
+
+.i-enviar {
+  position: absolute;
+  bottom: 25px;
+  right: 60px;
+}
+
+.container-titulo-pesquisa {
+  margin: 40px 0px;
+}
+
+.titulo-pesquisa {
+  font-size: 40px;
+  color: var(--laranja);
+}
+
+.texto-resposta {
+  color: white;
+}
+
+.descricao {
+  color: white;
+  margin-top: 20px;
+}
+
+::ng-deep .mat-mdc-tab.mdc-tab {
+  border-bottom: 2px solid var(--laranja);
+}
+
+::ng-deep .mat-mdc-tab .mdc-tab-indicator__content--underline {
+  border-color: none !important;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 100px;
+}
+
+::ng-deep mat-progress-spinner.custom-spinner > svg > circle {
+  stroke: var(--verde-escuro) !important;
+}
+
+::ng-deep
+  .mat-mdc-progress-spinner
+  .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--verde-escuro) !important;
 }

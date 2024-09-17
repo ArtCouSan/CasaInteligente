@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef, Input, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,11 +16,11 @@ import { BaseComponent } from '../../base.component';
   templateUrl: './colaborador.component.html',
   styleUrls: ['./colaborador.component.scss']
 })
-export class ColaboradorComponent implements OnInit {
+export class ColaboradorComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'exFuncionario', 'acoes'];
   dataSource = new MatTableDataSource<Colaborador>();
-
   colaboradorParaEditar: Colaborador | null = null;
+  isLoadingTabela = false;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -144,12 +144,20 @@ export class ColaboradorComponent implements OnInit {
   }
 
   carregarColaboradores(): void {
-    this.colaboradorService.getColaboradores().subscribe(
-      (colaboradores: Colaborador[]) => {
-        this.dataSource.data = colaboradores;
-      },
-      error => this.snackBar.open('Erro ao carregar colaboradores.', 'Fechar', { duration: 2000 })
-    );
+    this.isLoadingTabela = true;
+    this.colaboradorService.getColaboradores()
+      .subscribe(
+        (colaboradores: Colaborador[]) => {
+          this.dataSource.data = colaboradores;
+          setTimeout(() => {
+            this.isLoadingTabela = false;
+          }, 1000);
+        },
+        error => {
+          this.snackBar.open('Erro ao carregar colaboradores.', 'Fechar', { duration: 2000 })
+          this.isLoadingTabela = false;
+        }
+      );
   }
 
   resetar(): void {

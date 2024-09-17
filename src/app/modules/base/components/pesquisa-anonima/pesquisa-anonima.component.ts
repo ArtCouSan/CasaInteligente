@@ -11,7 +11,7 @@ import { Pesquisa } from '../../../../core/dto/pesquisa';
 @Component({
   selector: 'app-pesquisa-anonima',
   templateUrl: './pesquisa-anonima.component.html',
-  styleUrl: './pesquisa-anonima.component.scss'
+  styleUrls: ['./pesquisa-anonima.component.scss']
 })
 export class PesquisaAnonimaComponent {
   perguntas: Pergunta[] = [];  // Array de perguntas com opções de resposta
@@ -26,6 +26,7 @@ export class PesquisaAnonimaComponent {
     perguntas: [],
     respostas: []
   };
+  isLoadingTela = false;
 
   constructor(
     library: FaIconLibrary,
@@ -34,6 +35,7 @@ export class PesquisaAnonimaComponent {
   ) {
     library.addIcons(faPaperPlane);
   }
+
 
   ngOnInit(): void {
     this.carregarPerguntas();
@@ -45,6 +47,7 @@ export class PesquisaAnonimaComponent {
 
   // Carrega as perguntas e inicializa suas notas como 0
   carregarPerguntas(): void {
+    this.isLoadingTela = true;
     this.pesquisaService.getPesquisaAnonima().subscribe({
       next: (pesquisa) => {
         this.pesquisa = pesquisa;
@@ -54,38 +57,36 @@ export class PesquisaAnonimaComponent {
             nota: 0  // Inicializa a nota como 0
           }));
         } else {
-          console.error('Nenhuma pergunta encontrada para a pesquisa anônima.');
+          console.error('Nenhuma pergunta encontrada para a pesquisa fechada.');
         }
         this.carregarRespostasExistentes();  // Carrega as respostas já dadas pelo colaborador
       },
-      error: (err) => console.error('Erro ao carregar pesquisa anônima:', err)
+      error: (err) => console.error('Erro ao carregar pesquisa fechada:', err)
     });
   }
 
+  // Carrega as respostas anônimas já enviadas pelo colaborador
   carregarRespostasExistentes(): void {
-    if (this.pesquisa?.id) {
-      // Verifica se a pesquisa está fechada
-      if (this.pesquisa.is_pesquisa_anonima === 1) {
-        this.pesquisaService.getRespostas(this.colaboradorId, this.pesquisa?.id).subscribe({
-          next: (respostas) => {
-            respostas.forEach(resposta => {
-              const perguntaIndex = this.perguntas.findIndex(p => p.id === resposta.pergunta_id);
-              if (perguntaIndex !== -1) {
-                // Verifica se a pesquisa não é anônima
-                if (this.pesquisa.is_pesquisa_fechada !== 1) {
-                  this.perguntas[perguntaIndex].nota = resposta.nota;  // Preenche a nota com a resposta existente
-                } else {
-                  // Se for anônima, pode exibir de forma diferente ou não exibir a resposta diretamente
-                  console.log('Pesquisa anônima, respostas não são exibidas diretamente.');
-                }
-              }
-            });
-          },
-          error: (err) => console.error('Erro ao carregar respostas existentes:', err)
-        });
-      } else {
-        console.log('A pesquisa não está fechada, portanto, as respostas não podem ser carregadas.');
-      }
+    if (this.colaboradorId && this.pesquisa.id) {
+      this.pesquisaService.getRespostasAnonimas(this.colaboradorId).subscribe({
+        next: (respostas) => {
+          respostas.forEach(resposta => {
+            const perguntaIndex = this.perguntas.findIndex(p => p.id === resposta.pergunta_id);
+            if (perguntaIndex !== -1) {
+              this.perguntas[perguntaIndex].nota = resposta.nota;  // Preenche a nota com a resposta existente
+            }
+            setTimeout(() => {
+              this.isLoadingTela = false;
+            }, 1000);
+          });
+        },
+        error: (err) => {
+          console.error('Erro ao carregar respostas anônimas:', err)
+          setTimeout(() => {
+            this.isLoadingTela = false;
+          }, 1000);
+        }
+      });
     }
   }
 
@@ -104,10 +105,10 @@ export class PesquisaAnonimaComponent {
 
     const respostas: Resposta[] = this.perguntas.map(pergunta => ({
       colaborador_id: this.colaboradorId,  // ID do colaborador
-      pesquisa_id: this.pesquisa?.id!,       // ID da pesquisa (agora sabemos que é um número)
-      pergunta_id: pergunta.id,            // ID da pergunta
+      pesquisa_id: this.pesquisa?.id!,    // ID da pesquisa
+      pergunta_id: pergunta.id,           // ID da pergunta
       nota: pergunta.nota !== undefined ? pergunta.nota : 0, // Garante que a nota seja um número
-      is_pesquisa_anonima: 1
+      is_pesquisa_anonima: 1  // Marca como pesquisa anônima
     }));
 
     respostas.forEach(resposta => {

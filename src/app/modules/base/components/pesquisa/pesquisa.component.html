@@ -1,4 +1,4 @@
-<div *ngIf="pesquisaParaEditar === null; else editTemplate">
+<div *ngIf="pesquisaParaEditar === null && !isLoadingTabela; else editTemplate">
 
     <div class="container-filtro">
         <mat-form-field class="filtro" appearance="fill">
@@ -48,6 +48,10 @@
             <tr class="linhas" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>
+</div>
+
+<div class="spinner-container" *ngIf="isLoadingTabela">
+    <mat-spinner class="custom-spinner" diameter="150"></mat-spinner>
 </div>
 
 <ng-template #editTemplate>

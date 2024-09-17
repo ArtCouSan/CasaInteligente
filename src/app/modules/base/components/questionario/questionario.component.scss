@@ -124,3 +124,22 @@ mat-paginator {
 .coluna-descricao {
   width: 450px;
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 100px;
+}
+
+::ng-deep mat-progress-spinner.custom-spinner > svg > circle {
+  stroke: var(--verde-escuro) !important;
+}
+
+::ng-deep
+  .mat-mdc-progress-spinner
+  .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--verde-escuro) !important;
+}

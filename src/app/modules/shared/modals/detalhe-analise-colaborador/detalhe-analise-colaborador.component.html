@@ -1,4 +1,4 @@
-<div class="container-modal">
+<div *ngIf="!isLoadingTela" class="container-modal">
     <div class="container-conteudo">
         <fa-icon matTooltip="Voltar" class="fa-icone i-sair" icon="angle-left" (click)="onVoltar()"></fa-icon>
 
@@ -10,29 +10,35 @@
         </div>
 
         <mat-card class="card-motivo" appearance="outlined">
-            <mat-card-header>
+            <mat-card-header *ngIf="!isLoadingMotivo">
                 <mat-card-title class="card-titulo">Motivo</mat-card-title>
                 <fa-icon class="fa-icone-card" icon="rotate" matTooltip="Recarregar analise"
                     (click)="gerarNovoMotivo()"></fa-icon>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content *ngIf="!isLoadingMotivo" class="spinner-content">
                 <p class="card-descricao">
                     {{ analiseColaborador.motivo }}
                 </p>
             </mat-card-content>
+            <div class="spinner-container" *ngIf="isLoadingMotivo">
+                <mat-spinner class="custom-spinner" diameter="40"></mat-spinner>
+            </div>
         </mat-card>
 
-        <mat-card class="card-sugestao" appearance="outlined">
-            <mat-card-header>
+        <mat-card class="card-sugestao" isLoadingSugestao="outlined">
+            <mat-card-header *ngIf="!isLoadingSugestao">
                 <mat-card-title class="card-titulo">Sugestão</mat-card-title>
                 <fa-icon class="fa-icone-card" matTooltip="Recarregar analise" icon="rotate"
                     (click)="gerarNovaSugestao()"></fa-icon>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content *ngIf="!isLoadingSugestao">
                 <p class="card-descricao">
                     {{ analiseColaborador.sugestao }}
                 </p>
             </mat-card-content>
+            <div class="spinner-container" *ngIf="isLoadingSugestao">
+                <mat-spinner class="custom-spinner" diameter="40"></mat-spinner>
+            </div>
         </mat-card>
 
         <mat-card class="card-feature" appearance="outlined">
@@ -274,44 +280,55 @@
             </mat-expansion-panel>
         </mat-accordion>
 
-        <!-- Seção de Carreira -->
         <mat-accordion>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                    <mat-panel-title class="titulo-secao"> Pesquisas de Clima </mat-panel-title>
+                    <mat-panel-title class="titulo-secao"> Pesquisas de Clima Fechada </mat-panel-title>
                 </mat-expansion-panel-header>
+
                 <div class="secao-pesquisa-clima">
-                    <mat-tab-group *ngIf="analiseColaborador.colaborador?.id">
+                    <!-- Tab por ano -->
+                    <mat-tab-group *ngIf="anosDisponiveis.length > 0">
                         <mat-tab *ngFor="let ano of anosDisponiveis" [label]="ano.toString()">
-                            <mat-tab-group>
-                                <ng-container *ngFor="let trimestre of trimestres">
-                                    <mat-tab *ngIf="hasRespostas(trimestre, ano)"
-                                        [label]="trimestreDescricoes[trimestre]">
-                                        <div *ngFor="let resposta of respostasPesquisas[trimestre][ano]">
-                                            <div class="container-perguntas-respostas">
+                            <!-- Tab por pesquisa dentro de cada ano -->
+                            <mat-tab-group *ngIf="respostasPesquisas[ano].length > 0">
+                                <mat-tab *ngFor="let pesquisa of respostasPesquisas[ano]" [label]="pesquisa.titulo">
+                                    <!-- Conteúdo da pesquisa -->
+                                    <div class="container-modal-formulario">
+                                        <div class="container-formulario">
+                                            <div class="container-titulo-pesquisa">
+                                                <label class="titulo-pesquisa">{{ pesquisa.titulo }} ({{ ano }})</label>
+                                                <p class="descricao">{{ pesquisa.descricao }}</p>
+                                            </div>
+
+                                            <!-- Loop de perguntas e respostas -->
+                                            <div class="container-perguntas-respostas"
+                                                *ngFor="let resposta of pesquisa.respostas">
                                                 <mat-card class="container-card-pergunta" appearance="outlined">
-                                                    <mat-card-content class="pergunta">{{ resposta.pergunta_texto
-                                                        }}</mat-card-content>
+                                                    <mat-card-content class="pergunta">
+                                                        {{ getPerguntaTexto(resposta.pergunta_id) }}
+                                                    </mat-card-content>
                                                 </mat-card>
+
                                                 <mat-card class="container-card-resposta" appearance="outlined">
                                                     <mat-card-content class="resposta">
-                                                        <fa-icon
-                                                            [ngClass]="j < resposta.nota ? 'estrela-clicada' : 'estrela-n-clicada'"
-                                                            *ngFor="let star of [1, 2, 3, 4, 5]; let j = index"
-                                                            class="fa-icone"
-                                                            [icon]="j < resposta.nota ? ['fas', 'star'] : ['far', 'star']"></fa-icon>
+                                                        <label class="texto-resposta">Resposta Escolhida: {{
+                                                            getRespostaEscolhida(resposta.pergunta_id, resposta.nota)
+                                                            }}</label>
                                                     </mat-card-content>
                                                 </mat-card>
                                             </div>
                                         </div>
-                                    </mat-tab>
-                                </ng-container>
+                                    </div>
+                                </mat-tab>
                             </mat-tab-group>
                         </mat-tab>
                     </mat-tab-group>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
-
     </div>
+</div>
+<div class="spinner-container" *ngIf="isLoadingTela">
+    <mat-spinner class="custom-spinner" diameter="150"></mat-spinner>
 </div>

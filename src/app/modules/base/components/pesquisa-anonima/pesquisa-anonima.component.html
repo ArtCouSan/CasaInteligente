@@ -1,4 +1,4 @@
-<div class="container-modal">
+<div *ngIf="!isLoadingTela" class="container-modal">
     <div class="container-formulario">
         <div class="container-titulo-pesquisa">
             <label class="titulo-pesquisa">{{ pesquisa.titulo }} ({{ pesquisa.ano }})</label>
@@ -24,6 +24,10 @@
         <fa-icon class="fa-icone-enviar i-enviar" icon="paper-plane" matTooltip="Enviar pesquisa"
             (click)="enviarNotas()"></fa-icon>
     </div>
+</div>
+
+<div class="spinner-container" *ngIf="isLoadingTela">
+    <mat-spinner class="custom-spinner" diameter="150"></mat-spinner>
 </div>
 
 <app-chat></app-chat>

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Pergunta } from '../core/dto/pergunta';
-import { Resposta } from '../core/dto/resposta';
-import { Pesquisa } from '../core/dto/pesquisa';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Pergunta } from "../core/dto/pergunta";
+import { Pesquisa } from "../core/dto/pesquisa";
+import { Resposta } from "../core/dto/resposta";
 
 @Injectable({
     providedIn: 'root'
@@ -41,7 +41,7 @@ export class PesquisaService {
         return this.http.delete<any>(`${this.apiUrlPerguntas}/${perguntaId}`);
     }
 
-    // Obter todas as respostas de um colaborador específico para um determinado trimestre e ano
+    // Obter todas as respostas de um colaborador específico para uma pesquisa
     getRespostas(colaboradorId: number, pesquisaId: number): Observable<Resposta[]> {
         return this.http.get<Resposta[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/respostas?pesquisaId=${pesquisaId}`);
     }
@@ -49,6 +49,16 @@ export class PesquisaService {
     // Obter todas as respostas de um colaborador específico
     getRespostasByColaborador(colaboradorId: number): Observable<Resposta[]> {
         return this.http.get<Resposta[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/respostas`);
+    }
+
+    // Obter respostas de pesquisas fechadas para um colaborador
+    getRespostasFechadas(colaboradorId: number): Observable<any[]> {
+        return this.http.get<Resposta[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/respostas/fechadas`);
+    }
+
+    // Obter respostas de pesquisas anônimas para um colaborador
+    getRespostasAnonimas(colaboradorId: number): Observable<Resposta[]> {
+        return this.http.get<Resposta[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/respostas/anonimas`);
     }
 
     // Criar uma nova resposta para um colaborador
@@ -99,5 +109,10 @@ export class PesquisaService {
     // Busca a pesquisa anônima
     getPesquisaAnonima(): Observable<Pesquisa> {
         return this.http.get<Pesquisa>(`${this.apiUrlPesquisa}/anonima`);
+    }
+
+    // Obter todas as pesquisas fechadas com respostas de um colaborador (novo endpoint)
+    getPesquisasFechadasComRespostas(colaboradorId: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/pesquisas-fechadas`);
     }
 }

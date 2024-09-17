@@ -19,8 +19,8 @@ import { Pergunta } from '../../../../core/dto/pergunta';
 export class PesquisaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'texto', 'acoes'];
   dataSource = new MatTableDataSource<Pergunta>();
-
   pesquisaParaEditar: Pergunta | null = null;
+  isLoadingTabela = false;
 
   @ViewChild(MatSort)
   sort!: MatSort;
@@ -116,11 +116,18 @@ export class PesquisaComponent implements OnInit {
   }
 
   carregarPesquisas(): void {
+    this.isLoadingTabela = true;
     this.pesquisaService.getPerguntas().subscribe(
       (pesquisas: Pergunta[]) => {
         this.dataSource.data = pesquisas;
+        setTimeout(() => {
+          this.isLoadingTabela = false;
+        }, 1000);
       },
-      error => this.snackBar.open('Erro ao carregar perguntas.', 'Fechar', { duration: 2000 })
+      error => {
+        this.snackBar.open('Erro ao carregar perguntas.', 'Fechar', { duration: 2000 })
+        this.isLoadingTabela = false;
+      }
     );
   }
 
