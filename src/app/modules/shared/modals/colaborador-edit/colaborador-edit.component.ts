@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit, signal } from '@angular/core';
-import { Cargo, Colaborador, Departamento, EstadoCivil, Faculdade, FaixaSalarial, Formacao, Genero, NivelEscolaridade, Setor } from '../../../../core/dto/colaborador';
+import { Cargo, Colaborador, Departamento, EstadoCivil, Faculdade, Formacao, Genero, NivelEscolaridade, Setor, ViagemTrabalho } from '../../../../core/dto/colaborador';
 import { faCheck, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { SelecoesService } from '../../../../service/selecoes.service';
@@ -11,8 +11,7 @@ import { SelecoesService } from '../../../../service/selecoes.service';
 })
 export class ColaboradorEditComponent implements OnInit {
 
-  @Input()
-  colaborador!: Colaborador;
+  @Input() colaborador!: Colaborador;
   @Output() salvar = new EventEmitter<Colaborador>();
   @Output() voltar = new EventEmitter<void>();
 
@@ -30,8 +29,8 @@ export class ColaboradorEditComponent implements OnInit {
   formacoes: Formacao[] = [];
   departamentos: Departamento[] = [];
   setores: Setor[] = [];
-  faixasSalariais: FaixaSalarial[] = [];
   cargos: Cargo[] = [];
+  viagemTrabalho: ViagemTrabalho[] = [];
 
   estados: string[] = [
     'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
@@ -47,6 +46,7 @@ export class ColaboradorEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarListas();
+    this.formatarSalario(); // Formatar o salário na inicialização
   }
 
   carregarListas(): void {
@@ -57,16 +57,36 @@ export class ColaboradorEditComponent implements OnInit {
     this.listasService.listarFormacoes().subscribe(data => this.formacoes = data);
     this.listasService.listarDepartamentos().subscribe(data => this.departamentos = data);
     this.listasService.listarSetores().subscribe(data => this.setores = data);
-    this.listasService.listarFaixasSalariais().subscribe(data => this.faixasSalariais = data);
     this.listasService.listarCargos().subscribe(data => this.cargos = data);
+    this.listasService.listarViagem().subscribe(data => this.viagemTrabalho = data);
   }
 
-  onVoltar() {
+  onVoltar(): void {
     this.voltar.emit();
   }
 
   onSalvar(): void {
     this.salvar.emit(this.colaborador);
+  }
+
+  // Método para atualizar o valor do salário no model
+  atualizarSalario(valor: string): void {
+    // Remove todos os caracteres não numéricos e substitui a vírgula por um ponto
+    const valorNumerico = parseFloat(valor.replace(/[^\d,.-]/g, '').replace(',', '.'));
+    if (!isNaN(valorNumerico)) {
+      this.colaborador.salario = valorNumerico;
+    } else {
+      this.colaborador.salario = 0;
+    }
+    this.formatarSalario();
+  }
+
+  // Método para formatar o salário como moeda BRL
+  formatarSalario(): void {
+    const salario = this.colaborador.salario;
+    if (salario !== null && salario !== undefined) {
+      this.colaborador.salario = salario;
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../../auth/auth.service';
@@ -7,6 +7,8 @@ import { Pergunta } from '../../../../core/dto/pergunta';
 import { Resposta } from '../../../../core/dto/resposta';
 import { PesquisaService } from '../../../../service/pesquisa.service';
 import { Pesquisa } from '../../../../core/dto/pesquisa';
+import { InformativoComponent } from '../../../shared/modals/informativo/informativo.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pesquisa-anonima',
@@ -31,11 +33,11 @@ export class PesquisaAnonimaComponent {
   constructor(
     library: FaIconLibrary,
     private pesquisaService: PesquisaService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
   ) {
     library.addIcons(faPaperPlane);
   }
-
 
   ngOnInit(): void {
     this.carregarPerguntas();
@@ -97,7 +99,8 @@ export class PesquisaAnonimaComponent {
   }
 
   enviarNotas(): void {
-    // Verifica se pesquisaId é válido
+    this.isLoadingTela = true;
+    let erros = 0;
     if (this.pesquisa?.id === null || this.pesquisa?.id === undefined) {
       console.error('Nenhuma pesquisa carregada');
       return;
@@ -114,8 +117,30 @@ export class PesquisaAnonimaComponent {
     respostas.forEach(resposta => {
       this.pesquisaService.createResposta(resposta.colaborador_id, resposta).subscribe({
         next: (response) => console.log('Resposta enviada com sucesso:', response),
-        error: (err) => console.error('Erro ao enviar resposta:', err)
+        error: (err) => {
+          console.error('Erro ao enviar resposta:', err)
+          erros++;
+        }
       });
+    });
+
+    setTimeout(() => {
+      this.isLoadingTela = false;
+    }, 1000);
+
+    setTimeout(() => {
+      if (erros === 0) {
+        this.abrirModalInformativo('Sucesso', 'Respostas enviadas com sucesso!');
+      } else {
+        this.abrirModalInformativo('Erro', 'Ocorreu um erro ao enviar algumas respostas.');
+      }
+    }, 1000);
+  }
+
+  abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
+    this.dialog.open(InformativoComponent, {
+      width: '400px',
+      data: { tipo, mensagem }
     });
   }
 }

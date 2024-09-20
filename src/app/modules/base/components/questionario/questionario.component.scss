@@ -143,3 +143,13 @@ mat-paginator {
   .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--verde-escuro) !important;
 }
+
+::ng-deep
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::before {
+  border-bottom-color: var(--cinza);
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 0px !important;
+}

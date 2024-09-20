@@ -3,11 +3,12 @@ import { AnaliseColaborador } from '../../../../core/dto/analise-colaborador';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faCheck, faAngleLeft, faRotate, faStar as fasStar, faPaperPlane, faFaceLaughWink, faFaceSadCry } from '@fortawesome/free-solid-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { Cargo, Departamento, EstadoCivil, Faculdade, FaixaSalarial, Formacao, Genero, NivelEscolaridade, Setor } from '../../../../core/dto/colaborador';
+import { Cargo, Departamento, EstadoCivil, Faculdade, Formacao, Genero, NivelEscolaridade, Setor, ViagemTrabalho } from '../../../../core/dto/colaborador';
 import { SelecoesService } from '../../../../service/selecoes.service';
 import { AnaliseColaboradorService } from '../../../../service/analise-colaborador.service';
 import { PesquisaService } from '../../../../service/pesquisa.service';
 import { Pergunta } from '../../../../core/dto/pergunta';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-detalhe-analise-colaborador',
@@ -21,6 +22,7 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
   @Output() salvar = new EventEmitter<AnaliseColaborador>();
   @Output() voltar = new EventEmitter<void>();
   perguntasMap: { [id: number]: Pergunta } = {};
+  salarioFormatado: string = '';
 
   readonly panelDadosPessoais = signal(false);
   readonly panelContato = signal(false);
@@ -36,15 +38,14 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
   formacoes: Formacao[] = [];
   departamentos: Departamento[] = [];
   setores: Setor[] = [];
-  faixasSalariais: FaixaSalarial[] = [];
   cargos: Cargo[] = [];
+  viagemTrabalho: ViagemTrabalho[] = [];
 
   estados: string[] = [
     'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
   ];
 
   respostasPesquisas: { [ano: number]: { titulo: string, respostas: any[], descricao: string }[] } = {};
-
   anosDisponiveis: number[] = [];
 
   isLoadingMotivo: boolean = false;
@@ -63,10 +64,12 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
   ngOnInit(): void {
     this.isLoadingTela = true;
     if (this.analiseColaborador?.colaborador?.id) {
-      this.carregarPerguntas();  // Carregar perguntas para mapear texto pelo ID
+      this.formatarSalario();
+      this.carregarListas();
+      this.carregarPerguntas();
       this.carregarRespostasParaPesquisasFechadas(this.analiseColaborador.colaborador.id);
     }
-    setTimeout(() => {                           // <<<---using ()=> syntax
+    setTimeout(() => {
       this.isLoadingTela = false;
     }, 1500);
   }
@@ -80,34 +83,44 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
   }
 
   carregarRespostasParaPesquisasFechadas(colaboradorId: number): void {
-    this.pesquisaService.getPesquisasFechadasComRespostas(colaboradorId).subscribe(
-      (pesquisas: any[]) => {
-        pesquisas.forEach(pesquisa => {
-          const ano = pesquisa.ano;
-          const titulo = pesquisa.titulo;
-          const descricao = pesquisa.descricao;
-          const respostas = pesquisa.respostas.map((resposta: any) => ({
-            ...resposta,
-            pergunta_texto: this.getPerguntaTexto(resposta.pergunta_id)
-          }));
+    this.pesquisaService.getPesquisasFechadasComRespostas(colaboradorId)
+      .pipe(
+        catchError(error => {
+          console.error('Erro ao carregar as pesquisas fechadas com respostas:', error);
+          return of([]);
+        })
+      )
+      .subscribe(
+        (pesquisas: any[]) => {
+          if (pesquisas.length > 0) {
+            this.respostasPesquisas = {};
+            this.anosDisponiveis = [];
 
-          if (!this.respostasPesquisas[ano]) {
-            this.respostasPesquisas[ano] = [];
+            pesquisas.forEach(pesquisa => {
+              const ano = pesquisa.ano;
+              const titulo = pesquisa.titulo;
+              const descricao = pesquisa.descricao;
+              const respostas = pesquisa.respostas.map((resposta: any) => ({
+                ...resposta,
+                pergunta_texto: this.getPerguntaTexto(resposta.pergunta_id)
+              }));
+
+              if (!this.respostasPesquisas[ano]) {
+                this.respostasPesquisas[ano] = [];
+              }
+
+              this.respostasPesquisas[ano].push({
+                titulo: titulo,
+                descricao: descricao,
+                respostas: respostas
+              });
+            });
+            this.anosDisponiveis = Object.keys(this.respostasPesquisas).map(Number);
           }
-
-          this.respostasPesquisas[ano].push({
-            titulo: titulo,
-            descricao: descricao,
-            respostas: respostas
-          });
-        });
-        this.anosDisponiveis = Object.keys(this.respostasPesquisas).map(Number);
-      },
-      error => {
-        console.error('Erro ao carregar as pesquisas fechadas com respostas:', error);
-      }
-    );
+        }
+      );
   }
+
 
   // Função auxiliar para obter o texto da pergunta baseado no ID
   getPerguntaTexto(perguntaId: number): string {
@@ -141,8 +154,8 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
     this.listasService.listarFormacoes().subscribe(data => this.formacoes = data);
     this.listasService.listarDepartamentos().subscribe(data => this.departamentos = data);
     this.listasService.listarSetores().subscribe(data => this.setores = data);
-    this.listasService.listarFaixasSalariais().subscribe(data => this.faixasSalariais = data);
     this.listasService.listarCargos().subscribe(data => this.cargos = data);
+    this.listasService.listarViagem().subscribe(data => this.viagemTrabalho = data);
   }
 
   onVoltar() {
@@ -184,4 +197,35 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
       );
     }
   }
+
+  // Método para atualizar o valor do salário no model
+  atualizarSalario(valor: string): void {
+    // Remove todos os caracteres não numéricos e substitui a vírgula por um ponto
+    const valorNumerico = parseFloat(valor.replace(/[^\d,.-]/g, '').replace(',', '.'));
+    if (!isNaN(valorNumerico)) {
+      this.analiseColaborador.colaborador.salario = valorNumerico;
+    } else {
+      this.analiseColaborador.colaborador.salario = 0;
+    }
+    this.formatarSalario();
+  }
+
+  // Método para formatar o salário como moeda BRL
+  formatarSalario(): void {
+    const salario = this.analiseColaborador.colaborador.salario;
+    if (salario !== null && salario !== undefined) {
+      this.salarioFormatado = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(salario);
+    }
+  }
+
+  temPesquisasRespondidas(): boolean {
+    // Percorre todos os anos e verifica se há pelo menos uma pesquisa com respostas
+    return Object.values(this.respostasPesquisas).some(pesquisas =>
+      pesquisas.some(pesquisa => pesquisa.respostas && pesquisa.respostas.length > 0)
+    );
+  }
+
 }

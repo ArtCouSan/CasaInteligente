@@ -110,6 +110,12 @@
                         <mat-label class="titulo">CEP</mat-label>
                         <input matInput [(ngModel)]="colaborador.cep">
                     </mat-form-field>
+
+                    <mat-form-field class="form-field field-medium">
+                        <mat-label class="titulo">Distância de casa para o trabalho (em KM)</mat-label>
+                        <input matInput type="number" min="0" [(ngModel)]="colaborador.distanciaCasa">
+                    </mat-form-field>
+
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -154,7 +160,7 @@
         <mat-accordion>
             <mat-expansion-panel (opened)="panelCargo.set(true)" (closed)="panelCargo.set(false)">
                 <mat-expansion-panel-header>
-                    <mat-panel-title class="titulo-secao"> Dados do Cargo </mat-panel-title>
+                    <mat-panel-title class="titulo-secao"> Cargo </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="secao-dados-cargo">
                     <mat-form-field class="form-field">
@@ -176,12 +182,14 @@
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
-                        <mat-label class="titulo">Faixa Salarial</mat-label>
-                        <mat-select [(ngModel)]="colaborador.faixaSalarial.id">
-                            <mat-option *ngFor="let faixa of faixasSalariais" [value]="faixa.id">
-                                {{ faixa.descricao }}
-                            </mat-option>
-                        </mat-select>
+                        <mat-label class="titulo">Salário</mat-label>
+                        <input matInput type="number" [(ngModel)]="colaborador.salario" placeholder="Digite o salário"
+                            step="0.01" min="0" (blur)="formatarSalario()">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Porcentagem do último aumento</mat-label>
+                        <input type="number" min="0" matInput [(ngModel)]="colaborador.porcentagemUltimoAumento">
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
@@ -194,13 +202,32 @@
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
+                        <mat-label class="titulo">Quantos anos na empresa</mat-label>
+                        <input type="number" min="0" matInput [(ngModel)]="colaborador.quantidadeHorasTreinamentoAno">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
                         <mat-label class="titulo">Gerente</mat-label>
                         <input matInput [(ngModel)]="colaborador.gerente">
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
+                        <mat-label class="titulo">Quantos anos com o atual gestor</mat-label>
+                        <input type="number" min="0" matInput [(ngModel)]="colaborador.quantidadeAnosAtualGestor">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
                         <mat-label class="titulo">Tempo de Trabalho</mat-label>
-                        <input matInput [(ngModel)]="colaborador.tempoTrabalho">
+                        <input type="number" min="0" matInput [(ngModel)]="colaborador.tempoTrabalho">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Viagem a trabalho</mat-label>
+                        <mat-select [(ngModel)]="colaborador.viagemTrabalho.id">
+                            <mat-option *ngFor="let viagem of viagemTrabalho" [value]="viagem.id">
+                                {{ viagem.descricao }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </mat-expansion-panel>
@@ -222,6 +249,11 @@
                         <mat-label class="titulo">Quantos anos de carreira</mat-label>
                         <input matInput type="number" min="0"
                             [(ngModel)]="colaborador.quantidadeAnosTrabalhadosAnteriormente">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field field-medium">
+                        <mat-label class="titulo">Quantas horas em treinamento por ano</mat-label>
+                        <input type="number" min="0" matInput [(ngModel)]="colaborador.quantidadeAnosNaEmpresa">
                     </mat-form-field>
                 </div>
             </mat-expansion-panel>

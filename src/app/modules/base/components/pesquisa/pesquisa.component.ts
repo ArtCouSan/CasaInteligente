@@ -10,6 +10,7 @@ import { ConfirmarDelecaoComponent } from '../../../shared/modals/confirmar-dele
 import { PesquisaService } from '../../../../service/pesquisa.service'; // Serviço de Pesquisa
 import { BaseComponent } from '../../base.component';
 import { Pergunta } from '../../../../core/dto/pergunta';
+import { InformativoComponent } from '../../../shared/modals/informativo/informativo.component';
 
 @Component({
   selector: 'app-pesquisa',
@@ -71,24 +72,35 @@ export class PesquisaComponent implements OnInit {
   }
 
   salvarPesquisa(pesquisa: Pergunta): void {
+    let erros = 0;
     if (this.pesquisaParaEditar) {
       if (pesquisa.id) {
         this.pesquisaService.updatePergunta(pesquisa.id!, pesquisa).subscribe(
           () => {
-            this.snackBar.open('Pesquisa atualizada com sucesso!', 'Fechar', { duration: 2000 });
-            this.carregarPesquisas();
           },
-          error => this.snackBar.open('Erro ao atualizar pesquisa.', 'Fechar', { duration: 2000 })
+          error => {
+            erros++;
+          }
         );
       } else {
         this.pesquisaService.createPergunta(pesquisa).subscribe(
           () => {
-            this.snackBar.open('Pergunta criada com sucesso!', 'Fechar', { duration: 2000 });
-            this.carregarPesquisas();
           },
-          error => this.snackBar.open('Erro ao criar pergunta.', 'Fechar', { duration: 2000 })
+          error => {
+            erros++;
+          }
         );
       }
+
+      setTimeout(() => {
+        if (erros === 0) {
+          this.abrirModalInformativo('Sucesso', 'Pergunta alterada/criada com sucesso!');
+        } else {
+          this.abrirModalInformativo('Erro', 'Ocorreu um erro ao enviar algumas respostas.');
+        }
+      }, 1000);
+
+      this.carregarPesquisas();
       this.pesquisaParaEditar = null;
     }
   }
@@ -125,7 +137,6 @@ export class PesquisaComponent implements OnInit {
         }, 1000);
       },
       error => {
-        this.snackBar.open('Erro ao carregar perguntas.', 'Fechar', { duration: 2000 })
         this.isLoadingTabela = false;
       }
     );
@@ -163,5 +174,12 @@ export class PesquisaComponent implements OnInit {
     //     }
     //   });
     // }
+  }
+
+  abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
+    this.dialog.open(InformativoComponent, {
+      width: '400px',
+      data: { tipo, mensagem }
+    });
   }
 }

@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 import { DashboadComponent } from './components/dashboad/dashboad.component';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck, faClipboardQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck, faClipboardQuestion, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { ColaboradorComponent } from './components/colaborador/colaborador.component';
 import { AnaliseColaboradorComponent } from './components/analise-colaborador/analise-colaborador.component';
 import { PesquisaClimaComponent } from './components/pesquisa-clima/pesquisa-clima.component';
@@ -36,6 +36,7 @@ export class BaseComponent implements OnDestroy, OnInit {
   isLoginVisible: boolean = true;
   perfis: Perfil[] = [];
   usuario = this.authService.getCurrentUser();
+  isLoadingTela = false;
 
   private _mobileQueryListener: () => void;
 
@@ -48,15 +49,23 @@ export class BaseComponent implements OnDestroy, OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-
-    library.addIcons(faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck, faClipboardQuestion);
+    library.addIcons(faHouse, faDatabase, faUser, faChartPie, faPercent, faGaugeHigh, faCloud, faListCheck, faClipboardQuestion, faRightFromBracket);
   }
 
   ngOnInit(): void {
     if (this.usuario) {
       this.perfis = this.authService.getPerfis();
       this.isLoginVisible = false;
-      this.mostrarComponente(this.componentHome, 'home')
+
+      // Verifica o último componente salvo no localStorage
+      const lastComponent = localStorage.getItem('lastComponent');
+
+      if (lastComponent) {
+        this.restoreComponent(lastComponent);
+      } else {
+        this.mostrarComponente(this.componentHome, 'home');
+      }
+
     } else {
       this.perfis = [];
       this.isLoginVisible = true;
@@ -93,18 +102,54 @@ export class BaseComponent implements OnDestroy, OnInit {
     }
   }
 
-  // Função para exibir componentes dinamicamente
+  // Função para exibir componentes dinamicamente e salvar no localStorage
   mostrarComponente(componente: ComponentType<any>, item: string) {
     this.selectedItem = item;
     this.conteudoDinamico = componente;
+
+    // Salva o identificador do componente no localStorage
+    localStorage.setItem('lastComponent', item);
+  }
+
+  // Função para restaurar o componente salvo no localStorage
+  restoreComponent(componentName: string): void {
+    switch (componentName) {
+      case 'home':
+        this.mostrarComponente(this.componentHome, 'home');
+        break;
+      case 'dashboard':
+        this.mostrarComponente(this.componentDashboard, 'dashboard');
+        break;
+      case 'colaborador':
+        this.mostrarComponente(this.componentColaborador, 'colaborador');
+        break;
+      case 'analisar-colaborador':
+        this.mostrarComponente(this.componentAnalisarColaborador, 'analisar-colaborador');
+        break;
+      case 'pesquisa-clima':
+        this.mostrarComponente(this.componentPesquisaClima, 'pesquisa-clima');
+        break;
+      case 'pesquisa-anonima':
+        this.mostrarComponente(this.componentPesquisaAnonima, 'pesquisa-anonima');
+        break;
+      case 'perguntas':
+        this.mostrarComponente(this.componentPerguntas, 'perguntas');
+        break;
+      case 'questionario':
+        this.mostrarComponente(this.componentQuestionario, 'questionario');
+        break;
+      default:
+        this.mostrarComponente(this.componentHome, 'home');
+        break;
+    }
   }
 
   // Função para ocultar o modal de login
   onLoginSuccess() {
     this.perfis = this.authService.getPerfis();
     this.usuario = this.authService.getCurrentUser();
-    this.isLoginVisible = false; // Esconde o modal de login
-    this.mostrarComponente(this.componentHome, 'home')
+    this.isLoginVisible = false;
+    this.mostrarComponente(this.componentHome, 'home');
   }
 
   ngOnDestroy(): void {
@@ -112,6 +157,8 @@ export class BaseComponent implements OnDestroy, OnInit {
   }
 
   onLogout(): void {
+    this.authService.logout();
+    window.location.reload();
   }
 
   hasPerfil(nomePerfil: string): boolean {

@@ -178,3 +178,7 @@
     border-bottom-color: var(--cinza);
   }
 }
+
+::ng-deep .field-medium .mat-mdc-form-field-infix {
+  width: 240px !important;
+}

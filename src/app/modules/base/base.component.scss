@@ -58,11 +58,7 @@ mat-nav-list {
   width: 100%; /* Garante que a imagem preencha a bolinha */
   height: 100%; /* Garante que a imagem preencha a bolinha */
   object-fit: cover; /* Ajusta a imagem para cobrir a bolinha */
-}
-
-.name {
-  font-size: 16px; /* Tamanho do texto */
-  color: white; /* Cor do texto */
+  cursor: default;
 }
 
 .fa-icone {
@@ -127,4 +123,53 @@ app-login {
 
 .container-profile {
   margin: 10px 0px;
+}
+
+/* Container principal do usuário */
+.container-user {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Espaço entre informações do usuário e ícone */
+  align-items: center; /* Centraliza verticalmente os itens */
+}
+
+/* Container de informação do usuário (título e nome) */
+.user-info {
+  display: flex;
+  flex-direction: column; /* Organiza o título e o nome em colunas */
+  align-items: flex-start; /* Alinha à esquerda */
+}
+
+/* Container do nome e ícone */
+.user {
+  display: flex;
+  align-items: center; /* Alinha os itens verticalmente */
+  width: 100%; /* Garante que ocupe todo o espaço */
+}
+
+/* Título */
+.name {
+  font-size: 16px;
+  color: white;
+  cursor: default;
+}
+
+/* Subtítulo com nome do usuário */
+.subtitulo {
+  font-size: 12px;
+  color: var(--cinza);
+  margin-top: 4px; /* Espaçamento entre título e nome */
+  cursor: default;
+}
+
+/* Ícone de logout flutuando no canto direito */
+.fa-icone-logout {
+  margin-left: auto; /* Empurra o ícone para o canto direito */
+  color: var(--verde-claro);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.fa-icone-logout:hover {
+  color: var(--laranja); /* Cor ao passar o mouse */
 }

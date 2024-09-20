@@ -30,6 +30,7 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('user');
         localStorage.removeItem('perfis');
+        localStorage.removeItem('lastComponent');
     }
 
     // Verifica se o usuário está logado

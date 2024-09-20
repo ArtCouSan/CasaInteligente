@@ -223,3 +223,7 @@ input::placeholder {
   .mdc-line-ripple::before {
   border-bottom-color: var(--cinza);
 }
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 0px !important;
+}

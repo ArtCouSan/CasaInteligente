@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cargo, Departamento, EstadoCivil, Faculdade, FaixaSalarial, Formacao, Genero, NivelEscolaridade, Setor } from '../core/dto/colaborador';
+import { Cargo, Departamento, EstadoCivil, Faculdade, Formacao, Genero, NivelEscolaridade, Setor, ViagemTrabalho } from '../core/dto/colaborador';
 
 @Injectable({
   providedIn: 'root'
@@ -46,13 +46,16 @@ export class SelecoesService {
     return this.http.get<Setor[]>(`${this.apiUrl}/setores`);
   }
 
-  listarFaixasSalariais(): Observable<FaixaSalarial[]> {
-    return this.http.get<FaixaSalarial[]>(`${this.apiUrl}/faixas-salariais`);
-  }
+  // listarFaixasSalariais(): Observable<FaixaSalarial[]> {
+  //   return this.http.get<FaixaSalarial[]>(`${this.apiUrl}/faixas-salariais`);
+  // }
 
   listarCargos(): Observable<Cargo[]> {
     return this.http.get<Cargo[]>(`${this.apiUrl}/cargos`);
   }
 
+  listarViagem(): Observable<ViagemTrabalho[]> {
+    return this.http.get<ViagemTrabalho[]>(`${this.apiUrl}/viagem-trabalho`);
+  }
 
 }

@@ -1,0 +1,7 @@
+<div mat-dialog-content class="modal-container">
+    <div [ngClass]="data.tipo">
+        <h2 class="titulo">{{ data.tipo | titlecase }}</h2>
+        <p class="mensagem">{{ data.mensagem }}</p>
+    </div>
+    <button class="botao" mat-button (click)="fecharModal()">Fechar</button>
+</div>

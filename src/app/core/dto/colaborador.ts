@@ -18,13 +18,21 @@ export interface Colaborador {
   cep: string;
   departamento: Departamento;
   setor: Setor;
-  faixaSalarial: FaixaSalarial;
+  salario: number;
   cargo: Cargo;
   gerente?: string;
-  tempoTrabalho: string;
+  tempoTrabalho: number;
   quantidadeEmpresasTrabalhou: number;
   quantidadeAnosTrabalhadosAnteriormente: number;
   nivelEscolaridade: NivelEscolaridade;
+  viagemTrabalho: ViagemTrabalho;
+  distanciaCasa: number;
+  quantidadeAnosAtualGestor: number;
+  quantidadeAnosNaEmpresa: number;
+  quantidadeHorasTreinamentoAno: number;
+
+  porcentagemUltimoAumento: number;
+
   exFuncionario: boolean;
   acoes: string;
   perfis: Perfil[];
@@ -60,7 +68,7 @@ export interface Setor {
   nome: string;
 }
 
-export interface FaixaSalarial {
+export interface ViagemTrabalho {
   id: number;
   descricao: string;
 }

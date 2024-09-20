@@ -9,6 +9,8 @@ import { PesquisaService } from '../../../../service/pesquisa.service';
 import { ConfirmarDelecaoComponent } from '../../../shared/modals/confirmar-delecao/confirmar-delecao.component';
 import { BaseComponent } from '../../base.component';
 import { Pesquisa } from '../../../../core/dto/pesquisa';
+import { InformativoComponent } from '../../../shared/modals/informativo/informativo.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-questionario',
@@ -16,6 +18,9 @@ import { Pesquisa } from '../../../../core/dto/pesquisa';
   styleUrl: './questionario.component.scss'
 })
 export class QuestionarioComponent {
+
+  private reloadSubscription!: Subscription;
+
   displayedColumns: string[] = ['titulo', 'descricao', 'ano', 'acoes']; // Colunas para Pesquisa
   dataSource = new MatTableDataSource<Pesquisa>(); // Tabela para Pesquisa
   pesquisaParaEditar: Pesquisa | null = null;
@@ -33,7 +38,7 @@ export class QuestionarioComponent {
     library: FaIconLibrary,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private pesquisaService: PesquisaService // Injetando o serviço de Pesquisa
+    private pesquisaService: PesquisaService
   ) {
     library.addIcons(faPen, faTrash, faListCheck, faBan, faCheck, faFileArrowUp, faFileArrowDown, faBookMedical, faUserSecret, faUserTie);
   }
@@ -60,7 +65,7 @@ export class QuestionarioComponent {
     this.pesquisaParaEditar = {
       id: 0,
       descricao: '',
-      ano: 0,
+      ano: 2023,
       titulo: '',
       respostas: [],
       acoes: 'Adicionar'
@@ -72,47 +77,52 @@ export class QuestionarioComponent {
   }
 
   salvarPesquisa(pesquisa: Pesquisa): void {
+    let erros = 0;
     if (this.pesquisaParaEditar) {
       if (pesquisa.id) {
         this.pesquisaService.updatePesquisa(pesquisa.id!, pesquisa).subscribe(
           () => {
-            this.snackBar.open('Pesquisa atualizada com sucesso!', 'Fechar', { duration: 2000 });
-            this.carregarPesquisas();
+            this.mostrarModalInformativoComReload('Sucesso', 'Questionário alterado com sucesso!');
           },
-          error => this.snackBar.open('Erro ao atualizar pesquisa.', 'Fechar', { duration: 2000 })
+          error => {
+            erros++;
+            this.mostrarModalInformativoComReload('Erro', 'Ocorreu um erro ao atualizar o questionário.');
+          }
         );
       } else {
         this.pesquisaService.createPesquisa(pesquisa).subscribe(
           () => {
-            this.snackBar.open('Pergunta criada com sucesso!', 'Fechar', { duration: 2000 });
-            this.carregarPesquisas();
+            this.mostrarModalInformativoComReload('Sucesso', 'Questionário criado com sucesso!');
           },
-          error => this.snackBar.open('Erro ao criar pesquisa.', 'Fechar', { duration: 2000 })
+          error => {
+            erros++;
+            this.mostrarModalInformativoComReload('Erro', 'Ocorreu um erro ao criar o questionário.');
+          }
         );
       }
       this.pesquisaParaEditar = null;
     }
   }
 
-  confirmarExclusao(pesquisa: Pesquisa) {
+  confirmarExclusao(pesquisa: Pesquisa): void {
     const dialogRef = this.dialog.open(ConfirmarDelecaoComponent, {
       data: { message: `Tem certeza que deseja excluir a pesquisa ${pesquisa.titulo}?` }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.excluirPesquisa(pesquisa);
+        this.excluirPesquisaComReload(pesquisa);
       }
     });
   }
 
-  excluirPesquisa(pesquisa: Pesquisa): void {
+  // Método para excluir a pesquisa e recarregar a página após exclusão
+  excluirPesquisaComReload(pesquisa: Pesquisa): void {
     this.pesquisaService.deletePesquisa(pesquisa.id!).subscribe(
       () => {
-        this.snackBar.open(`${pesquisa.titulo} foi excluída com sucesso.`, 'Fechar', { duration: 2000 });
-        this.carregarPesquisas();
+        this.mostrarModalInformativoComReload('Sucesso', `${pesquisa.titulo} foi excluída com sucesso.`);
       },
-      error => this.snackBar.open('Erro ao excluir pesquisa.', 'Fechar', { duration: 2000 })
+      error => this.mostrarModalInformativoComReload('Erro', 'Erro ao excluir pesquisa.')
     );
   }
 
@@ -184,5 +194,18 @@ export class QuestionarioComponent {
       },
       error => this.snackBar.open('Erro ao marcar pesquisa como fechada.', 'Fechar', { duration: 2000 })
     );
+  }
+
+  // Método para mostrar o modal e recarregar a página após o fechamento
+  mostrarModalInformativoComReload(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
+    const dialogRef = this.dialog.open(InformativoComponent, {
+      width: '400px',
+      data: { tipo, mensagem }
+    });
+
+    // Recarrega a página somente após o modal ser fechado
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload(); // Recarrega a página após fechar o modal
+    });
   }
 }

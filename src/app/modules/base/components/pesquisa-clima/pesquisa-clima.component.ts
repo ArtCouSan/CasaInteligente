@@ -7,6 +7,8 @@ import { Resposta } from '../../../../core/dto/resposta';
 import { AuthService } from '../../../../auth/auth.service';
 import { Colaborador } from '../../../../core/dto/colaborador';
 import { Pesquisa } from '../../../../core/dto/pesquisa';
+import { InformativoComponent } from '../../../shared/modals/informativo/informativo.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pesquisa-clima',
@@ -31,7 +33,8 @@ export class PesquisaClimaComponent {
   constructor(
     library: FaIconLibrary,
     private pesquisaService: PesquisaService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
   ) {
     library.addIcons(faPaperPlane);
   }
@@ -96,7 +99,8 @@ export class PesquisaClimaComponent {
   }
 
   enviarNotas(): void {
-    // Verifica se pesquisaId é válido
+    this.isLoadingTela = true;
+    let erros = 0;
     if (!this.pesquisa?.id) {
       console.error('Nenhuma pesquisa carregada');
       return;
@@ -113,8 +117,30 @@ export class PesquisaClimaComponent {
     respostas.forEach(resposta => {
       this.pesquisaService.createResposta(resposta.colaborador_id, resposta).subscribe({
         next: (response) => console.log('Resposta enviada com sucesso:', response),
-        error: (err) => console.error('Erro ao enviar resposta:', err)
+        error: (err) => {
+          console.error('Erro ao enviar resposta:', err)
+          erros++;
+        }
       });
+    });
+
+    setTimeout(() => {
+      this.isLoadingTela = false;
+    }, 1000);
+
+    setTimeout(() => {
+      if (erros === 0) {
+        this.abrirModalInformativo('Sucesso', 'Respostas enviadas com sucesso!');
+      } else {
+        this.abrirModalInformativo('Erro', 'Ocorreu um erro ao enviar algumas respostas.');
+      }
+    }, 1000);
+  }
+
+  abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
+    this.dialog.open(InformativoComponent, {
+      width: '400px',
+      data: { tipo, mensagem }
     });
   }
 }

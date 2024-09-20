@@ -161,6 +161,12 @@
                         <mat-label class="titulo">CEP</mat-label>
                         <input matInput [(ngModel)]="analiseColaborador.colaborador.cep" disabled>
                     </mat-form-field>
+
+                    <mat-form-field class="form-field field-medium">
+                        <mat-label class="titulo">Distância de casa para o trabalho (em KM)</mat-label>
+                        <input matInput type="number" min="0" [(ngModel)]="analiseColaborador.colaborador.distanciaCasa"
+                            disabled>
+                    </mat-form-field>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -205,7 +211,7 @@
         <mat-accordion>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                    <mat-panel-title class="titulo-secao"> Dados do Cargo </mat-panel-title>
+                    <mat-panel-title class="titulo-secao"> Cargo </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="secao-dados-cargo">
                     <mat-form-field class="form-field">
@@ -227,12 +233,14 @@
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
-                        <mat-label class="titulo">Faixa Salarial</mat-label>
-                        <mat-select [(ngModel)]="analiseColaborador.colaborador.faixaSalarial.id" disabled>
-                            <mat-option *ngFor="let faixa of faixasSalariais" [value]="faixa.id">
-                                {{ faixa.descricao }}
-                            </mat-option>
-                        </mat-select>
+                        <mat-label class="titulo">Salário</mat-label>
+                        <input matInput type="text" [ngModel]="salarioFormatado"
+                            (ngModelChange)="atualizarSalario($event)" (blur)="formatarSalario()" disabled>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Porcentagem do último aumento</mat-label>
+                        <input matInput [(ngModel)]="analiseColaborador.colaborador.porcentagemUltimoAumento" disabled>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
@@ -245,13 +253,35 @@
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
+                        <mat-label class="titulo">Quantos anos na empresa</mat-label>
+                        <input type="number" min="0" matInput
+                            [(ngModel)]="analiseColaborador.colaborador.quantidadeHorasTreinamentoAno" disabled>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
                         <mat-label class="titulo">Gerente</mat-label>
                         <input matInput [(ngModel)]="analiseColaborador.colaborador.gerente" disabled>
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
+                        <mat-label class="titulo">Quantos anos com o atual gestor</mat-label>
+                        <input type="number" min="0" matInput
+                            [(ngModel)]="analiseColaborador.colaborador.quantidadeAnosAtualGestor" disabled>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
                         <mat-label class="titulo">Tempo de Trabalho</mat-label>
-                        <input matInput [(ngModel)]="analiseColaborador.colaborador.tempoTrabalho" disabled>
+                        <input type="number" min="0" matInput [(ngModel)]="analiseColaborador.colaborador.tempoTrabalho"
+                            disabled>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Viagem a trabalho</mat-label>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.viagemTrabalho.id" disabled>
+                            <mat-option *ngFor="let viagem of viagemTrabalho" [value]="viagem.id">
+                                {{ viagem.descricao }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </mat-expansion-panel>
@@ -276,11 +306,17 @@
                             [(ngModel)]="analiseColaborador.colaborador.quantidadeAnosTrabalhadosAnteriormente"
                             disabled>
                     </mat-form-field>
+
+                    <mat-form-field class="form-field field-medium">
+                        <mat-label class="titulo">Quantas horas em treinamento por ano</mat-label>
+                        <input type="number" min="0" matInput
+                            [(ngModel)]="analiseColaborador.colaborador.quantidadeAnosNaEmpresa" disabled>
+                    </mat-form-field>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
 
-        <mat-accordion>
+        <mat-accordion *ngIf="temPesquisasRespondidas()">
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title class="titulo-secao"> Pesquisas de Clima Fechada </mat-panel-title>
@@ -288,10 +324,11 @@
 
                 <div class="secao-pesquisa-clima">
                     <!-- Tab por ano -->
-                    <mat-tab-group *ngIf="anosDisponiveis.length > 0">
+                    <mat-tab-group *ngIf="anosDisponiveis && anosDisponiveis.length > 0">
                         <mat-tab *ngFor="let ano of anosDisponiveis" [label]="ano.toString()">
                             <!-- Tab por pesquisa dentro de cada ano -->
-                            <mat-tab-group *ngIf="respostasPesquisas[ano].length > 0">
+                            <mat-tab-group
+                                *ngIf="respostasPesquisas[ano].length > 0  && respostasPesquisas[ano].length > 0">
                                 <mat-tab *ngFor="let pesquisa of respostasPesquisas[ano]" [label]="pesquisa.titulo">
                                     <!-- Conteúdo da pesquisa -->
                                     <div class="container-modal-formulario">

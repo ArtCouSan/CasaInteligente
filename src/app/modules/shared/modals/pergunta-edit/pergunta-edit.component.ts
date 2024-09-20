@@ -4,6 +4,8 @@ import { Pergunta } from '../../../../core/dto/pergunta';
 import { RespostaOpcao } from '../../../../core/dto/resposta-opcao'; // Interface para RespostaOpcao
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCheck, faAngleLeft, faCirclePlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { InformativoComponent } from '../informativo/informativo.component';
 
 @Component({
   selector: 'app-pergunta-edit',
@@ -20,7 +22,8 @@ export class PerguntaEditComponent {
 
   constructor(
     library: FaIconLibrary,
-    private snackBar: MatSnackBar  // Injeção do MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     library.addIcons(faCheck, faAngleLeft, faCirclePlus, faTrashCan);
   }
@@ -69,5 +72,12 @@ export class PerguntaEditComponent {
 
   onSalvar(): void {
     this.salvar.emit(this.pergunta);
+  }
+
+  abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
+    this.dialog.open(InformativoComponent, {
+      width: '400px',
+      data: { tipo, mensagem }
+    });
   }
 }

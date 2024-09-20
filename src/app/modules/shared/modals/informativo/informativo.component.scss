@@ -1,0 +1,34 @@
+.modal-container {
+  text-align: center;
+  background-color: var(--cinza-escuro);
+
+  .success {
+    color: green;
+  }
+  .error {
+    color: red;
+  }
+  .info {
+    color: blue;
+  }
+  .warning {
+    color: orange;
+  }
+}
+
+.botao {
+  background-color: var(--verde-claro);
+  color: white;
+}
+
+.titulo {
+  color: var(--laranja);
+}
+
+.mensagem {
+  color: white;
+}
+
+::ng-deep .mdc-button__label {
+  color: white;
+}

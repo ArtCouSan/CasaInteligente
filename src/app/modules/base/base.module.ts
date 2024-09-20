@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { QuestionarioComponent } from './components/questionario/questionario.component';
 import { PesquisaAnonimaComponent } from './components/pesquisa-anonima/pesquisa-anonima.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [

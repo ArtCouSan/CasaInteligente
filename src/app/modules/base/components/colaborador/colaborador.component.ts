@@ -21,6 +21,7 @@ export class ColaboradorComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Colaborador>();
   colaboradorParaEditar: Colaborador | null = null;
   isLoadingTabela = false;
+  salarioFormatado: string = '';
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -81,15 +82,21 @@ export class ColaboradorComponent implements OnInit, AfterViewInit {
       cep: '',
       departamento: { id: 1, nome: '' },
       setor: { id: 1, nome: '' },
-      faixaSalarial: { id: 1, descricao: '' },
+      salario: 0,
       cargo: { id: 1, nome: '' },
       gerente: '',
-      tempoTrabalho: '',
+      tempoTrabalho: 0,
       quantidadeEmpresasTrabalhou: 0,
       quantidadeAnosTrabalhadosAnteriormente: 0,
       nivelEscolaridade: { id: 1, descricao: '' },
       exFuncionario: false,
       acoes: 'Adicionar',
+      viagemTrabalho: { id: 1, descricao: '' },
+      distanciaCasa: 0,
+      porcentagemUltimoAumento: 0,
+      quantidadeAnosAtualGestor: 0,
+      quantidadeAnosNaEmpresa: 0,
+      quantidadeHorasTreinamentoAno: 0,
       perfis: []
     };
   }
@@ -193,5 +200,18 @@ export class ColaboradorComponent implements OnInit, AfterViewInit {
       });
     }
   }
+
+  formatarParaBRL(valor: number): string {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(valor);
+  }
+
+  // atualizarSalario(): void {
+  //   this.analiseColaborador.colaborador.salario = parseFloat(this.salarioFormatado.replace(/[^\d,.-]/g, ''));
+  //   this.salarioFormatado = this.formatarParaBRL(this.analiseColaborador.colaborador.salario);
+  // }
+
 
 }

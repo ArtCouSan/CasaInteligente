@@ -94,7 +94,7 @@
 }
 
 ::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
-  background-color: var(--cinza-escuro);
+  background-color: var(--cinza-escuro) !important;
 }
 
 ::ng-deep
@@ -324,4 +324,8 @@
   .mat-mdc-progress-spinner
   .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--verde-escuro) !important;
+}
+
+::ng-deep .field-medium .mat-mdc-form-field-infix {
+  width: 240px !important;
 }
