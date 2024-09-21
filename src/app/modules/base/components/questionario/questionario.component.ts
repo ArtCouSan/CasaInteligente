@@ -11,6 +11,7 @@ import { BaseComponent } from '../../base.component';
 import { Pesquisa } from '../../../../core/dto/pesquisa';
 import { InformativoComponent } from '../../../shared/modals/informativo/informativo.component';
 import { Subscription } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-questionario',
@@ -25,9 +26,25 @@ export class QuestionarioComponent {
   dataSource = new MatTableDataSource<Pesquisa>(); // Tabela para Pesquisa
   pesquisaParaEditar: Pesquisa | null = null;
   isLoadingTabela = false;
+  questionarios: Pesquisa[] = [];
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  private paginator!: MatPaginator;
+  private sort!: MatSort;
+
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   @ViewChild('fileInput')
   fileInput!: ElementRef<HTMLInputElement>;
@@ -47,18 +64,9 @@ export class QuestionarioComponent {
     this.carregarPesquisas(); // Carregar as pesquisas na inicialização
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
-
-  aplicarFiltro(valor: string): void {
-    this.dataSource.filter = valor.trim().toLowerCase();
-  }
-
   filtrar(event: Event) {
     const filterValue = (event.target as HTMLInputElement)?.value || '';
     this.aplicarFiltro(filterValue);
-    this.resetar();
   }
 
   adicionarPesquisa(): void {
@@ -129,8 +137,11 @@ export class QuestionarioComponent {
   carregarPesquisas(): void {
     this.isLoadingTabela = true;
     this.pesquisaService.getPesquisas().subscribe(
-      (pesquisas: Pesquisa[]) => {
-        this.dataSource.data = pesquisas;
+      (questionarios: Pesquisa[]) => {
+        this.questionarios = questionarios; // Armazena todas as perguntas carregadas
+        this.dataSource.data = this.questionarios; // Inicialmente atribui ao dataSource
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         setTimeout(() => {
           this.isLoadingTabela = false;
         }, 1000);
@@ -144,6 +155,9 @@ export class QuestionarioComponent {
 
   resetar(): void {
     this.pesquisaParaEditar = null;
+    this.dataSource.data = this.questionarios; // Reatribui todos os dados ao dataSource
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   voltar(): void {
@@ -207,5 +221,27 @@ export class QuestionarioComponent {
     dialogRef.afterClosed().subscribe(() => {
       window.location.reload(); // Recarrega a página após fechar o modal
     });
+  }
+
+  aplicarFiltro(valor: string): void {
+    this.dataSource.data = this.questionarios; // Garante que todos os dados estão presentes
+
+    if (valor.trim().toLowerCase()) {
+      const valorFiltrado = valor.trim().toLowerCase();
+      const pesquisasFiltradas = this.questionarios.filter(questionario => {
+        return (
+          questionario.titulo.toLowerCase().includes(valorFiltrado) ||
+          questionario.descricao.toLowerCase().includes(valorFiltrado) ||
+          questionario.ano.toString().includes(valorFiltrado)
+        );
+      });
+
+      this.dataSource.data = pesquisasFiltradas;
+    } else {
+      this.dataSource.data = this.questionarios;
+    }
+
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }

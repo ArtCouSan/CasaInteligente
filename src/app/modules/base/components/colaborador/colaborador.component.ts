@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit, ElementRef, Input, AfterViewInit } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, ViewChild, OnInit, ElementRef, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -16,18 +16,31 @@ import { BaseComponent } from '../../base.component';
   templateUrl: './colaborador.component.html',
   styleUrls: ['./colaborador.component.scss']
 })
-export class ColaboradorComponent implements OnInit, AfterViewInit {
+export class ColaboradorComponent implements OnInit {
   displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'exFuncionario', 'acoes'];
   dataSource = new MatTableDataSource<Colaborador>();
   colaboradorParaEditar: Colaborador | null = null;
   isLoadingTabela = false;
   salarioFormatado: string = '';
+  colaboradores: Colaborador[] = [];
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+  private paginator!: MatPaginator;
+  private sort!: MatSort;
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   @ViewChild('fileInput')
   fileInput!: ElementRef<HTMLInputElement>;
@@ -47,19 +60,23 @@ export class ColaboradorComponent implements OnInit, AfterViewInit {
     this.carregarColaboradores();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   aplicarFiltro(valor: string): void {
-    this.dataSource.filter = valor.trim().toLowerCase();
+    const valorFiltrado = valor.trim().toLowerCase();
+    const colaboradoresFiltrados = this.colaboradores.filter(colaborador => {
+      return (
+        colaborador.nome.toLowerCase().includes(valorFiltrado) ||
+        colaborador.cpf.includes(valorFiltrado) ||
+        colaborador.departamento.nome.toLowerCase().includes(valorFiltrado)
+      );
+    });
+    this.dataSource = new MatTableDataSource<Colaborador>(colaboradoresFiltrados);
+    this.dataSource.paginator = this.paginator; // Reatribuindo paginator e sort
+    this.dataSource.sort = this.sort;
   }
 
   filtrar(event: Event) {
     const filterValue = (event.target as HTMLInputElement)?.value || '';
     this.aplicarFiltro(filterValue);
-    this.resetar();
   }
 
   adicionarColaborador(): void {
@@ -155,7 +172,10 @@ export class ColaboradorComponent implements OnInit, AfterViewInit {
     this.colaboradorService.getColaboradores()
       .subscribe(
         (colaboradores: Colaborador[]) => {
-          this.dataSource.data = colaboradores;
+          this.colaboradores = colaboradores;
+          this.dataSource.data = this.colaboradores; // Atribuição dos dados ao dataSource
+          this.dataSource.paginator = this.paginator; // Reatribuindo paginator e sort
+          this.dataSource.sort = this.sort;
           setTimeout(() => {
             this.isLoadingTabela = false;
           }, 1000);
@@ -169,6 +189,7 @@ export class ColaboradorComponent implements OnInit, AfterViewInit {
 
   resetar(): void {
     this.colaboradorParaEditar = null;
+    this.dataSource.paginator = this.paginator
   }
 
   voltar(): void {

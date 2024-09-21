@@ -22,9 +22,25 @@ export class PesquisaComponent implements OnInit {
   dataSource = new MatTableDataSource<Pergunta>();
   pesquisaParaEditar: Pergunta | null = null;
   isLoadingTabela = false;
+  pesquisas: Pergunta[] = [];
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  private paginator!: MatPaginator;
+  private sort!: MatSort;
+
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   @ViewChild('fileInput')
   fileInput!: ElementRef<HTMLInputElement>;
@@ -44,18 +60,9 @@ export class PesquisaComponent implements OnInit {
     this.carregarPesquisas();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
-
-  aplicarFiltro(valor: string): void {
-    this.dataSource.filter = valor.trim().toLowerCase();
-  }
-
   filtrar(event: Event) {
     const filterValue = (event.target as HTMLInputElement)?.value || '';
     this.aplicarFiltro(filterValue);
-    this.resetar();
   }
 
   adicionarPesquisa(): void {
@@ -131,19 +138,26 @@ export class PesquisaComponent implements OnInit {
     this.isLoadingTabela = true;
     this.pesquisaService.getPerguntas().subscribe(
       (pesquisas: Pergunta[]) => {
-        this.dataSource.data = pesquisas;
+        this.pesquisas = pesquisas; // Armazena todas as perguntas carregadas
+        this.dataSource.data = this.pesquisas; // Inicialmente atribui ao dataSource
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         setTimeout(() => {
           this.isLoadingTabela = false;
         }, 1000);
       },
       error => {
         this.isLoadingTabela = false;
+        this.snackBar.open('Erro ao carregar perguntas.', 'Fechar', { duration: 2000 });
       }
     );
   }
 
   resetar(): void {
     this.pesquisaParaEditar = null;
+    this.dataSource.data = this.pesquisas; // Reatribui todos os dados ao dataSource
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   voltar(): void {
@@ -181,5 +195,29 @@ export class PesquisaComponent implements OnInit {
       width: '400px',
       data: { tipo, mensagem }
     });
+  }
+
+  aplicarFiltro(valor: string): void {
+    // Primeiro, reatribua todos os dados ao dataSource para garantir que todas as perguntas estejam presentes
+    this.dataSource.data = this.pesquisas;
+
+    // Verifica se o valor do filtro não está vazio
+    if (valor.trim().toLowerCase()) {
+      const valorFiltrado = valor.trim().toLowerCase();
+      const pesquisasFiltradas = this.pesquisas.filter(pesquisa => {
+        // Verifica se o valor do filtro corresponde a qualquer uma das propriedades desejadas
+        return pesquisa.texto.toLowerCase().includes(valorFiltrado);
+      });
+
+      // Atualiza o dataSource com o resultado do filtro
+      this.dataSource.data = pesquisasFiltradas;
+    } else {
+      // Se o valor do filtro estiver vazio, redefine o dataSource para todas as perguntas
+      this.dataSource.data = this.pesquisas;
+    }
+
+    // Reatribui o paginator e sort após a filtragem
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }
