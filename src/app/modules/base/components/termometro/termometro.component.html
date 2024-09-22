@@ -1,8 +1,31 @@
-<div class="container-cards">
+<div class="container-cards" *ngIf="!isLoading">
     <mat-card *ngFor="let termometro of termometros" class="card" appearance="outlined">
-        <mat-card-header class="header"><span class="header-text">
-                {{termometro.contexto_nome}}
-            </span></mat-card-header>
-        <mat-card-content></mat-card-content>
+        <mat-card-header class="header">
+            <span class="header-text">{{ termometro.contexto_nome }}</span>
+            <fa-icon *ngIf="termometro.nota != 0" class="fa-icone-card"
+                (click)="recarregarTermometro(termometro.contexto_id)" icon="rotate"
+                matTooltip="Recarregar motivo"></fa-icon>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+            <div class="status-icon">
+                <!-- Exibe o ícone com base no status -->
+                <fa-icon *ngIf="termometro.status === 'bom'" icon="face-laugh-wink"
+                    class="fa-icone good-icon"></fa-icon>
+                <fa-icon *ngIf="termometro.status === 'neutro'" icon="face-meh" class="fa-icone neutral-icon"></fa-icon>
+                <fa-icon *ngIf="termometro.status === 'ruim'" icon="face-sad-cry" class="fa-icone bad-icon"></fa-icon>
+            </div>
+            <div class="info">
+                <p class="nota-text">Nota: {{ termometro.nota }}</p>
+                <p class="motivo-text">
+                    <span>Motivo: </span>{{ termometro.motivo }}
+                </p>
+            </div>
+        </mat-card-content>
     </mat-card>
 </div>
+
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner class="custom-spinner" diameter="150"></mat-spinner>
+</div>
+
+<app-chat></app-chat>

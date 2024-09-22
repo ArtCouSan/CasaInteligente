@@ -9,14 +9,106 @@
 
 .card {
   width: 500px;
-  height: 320px;
+  height: 380px;
   background-color: var(--cinza-escuro);
   margin: 15px;
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  margin-top: 15px;
+}
+
 .header-text {
-  width: 100%;
+  width: 80%;
   color: white;
   text-align: center;
-  margin-top: 15px;
+  font-size: 18px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: white;
+}
+
+.status-icon {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.info {
+  text-align: center;
+}
+
+.nota-text {
+  color: var(--cinza);
+  margin: 5px 0px 15px 0px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.motivo-text {
+  margin: 5px 0;
+  font-size: 13px;
+  text-align: justify;
+
+  span {
+    font-size: 13px;
+    color: var(--laranja);
+  }
+}
+
+.fa-icone {
+  margin: 10px;
+  cursor: default;
+  font-size: 84px;
+}
+
+.good-icon {
+  color: green;
+}
+
+.neutral-icon {
+  color: yellow;
+}
+
+.bad-icon {
+  color: red;
+}
+
+.fa-icone-card {
+  color: white;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.fa-icone-card:hover {
+  color: var(--laranja);
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 100px;
+}
+
+::ng-deep mat-progress-spinner.custom-spinner > svg > circle {
+  stroke: var(--verde-escuro) !important;
+}
+
+::ng-deep
+  .mat-mdc-progress-spinner
+  .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--verde-escuro) !important;
 }

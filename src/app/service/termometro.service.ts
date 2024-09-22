@@ -13,6 +13,11 @@ export class TermometroService {
     constructor(private http: HttpClient) { }
 
     getAllTermometros(): Observable<Termometro[]> {
-        return this.http.get<Termometro[]>(this.apiUrl);
+        return this.http.get<Termometro[]>(this.apiUrl + "s");
     }
+
+    atualizarTermometro(contexto_id: number): Observable<Termometro> {
+        return this.http.get<Termometro>(`${this.apiUrl}/${contexto_id}`);
+    }
+
 }
