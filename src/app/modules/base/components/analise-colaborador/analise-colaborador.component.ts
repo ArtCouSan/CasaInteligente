@@ -4,10 +4,11 @@ import { AnaliseColaborador } from '../../../../core/dto/analise-colaborador';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faEye, faPercent } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faPercent, faRotate } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AnaliseColaboradorService } from '../../../../service/analise-colaborador.service';
+import { InformativoComponent } from '../../../shared/modals/informativo/informativo.component';
 
 @Component({
   selector: 'app-analise-colaborador',
@@ -16,7 +17,7 @@ import { AnaliseColaboradorService } from '../../../../service/analise-colaborad
 })
 export class AnaliseColaboradorComponent implements OnInit {
 
-  displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'evasao', 'acoes'];
+  displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'evasao', 'porcentagem_evasao', 'acoes'];
   dataSource = new MatTableDataSource<AnaliseColaborador>();
   colaboradorParaAnalisar: AnaliseColaborador | null = null;
   isLoadingTabela = false;
@@ -46,7 +47,7 @@ export class AnaliseColaboradorComponent implements OnInit {
     private snackBar: MatSnackBar,
     private analiseColaboradorService: AnaliseColaboradorService // Injeção do serviço
   ) {
-    library.addIcons(faEye, faPercent);
+    library.addIcons(faEye, faPercent, faRotate);
   }
 
   ngOnInit(): void {
@@ -54,14 +55,11 @@ export class AnaliseColaboradorComponent implements OnInit {
   }
 
   aplicarFiltro(valor: string): void {
-    // Primeiro, reatribua todos os dados ao dataSource para garantir que todos os colaboradores estejam presentes
     this.dataSource.data = this.analiseColaborador;
 
-    // Verifica se o valor do filtro não está vazio
     if (valor.trim().toLowerCase()) {
       const valorFiltrado = valor.trim().toLowerCase();
       const analisesFiltradas = this.analiseColaborador.filter(analise => {
-        // Verifica se o valor do filtro corresponde a qualquer uma das propriedades desejadas
         return (
           analise.colaborador.nome.toLowerCase().includes(valorFiltrado) ||
           analise.colaborador.cpf.includes(valorFiltrado) ||
@@ -73,14 +71,11 @@ export class AnaliseColaboradorComponent implements OnInit {
         );
       });
 
-      // Atualiza o dataSource com o resultado do filtro
       this.dataSource.data = analisesFiltradas;
     } else {
-      // Se o valor do filtro estiver vazio, redefine o dataSource para todos os colaboradores
       this.dataSource.data = this.analiseColaborador;
     }
 
-    // Reatribui o paginator e sort após a filtragem
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -90,8 +85,8 @@ export class AnaliseColaboradorComponent implements OnInit {
     this.analiseColaboradorService.getAnalisesColaboradores().subscribe(
       (analises: AnaliseColaborador[]) => {
         this.analiseColaborador = analises;
-        this.dataSource.data = this.analiseColaborador; // Atribuição dos dados ao dataSource
-        this.dataSource.paginator = this.paginator; // Reatribuindo paginator e sort
+        this.dataSource.data = this.analiseColaborador;
+        this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.isLoadingTabela = false;
       },
@@ -128,4 +123,63 @@ export class AnaliseColaboradorComponent implements OnInit {
     if (evasao == "Sim") return 'red';
     return 'green';
   }
+
+  // Método para recarregar a análise de todos os colaboradores
+  recarregarTodasAnalises(): void {
+    this.isLoadingTabela = true;
+    let mensagem = "";
+
+    // Chama o serviço para recarregar a análise de evasão de todos os colaboradores
+    this.analiseColaboradorService.getRecarregarEvasaoTodosColaboradores().subscribe(
+      response => {
+        mensagem = 'Análise de evasão recarregada para todos os colaboradores.';
+        this.isLoadingTabela = false;
+        this.abrirModalInformativo('Sucesso', mensagem); // Abre o modal após o sucesso
+      },
+      error => {
+        mensagem = 'Erro ao recarregar análise de evasão.';
+        this.isLoadingTabela = false;
+        this.abrirModalInformativo('Erro', mensagem); // Abre o modal após o erro
+      }
+    );
+  }
+
+  // Método para recarregar a análise de colaboradores ativos
+  recarregarColaborador(analise: AnaliseColaborador): void {
+    this.isLoadingTabela = true;
+    let mensagem = "";
+
+    // Verifica se o id do colaborador não é undefined
+    if (analise.colaborador.id !== undefined) {
+      // Chama o serviço para recarregar a análise de evasão do colaborador
+      this.analiseColaboradorService.getRecarregarEvasaoColaborador(analise.colaborador.id).subscribe(
+        response => {
+          mensagem = 'Análise de evasão recarregada para o colaborador.';
+          this.isLoadingTabela = false;
+          this.abrirModalInformativo('Sucesso', mensagem); // Abre o modal após o sucesso
+        },
+        error => {
+          mensagem = 'Erro ao recarregar análise de evasão para o colaborador.';
+          this.isLoadingTabela = false;
+          this.abrirModalInformativo('Erro', mensagem); // Abre o modal após o erro
+        }
+      );
+    } else {
+      mensagem = "O ID do colaborador é undefined";
+      this.isLoadingTabela = false;
+      this.abrirModalInformativo('Erro', mensagem); // Abre o modal para o caso de ID indefinido
+    }
+  }
+
+  abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
+    const dialogRef = this.dialog.open(InformativoComponent, {
+      width: '400px',
+      data: { tipo, mensagem }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload(); // Recarrega a página
+    });
+  }
+
 }

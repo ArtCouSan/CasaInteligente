@@ -49,6 +49,10 @@
                 <p class="card-descricao">
                     {{ analiseColaborador.observacao }}
                 </p>
+                <ul *ngIf="analiseColaborador.feature_importance">
+                    <li class="card-descricao" *ngFor="let feature of analiseColaborador.feature_importance"> {{
+                        feature.motivo }}</li>
+                </ul>
             </mat-card-content>
         </mat-card>
 

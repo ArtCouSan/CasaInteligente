@@ -38,7 +38,6 @@ tr:hover {
 }
 
 .fa-icone {
-  margin: 10px;
   cursor: pointer;
 }
 
@@ -128,4 +127,14 @@ mat-paginator {
   .mat-mdc-progress-spinner
   .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--verde-escuro) !important;
+}
+
+.fa-icone-filtro {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.i-recarregar {
+  color: white;
+  font-size: 35px;
 }

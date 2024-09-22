@@ -21,26 +21,19 @@ export class AnaliseColaboradorService {
     return this.http.get<AnaliseColaborador>(`${this.apiUrl}/${id}`);
   }
 
-  // Criar uma nova análise de colaborador
-  createAnaliseColaborador(analiseColaborador: AnaliseColaborador): Observable<AnaliseColaborador> {
-    return this.http.post<AnaliseColaborador>(this.apiUrl, analiseColaborador);
-  }
-
-  // Atualizar uma análise de colaborador existente
-  updateAnaliseColaborador(id: number, analiseColaborador: AnaliseColaborador): Observable<AnaliseColaborador> {
-    return this.http.put<AnaliseColaborador>(`${this.apiUrl}/${id}`, analiseColaborador);
-  }
-
-  // Deletar uma análise de colaborador
-  deleteAnaliseColaborador(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
-  }
-
   gerarNovoMotivo(colaboradorId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/${colaboradorId}/gerar-novo-motivo`, {});
   }
 
   gerarNovaSugestao(colaboradorId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/${colaboradorId}/gerar-nova-sugestao`, {});
+  }
+
+  getRecarregarEvasaoColaborador(colaboradorId: number): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/${colaboradorId}/recarregar-evasao`);
+  }
+
+  getRecarregarEvasaoTodosColaboradores(): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/recarregar-todas-evasoes`);
   }
 }

@@ -5,6 +5,10 @@
       <mat-label>Buscar o colaborador</mat-label>
       <input (input)="filtrar($event)" matInput>
     </mat-form-field>
+    <div class="botao-adicionar">
+      <fa-icon (click)="recarregarTodasAnalises()" style="margin-left: 20px;" class="fa-icone-filtro i-recarregar"
+        matTooltip="Recarregar predições" icon="rotate"></fa-icon>
+    </div>
   </div>
 
   <div class="container-table">
@@ -43,12 +47,23 @@
         </td>
       </ng-container>
 
+      <!-- Coluna Porcentagem -->
+      <ng-container matColumnDef="porcentagem_evasao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Chance de Evasão </th>
+        <td class="texto-porcentagem" mat-cell *matCellDef="let element"
+          [ngStyle]="{'color': getColor(element.evasao)}">
+          {{element.porcentagem_evasao}}%
+        </td>
+      </ng-container>
+
       <!-- Coluna Ações -->
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef> Ações </th>
         <td mat-cell *matCellDef="let element">
           <fa-icon class="fa-icone" icon="eye" matTooltip="Ver mais detalhes"
             (click)="analisarColaborador(element)"></fa-icon>
+          <fa-icon (click)="recarregarColaborador(element)" style="margin-left: 20px;" class="fa-icone"
+            matTooltip="Recarregar predição colaborador" icon="rotate"></fa-icon>
         </td>
       </ng-container>
 

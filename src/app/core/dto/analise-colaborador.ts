@@ -6,5 +6,12 @@ export interface AnaliseColaborador {
   evasao: string;
   sugestao: string;
   observacao: string;
+  porcentagem_evasao: number;
+  feature_importance?: EvasaoFeatureImportance[]
 }
 
+export interface EvasaoFeatureImportance {
+  id: number;
+  motivo: string;
+  acuracia: number;
+}

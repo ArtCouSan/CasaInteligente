@@ -84,30 +84,22 @@ export class PesquisaComponent implements OnInit {
       if (pesquisa.id) {
         this.pesquisaService.updatePergunta(pesquisa.id!, pesquisa).subscribe(
           () => {
+            this.abrirModalInformativo('Sucesso', 'Pergunta alterada com sucesso!');
           },
           error => {
-            erros++;
+            this.abrirModalInformativo('Erro', 'Ocorreu um erro ao enviar algumas respostas.');
           }
         );
       } else {
         this.pesquisaService.createPergunta(pesquisa).subscribe(
           () => {
+            this.abrirModalInformativo('Sucesso', 'Pergunta criada com sucesso!');
           },
           error => {
-            erros++;
+            this.abrirModalInformativo('Erro', 'Ocorreu um erro ao enviar algumas respostas.');
           }
         );
       }
-
-      setTimeout(() => {
-        if (erros === 0) {
-          this.abrirModalInformativo('Sucesso', 'Pergunta alterada/criada com sucesso!');
-        } else {
-          this.abrirModalInformativo('Erro', 'Ocorreu um erro ao enviar algumas respostas.');
-        }
-      }, 1000);
-
-      this.carregarPesquisas();
       this.pesquisaParaEditar = null;
     }
   }
@@ -127,10 +119,9 @@ export class PesquisaComponent implements OnInit {
   excluirPesquisa(pesquisa: Pergunta): void {
     this.pesquisaService.deletePergunta(pesquisa.id!).subscribe(
       () => {
-        this.snackBar.open(`${pesquisa.texto} foi excluída com sucesso.`, 'Fechar', { duration: 2000 });
-        this.carregarPesquisas();
+        this.abrirModalInformativo('Sucesso', `Pergunta foi excluída com sucesso.`);
       },
-      error => this.snackBar.open('Erro ao excluir pergunta.', 'Fechar', { duration: 2000 })
+      error => this.abrirModalInformativo('Erro', 'Erro ao excluir pergunta.')
     );
   }
 
@@ -191,9 +182,14 @@ export class PesquisaComponent implements OnInit {
   }
 
   abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
-    this.dialog.open(InformativoComponent, {
+    const dialogRef = this.dialog.open(InformativoComponent, {
       width: '400px',
       data: { tipo, mensagem }
+    });
+
+    // Recarrega a página somente após o modal ser fechado
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload(); // Recarrega a página após fechar o modal
     });
   }
 

@@ -138,9 +138,13 @@ export class PesquisaAnonimaComponent {
   }
 
   abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
-    this.dialog.open(InformativoComponent, {
+    const dialogRef = this.dialog.open(InformativoComponent, {
       width: '400px',
       data: { tipo, mensagem }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload(); // Recarrega a página
     });
   }
 }

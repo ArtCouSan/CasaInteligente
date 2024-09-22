@@ -123,14 +123,14 @@ export class BaseComponent implements OnDestroy, OnInit {
       case 'colaborador':
         this.mostrarComponente(this.componentColaborador, 'colaborador');
         break;
-      case 'analisar-colaborador':
-        this.mostrarComponente(this.componentAnalisarColaborador, 'analisar-colaborador');
+      case 'percent':
+        this.mostrarComponente(this.componentAnalisarColaborador, 'percent');
         break;
-      case 'pesquisa-clima':
-        this.mostrarComponente(this.componentPesquisaClima, 'pesquisa-clima');
+      case 'pesquisaClima':
+        this.mostrarComponente(this.componentPesquisaClima, 'pesquisaClima');
         break;
-      case 'pesquisa-anonima':
-        this.mostrarComponente(this.componentPesquisaAnonima, 'pesquisa-anonima');
+      case 'pesquisaAnonima':
+        this.mostrarComponente(this.componentPesquisaAnonima, 'pesquisaAnonima');
         break;
       case 'perguntas':
         this.mostrarComponente(this.componentPerguntas, 'perguntas');

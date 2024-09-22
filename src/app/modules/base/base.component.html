@@ -35,6 +35,12 @@
           <fa-icon class="fa-icone" icon="chart-pie"></fa-icon>
           <span>Analytics</span>
         </mat-list-item>
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
+          (click)="mostrarComponente(componentAnalisarColaborador, 'percent')"
+          [class.selected]="selectedItem === 'percent'">
+          <fa-icon class="fa-icone" icon="percent"></fa-icon>
+          <span>Attrition</span>
+        </mat-list-item>
         <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item">
           <span class="item-titulo">Colaborador</span>
         </mat-list-item>
@@ -42,12 +48,6 @@
           (click)="mostrarComponente(componentColaborador, 'user')" [class.selected]="selectedItem === 'user'">
           <fa-icon class="fa-icone" icon="user"></fa-icon>
           <span>Colaboradores</span>
-        </mat-list-item>
-        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
-          (click)="mostrarComponente(componentAnalisarColaborador, 'percent')"
-          [class.selected]="selectedItem === 'percent'">
-          <fa-icon class="fa-icone" icon="percent"></fa-icon>
-          <span>Attrition</span>
         </mat-list-item>
         <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item">
           <span class="item-titulo">Pesquisa</span>

@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ElementRef, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef, Input } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -17,6 +17,7 @@ import { BaseComponent } from '../../base.component';
   styleUrls: ['./colaborador.component.scss']
 })
 export class ColaboradorComponent implements OnInit {
+
   displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'exFuncionario', 'acoes'];
   dataSource = new MatTableDataSource<Colaborador>();
   colaboradorParaEditar: Colaborador | null = null;
