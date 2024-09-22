@@ -41,6 +41,12 @@
           <fa-icon class="fa-icone" icon="percent"></fa-icon>
           <span>Attrition</span>
         </mat-list-item>
+        <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item"
+          (click)="mostrarComponente(componentTermometro, 'termometro')"
+          [class.selected]="selectedItem === 'termometro'">
+          <fa-icon class="fa-icone" icon="temperature-high"></fa-icon>
+          <span>Termômetro</span>
+        </mat-list-item>
         <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item">
           <span class="item-titulo">Colaborador</span>
         </mat-list-item>

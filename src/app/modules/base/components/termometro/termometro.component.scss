@@ -1,0 +1,22 @@
+.container-cards {
+  width: 100%;
+  padding: 20px 60px 100px 60px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 500px;
+  height: 320px;
+  background-color: var(--cinza-escuro);
+  margin: 15px;
+}
+
+.header-text {
+  width: 100%;
+  color: white;
+  text-align: center;
+  margin-top: 15px;
+}

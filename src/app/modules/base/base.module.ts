@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { QuestionarioComponent } from './components/questionario/questionario.component';
 import { PesquisaAnonimaComponent } from './components/pesquisa-anonima/pesquisa-anonima.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TermometroComponent } from './components/termometro/termometro.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     PesquisaComponent,
     PesquisaAnonimaComponent,
     QuestionarioComponent,
-    LoginComponent
+    LoginComponent,
+    TermometroComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, BaseRoutingModule, FontAwesomeModule, SharedModule],
 })
