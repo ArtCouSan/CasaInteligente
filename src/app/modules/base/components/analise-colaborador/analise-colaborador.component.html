@@ -12,7 +12,7 @@
   </div>
 
   <div class="container-table">
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
 
       <!-- Coluna CPF -->
       <ng-container matColumnDef="cpf">
@@ -73,8 +73,10 @@
     </table>
 
     <!-- Paginação -->
-    <mat-paginator [pageSizeOptions]="[5]" [hidePageSize]="true">
+    <mat-paginator [length]="totalItems" [pageSizeOptions]="[5]" [hidePageSize]="true" [pageSize]="perPage"
+      (page)="onPaginateChange($event)">
     </mat-paginator>
+
   </div>
 </div>
 

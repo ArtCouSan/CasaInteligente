@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, ElementRef, Input } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPen, faTrash, faUserPlus, faBan, faCheck, faFileArrowUp, faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +24,13 @@ export class ColaboradorComponent implements OnInit {
   isLoadingTabela = false;
   salarioFormatado: string = '';
   colaboradores: Colaborador[] = [];
+  totalPages: number = 0;
+  totalItems: number = 0;
+  currentPage: number = 1;
+  perPage: number = 5;
+  search: string = '';
+  sortColumn: string = '';
+  sortDirection: string = '';
 
   private paginator!: MatPaginator;
   private sort!: MatSort;
@@ -35,11 +42,15 @@ export class ColaboradorComponent implements OnInit {
 
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
+    if (this.paginator) {
+      this.paginator.length = this.totalItems; // Define o número total de registros
+      this.paginator.pageIndex = this.currentPage - 1; // Define o índice da página atual
+      this.paginator.pageSize = this.perPage; // Define o tamanho da página
+    }
     this.setDataSourceAttributes();
   }
 
   setDataSourceAttributes() {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
@@ -61,23 +72,9 @@ export class ColaboradorComponent implements OnInit {
     this.carregarColaboradores();
   }
 
-  aplicarFiltro(valor: string): void {
-    const valorFiltrado = valor.trim().toLowerCase();
-    const colaboradoresFiltrados = this.colaboradores.filter(colaborador => {
-      return (
-        colaborador.nome.toLowerCase().includes(valorFiltrado) ||
-        colaborador.cpf.includes(valorFiltrado) ||
-        colaborador.departamento.nome.toLowerCase().includes(valorFiltrado)
-      );
-    });
-    this.dataSource = new MatTableDataSource<Colaborador>(colaboradoresFiltrados);
-    this.dataSource.paginator = this.paginator; // Reatribuindo paginator e sort
-    this.dataSource.sort = this.sort;
-  }
-
   filtrar(event: Event) {
-    const filterValue = (event.target as HTMLInputElement)?.value || '';
-    this.aplicarFiltro(filterValue);
+    const filterValue = (event.target as HTMLInputElement).value.trim();
+    this.carregarColaboradores(1, this.perPage, filterValue); // Sempre busca a partir da página 1
   }
 
   adicionarColaborador(): void {
@@ -168,33 +165,55 @@ export class ColaboradorComponent implements OnInit {
     );
   }
 
-  carregarColaboradores(): void {
-    this.isLoadingTabela = true;
-    this.colaboradorService.getColaboradores()
+  carregarColaboradores(
+    page: number = 1,
+    perPage: number = 5,
+    search: string = this.search,
+    sortColumn: string = this.sortColumn,
+    sortDirection: string = this.sortDirection
+  ): void {
+    this.colaboradorService.getColaboradores(page, perPage, search, sortColumn, sortDirection)
       .subscribe(
-        (colaboradores: Colaborador[]) => {
-          this.colaboradores = colaboradores;
-          this.dataSource.data = this.colaboradores; // Atribuição dos dados ao dataSource
-          this.dataSource.paginator = this.paginator; // Reatribuindo paginator e sort
-          this.dataSource.sort = this.sort;
-          setTimeout(() => {
-            this.isLoadingTabela = false;
-          }, 1000);
+        (response: any) => {
+          this.colaboradores = response.colaboradores;
+          this.dataSource.data = this.colaboradores; // Atribuir dados ao dataSource
+          this.totalItems = response.total_items; // Número total de colaboradores
+          this.currentPage = response.current_page; // Página atual
+
+          // Atualiza manualmente as propriedades do paginator, se inicializado
+          if (this.paginator) {
+            this.paginator.length = this.totalItems; // Número total de registros
+            this.paginator.pageIndex = this.currentPage - 1; // Índice da página atual
+            this.paginator.pageSize = this.perPage; // Tamanho da página
+          }
         },
         error => {
-          this.snackBar.open('Erro ao carregar colaboradores.', 'Fechar', { duration: 2000 })
-          this.isLoadingTabela = false;
+          this.snackBar.open('Erro ao carregar colaboradores.', 'Fechar', { duration: 2000 });
         }
       );
   }
 
+  onPaginateChange(event: any): void {
+    this.carregarColaboradores(event.pageIndex + 1, event.pageSize, this.search, this.sortColumn, this.sortDirection);
+  }
+
+  // No método aplicarFiltro
+  aplicarFiltro(valor: string): void {
+    this.currentPage = 1; // Reseta para a primeira página quando um filtro é aplicado
+    this.search = valor.trim();
+    this.carregarColaboradores(this.currentPage, this.perPage, valor.trim());
+  }
+
   resetar(): void {
     this.colaboradorParaEditar = null;
-    this.dataSource.paginator = this.paginator
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.paginator.length = this.totalItems; // Agora usamos totalItems
+    }
   }
 
   voltar(): void {
-    this.aplicarFiltro(' ');
+    this.aplicarFiltro(this.search);
     this.resetar();
   }
 
@@ -230,10 +249,18 @@ export class ColaboradorComponent implements OnInit {
     }).format(valor);
   }
 
-  // atualizarSalario(): void {
-  //   this.analiseColaborador.colaborador.salario = parseFloat(this.salarioFormatado.replace(/[^\d,.-]/g, ''));
-  //   this.salarioFormatado = this.formatarParaBRL(this.analiseColaborador.colaborador.salario);
-  // }
-
+  onSortChange(event: Sort): void {
+    // Verifica se a coluna é a mesma e a direção também
+    if (this.sortColumn === event.active && this.sortDirection === event.direction) {
+      // Inverte a direção de ordenação se for a mesma coluna e direção
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      // Caso contrário, defina a coluna e direção fornecidas pelo evento
+      this.sortColumn = event.active;
+      this.sortDirection = event.direction || 'asc'; // Define 'asc' como padrão se não houver direção
+    }
+    // Carrega os colaboradores com a nova ordenação
+    this.carregarColaboradores(this.currentPage, this.perPage, this.search, this.sortColumn, this.sortDirection);
+  }
 
 }

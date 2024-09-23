@@ -138,3 +138,11 @@ mat-paginator {
   color: white;
   font-size: 35px;
 }
+
+::ng-deep .mat-mdc-paginator-navigation-next .mat-mdc-paginator-icon {
+  fill: white !important;
+}
+
+::ng-deep .mat-mdc-paginator-navigation-previous .mat-mdc-paginator-icon {
+  fill: white !important;
+}

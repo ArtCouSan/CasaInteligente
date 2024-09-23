@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AnaliseColaborador } from '../core/dto/analise-colaborador';
 
@@ -11,9 +11,26 @@ export class AnaliseColaboradorService {
 
   constructor(private http: HttpClient) { }
 
-  // Obter todas as análises de colaboradores
-  getAnalisesColaboradores(): Observable<AnaliseColaborador[]> {
-    return this.http.get<AnaliseColaborador[]>(`${this.apiUrl}es`);
+  getAnalisesColaboradores(
+    page: number,
+    perPage: number,
+    search: string = '',
+    sortColumn: string = '',
+    sortDirection: string = ''
+  ): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('per_page', perPage.toString())
+      .set('search', search);
+
+    if (sortColumn) {
+      params = params.set('sortColumn', sortColumn);
+    }
+    if (sortDirection) {
+      params = params.set('sortDirection', sortDirection);
+    }
+
+    return this.http.get(`${this.apiUrl}es`, { params });
   }
 
   // Obter uma análise de colaborador por ID

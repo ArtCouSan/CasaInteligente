@@ -134,3 +134,11 @@ mat-paginator {
   .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--verde-escuro) !important;
 }
+
+::ng-deep .mat-mdc-paginator-navigation-next .mat-mdc-paginator-icon {
+  fill: white !important;
+}
+
+::ng-deep .mat-mdc-paginator-navigation-previous .mat-mdc-paginator-icon {
+  fill: white !important;
+}

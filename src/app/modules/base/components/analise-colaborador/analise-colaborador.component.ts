@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AnaliseColaborador } from '../../../../core/dto/analise-colaborador';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faEye, faPercent, faRotate } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,9 +19,16 @@ export class AnaliseColaboradorComponent implements OnInit {
 
   displayedColumns: string[] = ['cpf', 'nome', 'departamento', 'evasao', 'porcentagem_evasao', 'acoes'];
   dataSource = new MatTableDataSource<AnaliseColaborador>();
+  analiseColaborador: AnaliseColaborador[] = [];
   colaboradorParaAnalisar: AnaliseColaborador | null = null;
   isLoadingTabela = false;
-  analiseColaborador: AnaliseColaborador[] = [];
+  totalPages: number = 0;
+  totalItems: number = 0;
+  currentPage: number = 1;
+  perPage: number = 5;
+  search: string = '';
+  sortColumn: string = '';
+  sortDirection: string = '';
 
   private paginator!: MatPaginator;
   private sort!: MatSort;
@@ -33,70 +40,63 @@ export class AnaliseColaboradorComponent implements OnInit {
 
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
+    if (this.paginator) {
+      this.paginator.length = this.totalItems; // Define o número total de registros
+      this.paginator.pageIndex = this.currentPage - 1; // Define o índice da página atual
+      this.paginator.pageSize = this.perPage; // Define o tamanho da página
+    }
     this.setDataSourceAttributes();
   }
 
   setDataSourceAttributes() {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   constructor(
     library: FaIconLibrary,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private analiseColaboradorService: AnaliseColaboradorService // Injeção do serviço
+    private analiseColaboradorService: AnaliseColaboradorService
   ) {
     library.addIcons(faEye, faPercent, faRotate);
   }
 
   ngOnInit(): void {
-    this.carregarAnalises();
+    this.carregarAnalises(); // Carrega as análises ao inicializar o componente
+  }
+
+  // Método para carregar análises com paginação e ordenação
+  carregarAnalises(
+    page: number = 1,
+    perPage: number = 5,
+    search: string = this.search,
+    sortColumn: string = this.sortColumn,
+    sortDirection: string = this.sortDirection
+  ): void {
+    this.analiseColaboradorService.getAnalisesColaboradores(page, perPage, search, sortColumn, sortDirection)
+      .subscribe(
+        (response: any) => {
+          this.analiseColaborador = response.analises;
+          this.dataSource.data = this.analiseColaborador; // Atribuir dados ao dataSource
+          this.totalItems = response.total_items; // Número total de análises
+          this.currentPage = response.current_page; // Página atual
+
+          // Atualiza manualmente as propriedades do paginator, se inicializado
+          if (this.paginator) {
+            this.paginator.length = this.totalItems; // Número total de registros
+            this.paginator.pageIndex = this.currentPage - 1; // Índice da página atual
+            this.paginator.pageSize = this.perPage; // Tamanho da página
+          }
+        },
+        error => {
+          this.abrirModalInformativo('Erro', 'Erro ao carregar análises de colaboradores.');
+          this.isLoadingTabela = false;
+        }
+      );
   }
 
   aplicarFiltro(valor: string): void {
-    this.dataSource.data = this.analiseColaborador;
-
-    if (valor.trim().toLowerCase()) {
-      const valorFiltrado = valor.trim().toLowerCase();
-      const analisesFiltradas = this.analiseColaborador.filter(analise => {
-        return (
-          analise.colaborador.nome.toLowerCase().includes(valorFiltrado) ||
-          analise.colaborador.cpf.includes(valorFiltrado) ||
-          analise.colaborador.departamento.nome.toLowerCase().includes(valorFiltrado) ||
-          analise.motivo.toLowerCase().includes(valorFiltrado) ||
-          analise.evasao.toLowerCase().includes(valorFiltrado) ||
-          analise.sugestao.toLowerCase().includes(valorFiltrado) ||
-          analise.observacao.toLowerCase().includes(valorFiltrado)
-        );
-      });
-
-      this.dataSource.data = analisesFiltradas;
-    } else {
-      this.dataSource.data = this.analiseColaborador;
-    }
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  carregarAnalises(): void {
-    this.isLoadingTabela = true;
-    this.analiseColaboradorService.getAnalisesColaboradores().subscribe(
-      (analises: AnaliseColaborador[]) => {
-        this.analiseColaborador = analises;
-        this.dataSource.data = this.analiseColaborador;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.isLoadingTabela = false;
-      },
-      error => {
-        this.snackBar.open('Erro ao carregar análises de colaboradores.', 'Fechar', {
-          duration: 3000
-        });
-        this.isLoadingTabela = false;
-      }
-    );
+    this.currentPage = 1; // Reseta para a primeira página quando um filtro é aplicado
+    this.carregarAnalises(this.currentPage, this.perPage, valor.trim());
   }
 
   filtrar(event: Event) {
@@ -104,8 +104,43 @@ export class AnaliseColaboradorComponent implements OnInit {
     this.aplicarFiltro(filterValue);
   }
 
-  analisarColaborador(analise: AnaliseColaborador) {
-    this.colaboradorParaAnalisar = analise;
+  // Método para capturar a mudança de ordenação
+  onSortChange(event: Sort): void {
+    if (this.sortColumn === event.active && this.sortDirection === event.direction) {
+      // Inverte a direção de ordenação se for a mesma coluna e direção
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      // Caso contrário, defina a coluna e direção fornecidas pelo evento
+      this.sortColumn = event.active;
+      this.sortDirection = event.direction || 'asc'; // Define 'asc' como padrão se não houver direção
+    }
+    // Carrega as análises com a nova ordenação
+    this.carregarAnalises(this.currentPage, this.perPage, this.search, this.sortColumn, this.sortDirection);
+  }
+
+  // Chamado ao clicar na paginação
+  onPaginateChange(event: any) {
+    this.carregarAnalises(event.pageIndex + 1, event.pageSize, this.search, this.sortColumn, this.sortDirection);
+  }
+
+  // Método para recarregar todas as análises
+  recarregarTodasAnalises(): void {
+    this.isLoadingTabela = true;
+    let mensagem = "";
+
+    this.analiseColaboradorService.getRecarregarEvasaoTodosColaboradores().subscribe(
+      response => {
+        mensagem = 'Análise de evasão recarregada para todos os colaboradores.';
+        this.isLoadingTabela = false;
+        this.abrirModalInformativo('Sucesso', mensagem); // Abre o modal após o sucesso
+        this.carregarAnalises(this.currentPage, this.perPage, this.search, this.sortColumn, this.sortDirection); // Recarrega as análises
+      },
+      error => {
+        mensagem = 'Erro ao recarregar análise de evasão.';
+        this.isLoadingTabela = false;
+        this.abrirModalInformativo('Erro', mensagem); // Abre o modal após o erro
+      }
+    );
   }
 
   resetar(): void {
@@ -124,39 +159,18 @@ export class AnaliseColaboradorComponent implements OnInit {
     return 'green';
   }
 
-  // Método para recarregar a análise de todos os colaboradores
-  recarregarTodasAnalises(): void {
-    this.isLoadingTabela = true;
-    let mensagem = "";
-
-    // Chama o serviço para recarregar a análise de evasão de todos os colaboradores
-    this.analiseColaboradorService.getRecarregarEvasaoTodosColaboradores().subscribe(
-      response => {
-        mensagem = 'Análise de evasão recarregada para todos os colaboradores.';
-        this.isLoadingTabela = false;
-        this.abrirModalInformativo('Sucesso', mensagem); // Abre o modal após o sucesso
-      },
-      error => {
-        mensagem = 'Erro ao recarregar análise de evasão.';
-        this.isLoadingTabela = false;
-        this.abrirModalInformativo('Erro', mensagem); // Abre o modal após o erro
-      }
-    );
-  }
-
-  // Método para recarregar a análise de colaboradores ativos
+  // Método para recarregar a análise de um colaborador específico
   recarregarColaborador(analise: AnaliseColaborador): void {
     this.isLoadingTabela = true;
     let mensagem = "";
 
-    // Verifica se o id do colaborador não é undefined
     if (analise.colaborador.id !== undefined) {
-      // Chama o serviço para recarregar a análise de evasão do colaborador
       this.analiseColaboradorService.getRecarregarEvasaoColaborador(analise.colaborador.id).subscribe(
         response => {
           mensagem = 'Análise de evasão recarregada para o colaborador.';
           this.isLoadingTabela = false;
           this.abrirModalInformativo('Sucesso', mensagem); // Abre o modal após o sucesso
+          this.carregarAnalises(this.currentPage, this.perPage, this.search, this.sortColumn, this.sortDirection); // Recarrega as análises
         },
         error => {
           mensagem = 'Erro ao recarregar análise de evasão para o colaborador.';
@@ -171,6 +185,7 @@ export class AnaliseColaboradorComponent implements OnInit {
     }
   }
 
+  // Método para abrir o modal informativo
   abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
     const dialogRef = this.dialog.open(InformativoComponent, {
       width: '400px',
@@ -182,4 +197,7 @@ export class AnaliseColaboradorComponent implements OnInit {
     });
   }
 
+  analisarColaborador(analise: AnaliseColaborador) {
+    this.colaboradorParaAnalisar = analise;
+  }
 }

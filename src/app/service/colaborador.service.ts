@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Colaborador } from '../core/dto/colaborador';
 
@@ -11,9 +11,27 @@ export class ColaboradorService {
 
   constructor(private http: HttpClient) { }
 
-  // Obter todos os colaboradores
-  getColaboradores(): Observable<Colaborador[]> {
-    return this.http.get<Colaborador[]>(`${this.apiUrl}es`);
+  getColaboradores(
+    page: number,
+    perPage: number,
+    search: string = '',
+    sortColumn: string = '',
+    sortDirection: string = ''
+  ): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('per_page', perPage.toString())
+      .set('search', search);
+
+    // Adiciona parâmetros de ordenação se estiverem presentes
+    if (sortColumn) {
+      params = params.set('sortColumn', sortColumn);
+    }
+    if (sortDirection) {
+      params = params.set('sortDirection', sortDirection);
+    }
+
+    return this.http.get(`${this.apiUrl}es`, { params });
   }
 
   // Obter um colaborador por ID

@@ -9,7 +9,7 @@
 
 .card {
   width: 500px;
-  height: 380px;
+  min-height: 320px;
   background-color: var(--cinza-escuro);
   margin: 15px;
 }
@@ -30,10 +30,10 @@
 }
 
 .card-content {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100%;
   color: white;
 }

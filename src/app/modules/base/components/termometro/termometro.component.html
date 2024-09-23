@@ -2,7 +2,7 @@
     <mat-card *ngFor="let termometro of termometros" class="card" appearance="outlined">
         <mat-card-header class="header">
             <span class="header-text">{{ termometro.contexto_nome }}</span>
-            <fa-icon *ngIf="termometro.nota != 0" class="fa-icone-card"
+            <fa-icon *ngIf="termometro.proximidade_bom != null" class="fa-icone-card"
                 (click)="recarregarTermometro(termometro.contexto_id)" icon="rotate"
                 matTooltip="Recarregar motivo"></fa-icon>
         </mat-card-header>
@@ -15,9 +15,14 @@
                 <fa-icon *ngIf="termometro.status === 'ruim'" icon="face-sad-cry" class="fa-icone bad-icon"></fa-icon>
             </div>
             <div class="info">
-                <p class="nota-text">Nota: {{ termometro.nota }}</p>
-                <p class="motivo-text">
+                <p class="nota-text" *ngIf="termometro.proximidade_bom != null">Notas boas: {{
+                    termometro.proximidade_bom }} %</p>
+                <p class="nota-text" *ngIf="termometro.proximidade_bom == null">N/D</p>
+                <p class="motivo-text" *ngIf="termometro.motivo != ''">
                     <span>Motivo: </span>{{ termometro.motivo }}
+                </p>
+                <p class="motivo-text" *ngIf="termometro.motivo == ''">
+                    <span>Motivo: </span> Clique em "recarregar motivo" para mais informações
                 </p>
             </div>
         </mat-card-content>
