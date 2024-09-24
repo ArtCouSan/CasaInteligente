@@ -30,6 +30,7 @@ export interface Colaborador {
   quantidadeAnosAtualGestor: number;
   quantidadeAnosNaEmpresa: number;
   quantidadeHorasTreinamentoAno: number;
+  nivelTrabalho: number;
 
   porcentagemUltimoAumento: number;
 

@@ -35,9 +35,9 @@
 
                     <mat-form-field class="form-field">
                         <mat-label class="titulo">Estado Civil</mat-label>
-                        <mat-select [(ngModel)]="colaborador.estadoCivil.id">
-                            <mat-option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil.id">
-                                {{ estadoCivil.descricao }}
+                        <mat-select [(ngModel)]="colaborador.estado">
+                            <mat-option *ngFor="let estado of estados" [value]="estado">
+                                {{ estado }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -197,6 +197,15 @@
                         <mat-select [(ngModel)]="colaborador.cargo.id">
                             <mat-option *ngFor="let cargo of cargos" [value]="cargo.id">
                                 {{ cargo.nome }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <mat-label class="titulo">Nível Cargo</mat-label>
+                        <mat-select [(ngModel)]="colaborador.nivelTrabalho">
+                            <mat-option *ngFor="let nivel of nivelesCargo" [value]="nivel.id">
+                                {{ nivel.descricao }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

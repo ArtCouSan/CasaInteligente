@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmarDelecaoComponent } from '../../../shared/modals/confirmar-delecao/confirmar-delecao.component';
 import { ColaboradorService } from '../../../../service/colaborador.service';
 import { BaseComponent } from '../../base.component';
+import { InformativoComponent } from '../../../shared/modals/informativo/informativo.component';
 
 @Component({
   selector: 'app-colaborador',
@@ -112,6 +113,7 @@ export class ColaboradorComponent implements OnInit {
       quantidadeAnosAtualGestor: 0,
       quantidadeAnosNaEmpresa: 0,
       quantidadeHorasTreinamentoAno: 0,
+      nivelTrabalho: 1,
       perfis: []
     };
   }
@@ -222,21 +224,15 @@ export class ColaboradorComponent implements OnInit {
   }
 
   subirArquivo(event: any): void {
+    this.isLoadingTabela = true;
     const file = event.target.files[0];
     if (file) {
       this.colaboradorService.uploadColaboradoresCsv(file).subscribe({
         next: (response) => {
-          this.carregarColaboradores();
-          this.snackBar.open('Upload realizado com sucesso!', 'Fechar', {
-            duration: 3000,
-          });
+          this.mostrarModalInformativoComReload('Sucesso', `Carga foi enviada com sucesso.`);
         },
         error: (err) => {
-          this.snackBar.open(`${err.error.error}`, 'Fechar', {
-            duration: 5000,
-            verticalPosition: 'top',
-            horizontalPosition: 'center'
-          });
+          this.mostrarModalInformativoComReload('Erro', `Carga foi enviada com erro.`);
         }
       });
     }
@@ -261,6 +257,19 @@ export class ColaboradorComponent implements OnInit {
     }
     // Carrega os colaboradores com a nova ordenação
     this.carregarColaboradores(this.currentPage, this.perPage, this.search, this.sortColumn, this.sortDirection);
+  }
+
+  // Método para mostrar o modal e recarregar a página após o fechamento
+  mostrarModalInformativoComReload(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
+    const dialogRef = this.dialog.open(InformativoComponent, {
+      width: '400px',
+      data: { tipo, mensagem }
+    });
+
+    // Recarrega a página somente após o modal ser fechado
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload(); // Recarrega a página após fechar o modal
+    });
   }
 
 }

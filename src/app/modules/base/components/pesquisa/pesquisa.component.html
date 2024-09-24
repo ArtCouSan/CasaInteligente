@@ -9,9 +9,9 @@
             <fa-icon class="fa-icone-filtro i-adicionar" style="margin-left: 20px;" matTooltip="Adicionar pergunta"
                 icon="book-medical" (click)="adicionarPesquisa()"></fa-icon>
             <fa-icon class="fa-icone-filtro i-adicionar" (click)="triggerFileInput()"
-                matTooltip="Subir arquivo para cadastro" icon="file-arrow-up"></fa-icon>
+                matTooltip="Subir arquivo para enriquecimento" icon="file-arrow-up"></fa-icon>
             <input type="file" #fileInput style="display: none;" (change)="subirArquivo($event)" />
-            <a [href]="'http://localhost:5000/api/download-template'" download matTooltip="Baixar template">
+            <a [href]="'http://localhost:5000/api/pergunta/download-template'" download matTooltip="Baixar template">
                 <fa-icon class="fa-icone-filtro i-adicionar" icon="file-arrow-down"></fa-icon>
             </a>
         </div>

@@ -45,7 +45,7 @@
           (click)="mostrarComponente(componentTermometro, 'termometro')"
           [class.selected]="selectedItem === 'termometro'">
           <fa-icon class="fa-icone" icon="temperature-high"></fa-icon>
-          <span>Termômetro</span>
+          <span>Score</span>
         </mat-list-item>
         <mat-list-item *ngIf="hasPerfil('dp') || hasPerfil('desenvolvedor')" class="mat-list-item">
           <span class="item-titulo">Colaborador</span>
@@ -92,7 +92,7 @@
       </mat-nav-list>
     </div>
     <footer class="sidenav-footer">
-      <span> CiXAI &copy; 2024 <br /> Todos os direitos reservados.</span>
+      <span> CiX Analytics &copy; 2024 <br /> Todos os direitos reservados.</span>
     </footer>
   </mat-sidenav>
   <mat-sidenav-content [ngClass]="{'blur-background': isLoginVisible}" class="mat-sidenav-content">

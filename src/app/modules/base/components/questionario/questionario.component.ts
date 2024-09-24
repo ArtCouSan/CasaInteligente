@@ -170,43 +170,73 @@ export class QuestionarioComponent {
   }
 
   subirArquivo(event: any): void {
+    this.isLoadingTabela = true;
     const file = event.target.files[0];
-    // if (file) {
-    //   this.pesquisaService.uploadPesquisasCsv(file).subscribe({
-    //     next: (response) => {
-    //       this.carregarPesquisas();
-    //       this.snackBar.open('Upload realizado com sucesso!', 'Fechar', {
-    //         duration: 3000,
-    //       });
-    //     },
-    //     error: (err) => {
-    //       this.snackBar.open(`${err.error.error}`, 'Fechar', {
-    //         duration: 5000,
-    //         verticalPosition: 'top',
-    //         horizontalPosition: 'center'
-    //       });
-    //     }
-    //   });
-    // }
+    if (file) {
+      this.pesquisaService.uploadPesrquisaCsv(file).subscribe({
+        next: (response) => {
+          this.mostrarModalInformativoComReload('Sucesso', `Carga foi enviada com sucesso.`);
+        },
+        error: (err) => {
+          this.mostrarModalInformativoComReload('Erro', `Carga foi enviada com erro.`);
+        }
+      });
+    }
+  }
+
+  confirmarEnvioPesquisaAnonima(pesquisa: Pesquisa) {
+    const dialogRef = this.dialog.open(ConfirmarDelecaoComponent, {
+      data: { message: `Tem certeza que deseja enviar a pesquisa?` }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.marcarComoAnonima(pesquisa);
+      }
+    });
   }
 
   marcarComoAnonima(pesquisa: Pesquisa): void {
+    this.isLoadingTabela = true;
     this.pesquisaService.marcarPesquisa(pesquisa.id!, { is_pesquisa_anonima: 1 }).subscribe(
       () => {
-        this.snackBar.open('Pesquisa marcada como anônima.', 'Fechar', { duration: 2000 });
-        this.carregarPesquisas();
+        this.mostrarModalInformativoComReload('Sucesso', `${pesquisa.titulo} foi enviada com sucesso.`);
+        setTimeout(() => {
+          this.isLoadingTabela = false;
+        }, 1000);
       },
-      error => this.snackBar.open('Erro ao marcar pesquisa como anônima.', 'Fechar', { duration: 2000 })
+      error => {
+        this.isLoadingTabela = false;
+        this.snackBar.open('Erro ao marcar pesquisa como anônima.', 'Fechar', { duration: 2000 })
+      }
     );
   }
 
+  confirmarEnvioPesquisaFechada(pesquisa: Pesquisa) {
+    const dialogRef = this.dialog.open(ConfirmarDelecaoComponent, {
+      data: { message: `Tem certeza que deseja enviar a pesquisa?` }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.marcarComoFechada(pesquisa);
+      }
+    });
+  }
+
   marcarComoFechada(pesquisa: Pesquisa): void {
+    this.isLoadingTabela = true;
     this.pesquisaService.marcarPesquisa(pesquisa.id!, { is_pesquisa_fechada: 1 }).subscribe(
       () => {
-        this.snackBar.open('Pesquisa marcada como fechada.', 'Fechar', { duration: 2000 });
-        this.carregarPesquisas();
+        this.mostrarModalInformativoComReload('Sucesso', `${pesquisa.titulo} foi enviada com sucesso.`);
+        setTimeout(() => {
+          this.isLoadingTabela = false;
+        }, 1000);
       },
-      error => this.snackBar.open('Erro ao marcar pesquisa como fechada.', 'Fechar', { duration: 2000 })
+      error => {
+        this.isLoadingTabela = false;
+        this.snackBar.open('Erro ao marcar pesquisa como anônima.', 'Fechar', { duration: 2000 })
+      }
     );
   }
 

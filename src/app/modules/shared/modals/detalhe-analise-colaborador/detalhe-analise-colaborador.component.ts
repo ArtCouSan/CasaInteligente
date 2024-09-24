@@ -43,6 +43,14 @@ export class DetalheAnaliseColaboradorComponent implements OnInit {
 
   estados: string[] = [
     'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+  ]
+
+  nivelesCargo = [
+    { id: 1, descricao: 'Júnior/Assistente' },
+    { id: 2, descricao: 'Analista/Especialista' },
+    { id: 3, descricao: 'Supervisor/Gerente' },
+    { id: 4, descricao: 'Gerente Senior/Diretor' },
+    { id: 5, descricao: 'Executivo/Vice-Presidente' },
   ];
 
   respostasPesquisas: { [ano: number]: { titulo: string, respostas: any[], descricao: string }[] } = {};

@@ -122,8 +122,8 @@ export class BaseComponent implements OnDestroy, OnInit {
       case 'dashboard':
         this.mostrarComponente(this.componentDashboard, 'dashboard');
         break;
-      case 'colaborador':
-        this.mostrarComponente(this.componentColaborador, 'colaborador');
+      case 'user':
+        this.mostrarComponente(this.componentColaborador, 'user');
         break;
       case 'percent':
         this.mostrarComponente(this.componentAnalisarColaborador, 'percent');

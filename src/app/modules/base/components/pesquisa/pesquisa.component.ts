@@ -160,27 +160,6 @@ export class PesquisaComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
-  subirArquivo(event: any): void {
-    const file = event.target.files[0];
-    // if (file) {
-    //   this.pesquisaService.uploadPesquisasCsv(file).subscribe({
-    //     next: (response) => {
-    //       this.carregarPesquisas();
-    //       this.snackBar.open('Upload realizado com sucesso!', 'Fechar', {
-    //         duration: 3000,
-    //       });
-    //     },
-    //     error: (err) => {
-    //       this.snackBar.open(`${err.error.error}`, 'Fechar', {
-    //         duration: 5000,
-    //         verticalPosition: 'top',
-    //         horizontalPosition: 'center'
-    //       });
-    //     }
-    //   });
-    // }
-  }
-
   abrirModalInformativo(tipo: 'Sucesso' | 'Erro' | 'info' | 'warning', mensagem: string): void {
     const dialogRef = this.dialog.open(InformativoComponent, {
       width: '400px',
@@ -215,5 +194,20 @@ export class PesquisaComponent implements OnInit {
     // Reatribui o paginator e sort após a filtragem
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  subirArquivo(event: any): void {
+    this.isLoadingTabela = true;
+    const file = event.target.files[0];
+    if (file) {
+      this.pesquisaService.uploadPerguntaCsv(file).subscribe({
+        next: (response) => {
+          this.abrirModalInformativo('Sucesso', `Carga foi enviada com sucesso.`);
+        },
+        error: (err) => {
+          this.abrirModalInformativo('Erro', `Carga foi enviada com erro.`);
+        }
+      });
+    }
   }
 }

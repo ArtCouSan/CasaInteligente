@@ -15,7 +15,7 @@
                 <fa-icon *ngIf="termometro.status === 'ruim'" icon="face-sad-cry" class="fa-icone bad-icon"></fa-icon>
             </div>
             <div class="info">
-                <p class="nota-text" *ngIf="termometro.proximidade_bom != null">Notas boas: {{
+                <p class="nota-text" *ngIf="termometro.proximidade_bom != null">Score notas: {{
                     termometro.proximidade_bom }} %</p>
                 <p class="nota-text" *ngIf="termometro.proximidade_bom == null">N/D</p>
                 <p class="motivo-text" *ngIf="termometro.motivo != ''">

@@ -257,6 +257,15 @@
                     </mat-form-field>
 
                     <mat-form-field class="form-field">
+                        <mat-label class="titulo">Nível Cargo</mat-label>
+                        <mat-select [(ngModel)]="analiseColaborador.colaborador.nivelTrabalho">
+                            <mat-option *ngFor="let nivel of nivelesCargo" [value]="nivel.id" disabled>
+                                {{ nivel.descricao }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
                         <mat-label class="titulo">Quantos anos na empresa</mat-label>
                         <input type="number" min="0" matInput
                             [(ngModel)]="analiseColaborador.colaborador.quantidadeHorasTreinamentoAno" disabled>

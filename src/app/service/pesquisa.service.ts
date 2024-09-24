@@ -115,4 +115,16 @@ export class PesquisaService {
     getPesquisasFechadasComRespostas(colaboradorId: number): Observable<any[]> {
         return this.http.get<any[]>(`${this.apiUrlColaboradorRespostas}/${colaboradorId}/pesquisas-fechadas`);
     }
+
+    uploadPerguntaCsv(file: File): Observable<any> {
+        const formData = new FormData();
+        formData.append('file', file);
+        return this.http.post(`${this.apiUrlPerguntas}/upload`, formData);
+    }
+
+    uploadPesrquisaCsv(file: File): Observable<any> {
+        const formData = new FormData();
+        formData.append('file', file);
+        return this.http.post(`${this.apiUrlPesquisa}/upload`, formData);
+    }
 }
